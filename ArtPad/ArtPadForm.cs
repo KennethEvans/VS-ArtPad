@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 
@@ -16,7 +10,10 @@ namespace ArtPad {
         }
 
         protected override void OnLoad(System.EventArgs e) {
-            List<KeyConfig> keys = Constants.TestKeyConfigs;
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnLoad");
+#endif
+            List<KeyConfig> keys = Tools.TestKeyConfigs;
             int rows = -1;
             int cols = -1;
 
@@ -64,20 +61,98 @@ namespace ArtPad {
             }
         }
 
+        protected override void OnHandleCreated(System.EventArgs e) {
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnHandleCreated (Before)");
+#endif
+            base.OnHandleCreated(e);
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnHandleCreated (After)");
+#endif
+        }
+
+        protected override void OnBindingContextChanged(System.EventArgs e) {
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnBindingContextChanged");
+#endif
+            base.OnBindingContextChanged(e);
+        }
+
+        protected override void OnActivated(System.EventArgs e) {
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnActivated (Before)");
+#endif
+            base.OnActivated(e);
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnActivated (After)");
+#endif
+        }
+
+        protected override void OnVisibleChanged(System.EventArgs e) {
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnVisibleChanged");
+#endif
+            base.OnVisibleChanged(e);
+        }
+
+        protected override void OnShown(System.EventArgs e) {
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnShown");
+#endif
+            base.OnShown(e);
+        }
+
+        protected override void OnGotFocus(System.EventArgs e) {
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnGotFocus");
+#endif
+            base.OnGotFocus(e);
+        }
+
+        protected override void OnLostFocus(System.EventArgs e) {
+            base.OnLostFocus(e);
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnLostFocus");
+#endif
+        }
+
+        protected override void OnLocationChanged(System.EventArgs e) {
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnLocationChanged");
+#endif
+            base.OnLocationChanged(e);
+        }
+
+        protected override void OnResizeEnd(System.EventArgs e) {
+            base.OnResizeEnd(e);
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnResizeEnd (Before)");
+#endif
+            Tools.setForegroundWindowFromSaved();
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnResizeEnd (After)");
+#endif
+        }
+
+
+        protected override void OnMouseEnter(System.EventArgs e) {
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnMouseEnter");
+#endif
+            base.OnMouseEnter(e);
+        }
+
+        protected override void OnMouseLeave(System.EventArgs e) {
+            base.OnMouseLeave(e);
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnMouseLeave");
+#endif
+        }
+
         protected override void OnMouseMove(MouseEventArgs e) {
-            IntPtr hWnd = Constants.getForegroundWindow();
-            Debug.Print("OnMouseMove: " + Constants.getWindowTitle(hWnd));
-            if (Constants.hForegroundWindow == IntPtr.Zero) {
-                Constants.SetForegroundWindow(Constants.hForegroundWindow);
-                Constants.hForegroundWindow = IntPtr.Zero;
-            }
-
-            // Make the cursor the Hand cursor when the mouse moves 
-            // over the button.
-            Cursor = Cursors.Hand;
-
-            // Call MyBase.OnMouseMove to activate the delegate.
-            base.OnMouseMove(e);
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnMouseMove");
+#endif
         }
 
         private void ArtPadForm_Load(object sender, EventArgs e) {

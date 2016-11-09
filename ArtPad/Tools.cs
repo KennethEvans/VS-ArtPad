@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace ArtPad {
-    public static class Constants {
+    public static class Tools {
+        public const string VERSION = "ArtPad 1.0.0";
         private const int WS_EX_NOACTIVATE = 0x08000000;
         private const int GWL_EXSTYLE = -20;
 
@@ -22,26 +22,33 @@ namespace ArtPad {
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
 
-        public const string VERSION = "ArtPad 1.0.0";
-        public static IntPtr hForegroundWindow { get; set; } = IntPtr.Zero;
+        private static IntPtr hForegroundWindow = IntPtr.Zero;
 
-        public static IntPtr getForegroundWindow() {
-            return GetForegroundWindow();
+        public static void saveForegroundWindow() {
+            HForegroundWindow = GetForegroundWindow();
         }
 
-        public static bool setForegroundWindow(IntPtr hWnd) {
-            return SetForegroundWindow(hWnd);
-        }
-
-        public static string getActiveWindowTitle() {
-            const int nChars = 256;
-            StringBuilder Buff = new StringBuilder(nChars);
-            IntPtr HWnd = GetForegroundWindow();
-
-            if (GetWindowText(HWnd, Buff, nChars) > 0) {
-                return Buff.ToString();
+        public static bool setForegroundWindowFromSaved() {
+            if (Tools.HForegroundWindow != IntPtr.Zero) {
+                return SetForegroundWindow(HForegroundWindow);
             }
-            return null;
+            return false;
+        }
+
+        public static string getForegroundWindowTitle() {
+            IntPtr hWnd = GetForegroundWindow();
+            if (hWnd.Equals(IntPtr.Zero)) {
+                return "<NotFound>";
+            }
+            return getWindowTitle(hWnd);
+        }
+
+        public static string getSavedForegroundWindowTitle() {
+            IntPtr hWnd = HForegroundWindow;
+            if (hWnd.Equals(IntPtr.Zero)) {
+                return "NotFound>";
+            }
+            return getWindowTitle(hWnd);
         }
 
         public static string getWindowTitle(IntPtr hWnd) {
@@ -50,8 +57,16 @@ namespace ArtPad {
             if (GetWindowText(hWnd, Buff, nChars) > 0) {
                 return Buff.ToString();
             }
-            return null;
+            return "<empty>";
         }
+
+#if DEBUG
+        public static void debugForegroundWindows(string method) {
+            Debug.Print(method + ": Foreground: "
+                + getForegroundWindowTitle()
+                + ", Saved: " + getSavedForegroundWindowTitle());
+        }
+#endif
 
         public static List<KeyConfig> TestKeyConfigs
         {
@@ -73,6 +88,19 @@ namespace ArtPad {
             new KeyConfig("Paste","^V", KeyConfig.KeyType.NORMAL, 2, 3),
         };
                 }
+            }
+        }
+
+        public static IntPtr HForegroundWindow
+        {
+            get
+            {
+                return hForegroundWindow;
+            }
+
+            set
+            {
+                hForegroundWindow = value;
             }
         }
     }

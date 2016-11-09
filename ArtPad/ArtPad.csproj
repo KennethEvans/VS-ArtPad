@@ -52,7 +52,7 @@
     <Compile Include="ArtPadForm.Designer.cs">
       <DependentUpon>ArtPadForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Constants.cs" />
+    <Compile Include="Tools.cs" />
     <Compile Include="KeyConfig.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

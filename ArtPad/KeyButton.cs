@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Diagnostics;
+﻿using System.Windows.Forms;
 
 namespace ArtPad {
     public partial class KeyButton : Button {
@@ -19,43 +10,36 @@ namespace ArtPad {
         }
 
         protected override void OnMouseEnter(System.EventArgs e) {
-            IntPtr hWnd = Constants.getForegroundWindow();
-            Constants.hForegroundWindow = hWnd;
-            Debug.Print("OnMouseEnter: " + Constants.getWindowTitle(hWnd));
+#if DEBUG && true
+            Tools.debugForegroundWindows("KeyButton.OnMouseEnter ("
+                + keyConfig.ROW + "," + keyConfig.COL + ")");
+#endif
+            Tools.saveForegroundWindow();
             base.OnMouseEnter(e);
         }
 
         protected override void OnMouseLeave(System.EventArgs e) {
             base.OnMouseLeave(e);
-            IntPtr hWnd = Constants.getForegroundWindow();
-            Debug.Print("OnMouseLeave: " + Constants.getWindowTitle(hWnd));
+#if DEBUG && true
+            Tools.debugForegroundWindows("KeyButton.OnMouseLeave ("
+                + keyConfig.ROW + "," + keyConfig.COL + ")");
+
+#endif
         }
 
         protected override void OnClick(System.EventArgs e) {
-            string title = Constants.getActiveWindowTitle();
-            string saveTitle = Constants.getWindowTitle(Constants.hForegroundWindow);
-            Debug.Print("OnClick: " + title);
-            Debug.Print("OnClick: Saved: " + saveTitle);
-            if (Constants.hForegroundWindow != IntPtr.Zero) {
-                Constants.SetForegroundWindow(Constants.hForegroundWindow);
-            }
-            title = Constants.getActiveWindowTitle();
-            Debug.Print("OnClick: After: " + title);
-
-            if (!FindForm().Equals(Constants.hForegroundWindow)) {
+#if DEBUG && false
+            Tools.debugForegroundWindows("KeyButton.OnClick");
+#endif
+            Tools.setForegroundWindowFromSaved();
+#if DEBUG && false
+            Tools.debugForegroundWindows("KeyButton.OnClick (After));
+            debug.print("KeyButton.OnClick (After): Sending: " + keyConfig.KeyString);
+#endif
+            // Send theKeyString
+            if (!FindForm().Equals(Tools.HForegroundWindow)) {
                 SendKeys.Send(keyConfig.KeyString);
             }
-
-            //string msg;
-            //if (keyConfig == null) {
-            //    msg = this.Text;
-            //} else {
-            //    msg = keyConfig.KeyString;
-            //}
-            //msg += Environment.NewLine + "Title: " + title
-            //        + Environment.NewLine + "SaveTitle: " + saveTitle;
-            //MessageBox.Show(msg, "KeyButton",
-            //MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
     }
 }
