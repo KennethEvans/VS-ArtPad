@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace ArtPad {
     public partial class ArtPadForm : Form {
@@ -53,6 +54,30 @@ namespace ArtPad {
                 keyButton.Margin = new Padding(0);  // Default is 3
                 this.tableLayoutPanel.Controls.Add(keyButton, key.COL, key.ROW);
             }
+        }
+
+        protected override bool ShowWithoutActivation
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e) {
+            IntPtr hWnd = Constants.getForegroundWindow();
+            Debug.Print("OnMouseMove: " + Constants.getWindowTitle(hWnd));
+            if (Constants.hForegroundWindow == IntPtr.Zero) {
+                Constants.SetForegroundWindow(Constants.hForegroundWindow);
+                Constants.hForegroundWindow = IntPtr.Zero;
+            }
+
+            // Make the cursor the Hand cursor when the mouse moves 
+            // over the button.
+            Cursor = Cursors.Hand;
+
+            // Call MyBase.OnMouseMove to activate the delegate.
+            base.OnMouseMove(e);
         }
 
         private void ArtPadForm_Load(object sender, EventArgs e) {
