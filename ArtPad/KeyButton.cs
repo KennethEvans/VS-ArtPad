@@ -6,7 +6,7 @@ namespace ArtPad {
 
         public KeyButton(KeyConfig keyConfig) {
             this.keyConfig = keyConfig;
-            InitializeComponent();
+                 InitializeComponent();
         }
 
         protected override void OnMouseEnter(System.EventArgs e) {

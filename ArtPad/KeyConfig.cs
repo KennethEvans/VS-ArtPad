@@ -1,6 +1,6 @@
 ﻿namespace ArtPad {
     public class KeyConfig {
-        public enum KeyType { NORMAL, HOLD, MENU };
+        public enum KeyType { NORMAL, HOLD, COMMAND, MENU };
 
         private string name;
         private string keyString;

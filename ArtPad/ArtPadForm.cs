@@ -1,4 +1,6 @@
-﻿using System;
+﻿#undef CHECK_EVENTS
+
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Diagnostics;
@@ -34,12 +36,13 @@ namespace ArtPad {
             float colPercent = 100.0F / cols;
             for (int row = 0; row < rows; row++) {
                 this.tableLayoutPanel.RowStyles.
-                    Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, rowPercent));
+             Add(new RowStyle(SizeType.Percent, rowPercent));
             }
             for (int col = 0; col < cols; col++) {
                 this.tableLayoutPanel.ColumnStyles.
-                            Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent,
-                            colPercent));
+                            Add(new System.Windows.Forms.ColumnStyle(
+                                System.Windows.Forms.SizeType.Percent,
+                                colPercent));
             }
 
             // Set the keys into the table
@@ -53,12 +56,44 @@ namespace ArtPad {
             }
         }
 
+        /// <summary>
+        /// ShowWithoutActivation is readonly and  needs to be overwritten to
+        /// keep the Form from being activated when it is shown.
+        /// </summary>
         protected override bool ShowWithoutActivation
         {
             get
             {
                 return true;
             }
+        }
+
+        protected override void OnResizeEnd(System.EventArgs e) {
+            base.OnResizeEnd(e);
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnResizeEnd (Before)");
+#endif
+            Tools.setForegroundWindowFromSaved();
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnResizeEnd (After)");
+#endif
+        }
+
+        private void ArtPadForm_Load(object sender, EventArgs e) {
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm_Load");
+#endif
+        }
+
+        // Define debugging for determining when events are called
+        // and the state of the foreground window
+#if CHECK_EVENTS
+
+        protected override void OnMouseEnter(System.EventArgs e) {
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnMouseEnter");
+#endif
+            base.OnMouseEnter(e);
         }
 
         protected override void OnHandleCreated(System.EventArgs e) {
@@ -123,25 +158,6 @@ namespace ArtPad {
             base.OnLocationChanged(e);
         }
 
-        protected override void OnResizeEnd(System.EventArgs e) {
-            base.OnResizeEnd(e);
-#if DEBUG
-            Tools.debugForegroundWindows("ArtPadForm.OnResizeEnd (Before)");
-#endif
-            Tools.setForegroundWindowFromSaved();
-#if DEBUG
-            Tools.debugForegroundWindows("ArtPadForm.OnResizeEnd (After)");
-#endif
-        }
-
-
-        protected override void OnMouseEnter(System.EventArgs e) {
-#if DEBUG
-            Tools.debugForegroundWindows("ArtPadForm.OnMouseEnter");
-#endif
-            base.OnMouseEnter(e);
-        }
-
         protected override void OnMouseLeave(System.EventArgs e) {
             base.OnMouseLeave(e);
 #if DEBUG
@@ -155,8 +171,7 @@ namespace ArtPad {
 #endif
         }
 
-        private void ArtPadForm_Load(object sender, EventArgs e) {
+#endif //CHECK_EVENTS
 
-        }
     }
 }
