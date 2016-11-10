@@ -62,6 +62,7 @@
     <Compile Include="KeyButton.Designer.cs">
       <DependentUpon>KeyButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils.cs" />
     <EmbeddedResource Include="ArtPadForm.resx">
       <DependentUpon>ArtPadForm.cs</DependentUpon>
     </EmbeddedResource>

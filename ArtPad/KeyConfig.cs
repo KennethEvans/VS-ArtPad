@@ -44,7 +44,7 @@
             }
         }
 
-        private KeyType Type
+        public KeyType Type
         {
             get
             {

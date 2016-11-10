@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace ArtPad {
     public partial class KeyButton : Button {
@@ -6,7 +7,7 @@ namespace ArtPad {
 
         public KeyButton(KeyConfig keyConfig) {
             this.keyConfig = keyConfig;
-                 InitializeComponent();
+            InitializeComponent();
         }
 
         protected override void OnMouseEnter(System.EventArgs e) {
@@ -23,7 +24,6 @@ namespace ArtPad {
 #if DEBUG && true
             Tools.debugForegroundWindows("KeyButton.OnMouseLeave ("
                 + keyConfig.ROW + "," + keyConfig.COL + ")");
-
 #endif
         }
 
@@ -33,13 +33,48 @@ namespace ArtPad {
 #endif
             Tools.setForegroundWindowFromSaved();
 #if DEBUG && false
-            Tools.debugForegroundWindows("KeyButton.OnClick (After));
+            Tools.debugForegroundWindows("KeyButton.OnClick (After)");
             debug.print("KeyButton.OnClick (After): Sending: " + keyConfig.KeyString);
 #endif
-            // Send theKeyString
+            switch (keyConfig.Type) {
+                case KeyConfig.KeyType.NORMAL:
+                    handleNormalKey(e);
+                    break;
+                case KeyConfig.KeyType.COMMAND:
+                    handleCommandKey(e);
+                    break;
+                default:
+                    Utils.errMsg("Unhandled key type: " + keyConfig.Type);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Handles a NORMAL key
+        /// </summary>
+        /// <param name="e"></param>
+        protected void handleNormalKey(System.EventArgs e) {
+            // Send the KeyString
             if (!FindForm().Equals(Tools.HForegroundWindow)) {
                 SendKeys.Send(keyConfig.KeyString);
             }
+        }
+
+        /// <summary>
+        /// Handles a COMMAND key
+        /// </summary>
+        /// <param name="e"></param>
+        protected void handleCommandKey(System.EventArgs e) {
+            // Send the KeyString as a command
+            var process = new Process {
+                StartInfo = new ProcessStartInfo {
+                    FileName = keyConfig.KeyString
+                }
+            };
+            process.Start();
+#if DEBUG && false
+            Tools.debugForegroundWindows("handleCommandKey (After)");
+#endif
         }
     }
 }
