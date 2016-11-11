@@ -7,17 +7,17 @@ using WindowsInput.Native;
 namespace ArtPad {
     public partial class KeyButton : Button {
         private string LF = System.Environment.NewLine;
-        private KeyConfig keyConfig;
+        private KeyConfig key;
 
-        public KeyButton(KeyConfig keyConfig) {
-            this.keyConfig = keyConfig;
+        public KeyButton(KeyConfig key) {
+            this.key = key;
             InitializeComponent();
         }
 
         protected override void OnMouseEnter(System.EventArgs e) {
 #if DEBUG && true
             Tools.debugForegroundWindows("KeyButton.OnMouseEnter ("
-                + keyConfig.ROW + "," + keyConfig.COL + ")");
+                + key.ROW + "," + key.COL + ")");
 #endif
             Tools.saveForegroundWindow();
             base.OnMouseEnter(e);
@@ -27,7 +27,7 @@ namespace ArtPad {
             base.OnMouseLeave(e);
 #if DEBUG && true
             Tools.debugForegroundWindows("KeyButton.OnMouseLeave ("
-                + keyConfig.ROW + "," + keyConfig.COL + ")");
+                + key.ROW + "," + key.COL + ")");
 #endif
         }
 
@@ -40,7 +40,7 @@ namespace ArtPad {
             Tools.debugForegroundWindows("KeyButton.OnClick (After)");
             debug.print("KeyButton.OnClick (After): Sending: " + keyConfig.KeyString);
 #endif
-            switch (keyConfig.Type) {
+            switch (key.Type) {
                 case KeyConfig.KeyType.NORMAL:
                     handleNormalKey(e);
                     break;
@@ -51,7 +51,7 @@ namespace ArtPad {
                     handleHoldKey(e);
                     break;
                 default:
-                    Utils.errMsg("Unhandled key type: " + keyConfig.Type);
+                    Utils.errMsg("Unhandled key type: " + key.Type);
                     return;
             }
         }
@@ -63,7 +63,7 @@ namespace ArtPad {
         protected void handleNormalKey(System.EventArgs e) {
             // Send the KeyString
             if (!FindForm().Equals(Tools.HForegroundWindow)) {
-                SendKeys.Send(keyConfig.KeyString);
+                SendKeys.Send(key.KeyString);
             }
         }
 
@@ -75,7 +75,7 @@ namespace ArtPad {
             // Send the KeyString as a command
             var process = new Process {
                 StartInfo = new ProcessStartInfo {
-                    FileName = keyConfig.KeyString
+                    FileName = key.KeyString
                 }
             };
             process.Start();
@@ -90,26 +90,26 @@ namespace ArtPad {
         /// <param name="e"></param>
         protected void handleHoldKey(System.EventArgs e) {
             VirtualKeyCode keyCode;
-            if (keyConfig.KeyString.Equals("^")) { // Ctrl
+            if (key.KeyString.Equals("^")) { // Ctrl
                 keyCode = VirtualKeyCode.CONTROL;
-            } else if (keyConfig.KeyString.Equals("%")) { // Alt
+            } else if (key.KeyString.Equals("%")) { // Alt
                 keyCode = VirtualKeyCode.MENU;
-            } else if (keyConfig.KeyString.Equals("+")) { // Shift
+            } else if (key.KeyString.Equals("+")) { // Shift
                 keyCode = VirtualKeyCode.SHIFT;
             } else {
-                Utils.errMsg("Cannot handle HOLD for " + keyConfig.KeyString
+                Utils.errMsg("Cannot handle HOLD for " + key.KeyString
                     + LF + "Must be ^ (Ctrl), % (Alt), or + (Shift)");
                 return;
             }
 
             var sim = new InputSimulator();
-            if(keyConfig.Pressed) {
-                keyConfig.Pressed = false;
+            if(key.Pressed) {
+                key.Pressed = false;
                 sim.Keyboard.KeyUp(keyCode);
                 this.BackColor = Color.FromKnownColor(KnownColor.Control);
             } else {
                 sim.Keyboard.KeyDown(keyCode);
-                keyConfig.Pressed = true;
+                key.Pressed = true;
                 this.BackColor = Color.FromKnownColor(KnownColor.Highlight);
             }
         }

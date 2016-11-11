@@ -1,25 +1,34 @@
-﻿#undef CHECK_EVENTS
+﻿#define CHECK_EVENTS
 
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Diagnostics;
+using WindowsInput;
+using WindowsInput.Native;
 
 namespace ArtPad {
     public partial class ArtPadForm : Form {
+        private string LF = System.Environment.NewLine;
+
+        private List<KeyConfig> keys = Tools.TestKeyConfigs;
+
         public ArtPadForm() {
             InitializeComponent();
         }
 
-        protected override void OnLoad(System.EventArgs e) {
-#if DEBUG
-            Tools.debugForegroundWindows("ArtPadForm.OnLoad");
-#endif
-            List<KeyConfig> keys = Tools.TestKeyConfigs;
-            int rows = -1;
-            int cols = -1;
+        protected void populateTable() {
+            tableLayoutPanel.RowStyles.Clear();
+            tableLayoutPanel.ColumnStyles.Clear();
+
+            if (keys == null) {
+                Utils.errMsg("No keys are defined");
+                return;
+            }
 
             // Get the table size
+            int rows = -1;
+            int cols = -1;
             foreach (KeyConfig key in keys) {
                 if (key.COL > cols) cols = key.COL;
                 if (key.ROW > rows) rows = key.ROW;
@@ -28,10 +37,8 @@ namespace ArtPad {
             cols += 1;
 
             // Reset the rows and columns in the table
-            this.tableLayoutPanel.RowCount = rows;
-            this.tableLayoutPanel.ColumnCount = cols;
-            this.tableLayoutPanel.RowStyles.Clear();
-            this.tableLayoutPanel.ColumnStyles.Clear();
+            tableLayoutPanel.RowCount = rows;
+            tableLayoutPanel.ColumnCount = cols;
             float rowPercent = 100.0F / rows;
             float colPercent = 100.0F / cols;
             for (int row = 0; row < rows; row++) {
@@ -39,7 +46,7 @@ namespace ArtPad {
              Add(new RowStyle(SizeType.Percent, rowPercent));
             }
             for (int col = 0; col < cols; col++) {
-                this.tableLayoutPanel.ColumnStyles.
+                tableLayoutPanel.ColumnStyles.
                             Add(new System.Windows.Forms.ColumnStyle(
                                 System.Windows.Forms.SizeType.Percent,
                                 colPercent));
@@ -52,8 +59,15 @@ namespace ArtPad {
                 keyButton.Text = key.Name;
                 keyButton.Dock = DockStyle.Fill;
                 keyButton.Margin = new Padding(0);  // Default is 3
-                this.tableLayoutPanel.Controls.Add(keyButton, key.COL, key.ROW);
+                tableLayoutPanel.Controls.Add(keyButton, key.COL, key.ROW);
             }
+        }
+
+        protected override void OnLoad(System.EventArgs e) {
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnLoad");
+#endif
+            populateTable();
         }
 
         /// <summary>
@@ -77,6 +91,36 @@ namespace ArtPad {
 #if DEBUG
             Tools.debugForegroundWindows("ArtPadForm.OnResizeEnd (After)");
 #endif
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e) {
+#if DEBUG
+            Tools.debugForegroundWindows("ArtPadForm.OnFormClosing");
+#endif
+            // Send up events for any pressed keys
+            if (keys != null) { }
+            foreach (KeyConfig key in keys) {
+                if (key.Type == KeyConfig.KeyType.HOLD && key.Pressed == true) {
+                    key.Pressed = false;
+
+                    VirtualKeyCode keyCode;
+                    if (key.KeyString.Equals("^")) { // Ctrl
+                        keyCode = VirtualKeyCode.CONTROL;
+                    } else if (key.KeyString.Equals("%")) { // Alt
+                        keyCode = VirtualKeyCode.MENU;
+                    } else if (key.KeyString.Equals("+")) { // Shift
+                        keyCode = VirtualKeyCode.SHIFT;
+                    } else {
+                        Utils.errMsg("Cannot handle HOLD for " + key.KeyString
+                            + LF + "Must be ^ (Ctrl), % (Alt), or + (Shift)");
+                        return;
+                    }
+                    var sim = new InputSimulator();
+                    sim.Keyboard.KeyUp(keyCode);
+                }
+            }
+
+            base.OnFormClosing(e);
         }
 
         private void ArtPadForm_Load(object sender, EventArgs e) {
