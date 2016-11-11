@@ -70,6 +70,9 @@
     <EmbeddedResource Include="ArtPadForm.resx">
       <DependentUpon>ArtPadForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="KeyButton.resx">
+      <DependentUpon>KeyButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -84,8 +84,8 @@ namespace ArtPad {
             new KeyConfig("f","f", KeyConfig.KeyType.NORMAL, 1, 3),
             new KeyConfig("Ctrl","^", KeyConfig.KeyType.HOLD, 2, 0),
             new KeyConfig("Alt","%", KeyConfig.KeyType.HOLD, 2, 1),
-            new KeyConfig("OSK",@"osk.exe", KeyConfig.KeyType.COMMAND, 2, 2),
-            new KeyConfig("Menu","", KeyConfig.KeyType.MENU, 2, 3),
+            new KeyConfig("Shift","+", KeyConfig.KeyType.HOLD, 2, 2),
+            new KeyConfig("OSK",@"osk.exe", KeyConfig.KeyType.COMMAND, 2, 3),
         };
                 }
             }

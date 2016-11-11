@@ -12,6 +12,31 @@ namespace ArtPad {
         public KeyButton(KeyConfig key) {
             this.key = key;
             InitializeComponent();
+
+            // Should have been able to do this in the designer
+            this.toolStripLoadMenuItem.Click +=
+                new System.EventHandler(this.toolStripLoadMenuItem_Click);
+        }
+
+        void toolStripLoadMenuItem_Click(object sender, System.EventArgs e) {
+            Utils.infoMsg("toolStripLoadMenuItem_Click");
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e) {
+            // Use this for showing the context menu because OnClick
+            // apparently does not get right mouse events
+#if DEBUG && true
+            Tools.debugForegroundWindows("KeyButton.OnMouseUp ("
+                + key.ROW + "," + key.COL + ")");
+#endif
+            // See if it is a right click
+            MouseEventArgs me = (MouseEventArgs)e;
+            if (me.Button == MouseButtons.Right) {
+                // Show the context menu
+                contextMenuStrip.Show(this, me.X, me.Y);
+                return;
+            }
+            base.OnMouseUp(e);
         }
 
         protected override void OnMouseEnter(System.EventArgs e) {
@@ -19,6 +44,7 @@ namespace ArtPad {
             Tools.debugForegroundWindows("KeyButton.OnMouseEnter ("
                 + key.ROW + "," + key.COL + ")");
 #endif
+            // Save the foreground window here
             Tools.saveForegroundWindow();
             base.OnMouseEnter(e);
         }
@@ -103,7 +129,7 @@ namespace ArtPad {
             }
 
             var sim = new InputSimulator();
-            if(key.Pressed) {
+            if (key.Pressed) {
                 key.Pressed = false;
                 sim.Keyboard.KeyUp(keyCode);
                 this.BackColor = Color.FromKnownColor(KnownColor.Control);
