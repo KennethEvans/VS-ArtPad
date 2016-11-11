@@ -1,8 +1,12 @@
 ﻿using System.Diagnostics;
+using System.Drawing;
 using System.Windows.Forms;
+using WindowsInput;
+using WindowsInput.Native;
 
 namespace ArtPad {
     public partial class KeyButton : Button {
+        private string LF = System.Environment.NewLine;
         private KeyConfig keyConfig;
 
         public KeyButton(KeyConfig keyConfig) {
@@ -43,9 +47,12 @@ namespace ArtPad {
                 case KeyConfig.KeyType.COMMAND:
                     handleCommandKey(e);
                     break;
+                case KeyConfig.KeyType.HOLD:
+                    handleHoldKey(e);
+                    break;
                 default:
                     Utils.errMsg("Unhandled key type: " + keyConfig.Type);
-                    break;
+                    return;
             }
         }
 
@@ -76,5 +83,36 @@ namespace ArtPad {
             Tools.debugForegroundWindows("handleCommandKey (After)");
 #endif
         }
+
+        /// <summary>
+        /// Handles a HOLD key
+        /// </summary>
+        /// <param name="e"></param>
+        protected void handleHoldKey(System.EventArgs e) {
+            VirtualKeyCode keyCode;
+            if (keyConfig.KeyString.Equals("^")) { // Ctrl
+                keyCode = VirtualKeyCode.CONTROL;
+            } else if (keyConfig.KeyString.Equals("%")) { // Alt
+                keyCode = VirtualKeyCode.MENU;
+            } else if (keyConfig.KeyString.Equals("+")) { // Shift
+                keyCode = VirtualKeyCode.SHIFT;
+            } else {
+                Utils.errMsg("Cannot handle HOLD for " + keyConfig.KeyString
+                    + LF + "Must be ^ (Ctrl), % (Alt), or + (Shift)");
+                return;
+            }
+
+            var sim = new InputSimulator();
+            if(keyConfig.Pressed) {
+                keyConfig.Pressed = false;
+                sim.Keyboard.KeyUp(keyCode);
+                this.BackColor = Color.FromKnownColor(KnownColor.Control);
+            } else {
+                sim.Keyboard.KeyDown(keyCode);
+                keyConfig.Pressed = true;
+                this.BackColor = Color.FromKnownColor(KnownColor.Highlight);
+            }
+        }
+
     }
 }
