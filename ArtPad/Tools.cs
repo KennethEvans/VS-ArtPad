@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using WindowsInput.Native;
+using WindowsInput;
 
 namespace ArtPad {
     public static class Tools {
@@ -22,12 +24,22 @@ namespace ArtPad {
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
 
+        /// <summary>
+        /// The saved value of the foreground window to be restored later.
+        /// </summary>
         private static IntPtr hForegroundWindow = IntPtr.Zero;
 
+        /// <summary>
+        /// Saves the current foreground window to be restored later.
+        /// </summary>
         public static void saveForegroundWindow() {
             HForegroundWindow = GetForegroundWindow();
         }
 
+        /// <summary>
+        /// Sets the current foreground window to the saved one.
+        /// </summary>
+        /// <returns></returns>
         public static bool setForegroundWindowFromSaved() {
             if (Tools.HForegroundWindow != IntPtr.Zero) {
                 return SetForegroundWindow(HForegroundWindow);
@@ -35,6 +47,10 @@ namespace ArtPad {
             return false;
         }
 
+        /// <summary>
+        /// Get the title for the current foreground window.
+        /// </summary>
+        /// <returns></returns>
         public static string getForegroundWindowTitle() {
             IntPtr hWnd = GetForegroundWindow();
             if (hWnd.Equals(IntPtr.Zero)) {
@@ -43,6 +59,10 @@ namespace ArtPad {
             return getWindowTitle(hWnd);
         }
 
+        /// <summary>
+        /// Gets the title for the current saved window handle.
+        /// </summary>
+        /// <returns></returns>
         public static string getSavedForegroundWindowTitle() {
             IntPtr hWnd = HForegroundWindow;
             if (hWnd.Equals(IntPtr.Zero)) {
@@ -51,6 +71,11 @@ namespace ArtPad {
             return getWindowTitle(hWnd);
         }
 
+        /// <summary>
+        /// Gets the title for the given window handle.
+        /// </summary>
+        /// <param name="hWnd"></param>
+        /// <returns></returns>
         public static string getWindowTitle(IntPtr hWnd) {
             const int nChars = 256;
             StringBuilder Buff = new StringBuilder(nChars);
@@ -60,7 +85,55 @@ namespace ArtPad {
             return "<empty>";
         }
 
+        /// <summary>
+        /// Gets a VirtualKeyCode for the given KeyConfig.
+        /// </summary>
+        /// <param name="key">The key to use.</param>
+        /// <returns></returns>
+        public static VirtualKeyCode getKeyCode(KeyConfig key) {
+            VirtualKeyCode keyCode;
+            if (key.KeyString.Equals("^")) { // Ctrl
+                keyCode = VirtualKeyCode.CONTROL;
+            } else if (key.KeyString.Equals("%")) { // Alt
+                keyCode = VirtualKeyCode.MENU;
+            } else if (key.KeyString.Equals("+")) { // Shift
+                keyCode = VirtualKeyCode.SHIFT;
+            } else {
+                throw new ArgumentException(key.KeyString
+                    + " is not supported");
+            }
+            return keyCode;
+        }
+
+        /// <summary>
+        /// Sends up events for any pressed keys in the given keyConfig list.
+        /// </summary>
+        /// <param name="TestKeyConfigs">List of keys to use.</param>
+        public static void sendUpEventsForPressedKeys(List<KeyConfig> keys) {
+            if (keys == null) {
+                return;
+            }
+            foreach (KeyConfig key in keys) {
+                if (key.Type == KeyConfig.KeyType.HOLD && key.Pressed == true) {
+                    VirtualKeyCode keyCode;
+                    try {
+                        keyCode = Tools.getKeyCode(key);
+                    } catch (System.ArgumentException) {
+                        continue;
+                    }
+                    key.Pressed = false;
+                    var sim = new InputSimulator();
+                    sim.Keyboard.KeyUp(keyCode);
+                }
+            }
+        }
+
+
 #if DEBUG
+        /// <summary>
+        /// Generic debugging printout for examining foreground windows.
+        /// </summary>
+        /// <param name="method"></param>
         public static void debugForegroundWindows(string method) {
             Debug.Print(method + ": Foreground: "
                 + getForegroundWindowTitle()
@@ -68,6 +141,9 @@ namespace ArtPad {
         }
 #endif
 
+        /// <summary>
+        /// A hard-coded list of KeyConfig's for testing.
+        /// </summary>
         public static List<KeyConfig> TestKeyConfigs
         {
             get

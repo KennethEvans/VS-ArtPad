@@ -116,13 +116,9 @@ namespace ArtPad {
         /// <param name="e"></param>
         protected void handleHoldKey(System.EventArgs e) {
             VirtualKeyCode keyCode;
-            if (key.KeyString.Equals("^")) { // Ctrl
-                keyCode = VirtualKeyCode.CONTROL;
-            } else if (key.KeyString.Equals("%")) { // Alt
-                keyCode = VirtualKeyCode.MENU;
-            } else if (key.KeyString.Equals("+")) { // Shift
-                keyCode = VirtualKeyCode.SHIFT;
-            } else {
+            try {
+                keyCode = Tools.getKeyCode(key);
+            } catch (System.ArgumentException) {
                 Utils.errMsg("Cannot handle HOLD for " + key.KeyString
                     + LF + "Must be ^ (Ctrl), % (Alt), or + (Shift)");
                 return;
