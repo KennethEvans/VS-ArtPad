@@ -19,7 +19,16 @@ namespace ArtPad {
         }
 
         void toolStripLoadMenuItem_Click(object sender, System.EventArgs e) {
-            Utils.infoMsg("toolStripLoadMenuItem_Click");
+            int size = Application.OpenForms.Count;
+            ArtPadForm mainForm = (ArtPadForm)FindForm().FindForm();
+
+            // Displays an OpenFileDialog so the user can select a Cursor.
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Configuration Files|*.config";
+            ofd.Title = "Select a Configuration File";
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                mainForm.reconfigure(ofd.FileName);
+            }
         }
 
         protected override void OnMouseUp(MouseEventArgs e) {

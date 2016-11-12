@@ -9,18 +9,52 @@ using WindowsInput.Native;
 
 namespace ArtPad {
     public partial class ArtPadForm : Form {
-        private string LF = System.Environment.NewLine;
+        private string LF = Utils.LF;
 
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
+
+        private Configuration config = new Configuration();
         private List<KeyConfig> keys = Tools.TestKeyConfigs;
 
         public ArtPadForm() {
+            config.Keys = Tools.TestKeyConfigs;
+            InitializeComponent();
+            //Configuration.writeConfig(config, @"c:\scratch\ArtPad.config");
+        }
+
+        public ArtPadForm(string[] args) {
+            if (args.Length > 0) {
+                Configuration newConfig = Configuration.readConfig(args[0]);
+                if (newConfig != null) {
+                    config = newConfig;
+                    keys = config.Keys;
+                } else {
+                    Utils.errMsg("Error reading configuration");
+                }
+            }
             InitializeComponent();
         }
 
-        protected void populateTable() {
-            tableLayoutPanel.RowStyles.Clear();
-            tableLayoutPanel.ColumnStyles.Clear();
+        public void reconfigure(string fileName) {
+            Configuration newConfig = Configuration.readConfig(fileName);
+            Debug.Print("reconfigure(1): config: nKeys=" + config.Keys.Count
+                +  " Size=" + config.Size);
+            Debug.Print("reconfigure(1): newConfig: nKeys=" + newConfig.Keys.Count
+                + " Size=" + config.Size);
+            if (newConfig != null) {
+                config = newConfig;
+                keys = config.Keys;
+            } else {
+                Utils.errMsg("Error reading configuration");
+            }
+            Debug.Print("reconfigure(2): config: nKeys=" + config.Keys.Count
+                + " Size=" + config.Size);
+            Configuration.writeConfig(config, @"c:\scratch\ArtPad-reconfigure.config");
 
+            createTable();
+        }
+
+        protected void createTable() {
             if (keys == null) {
                 Utils.errMsg("No keys are defined");
                 return;
@@ -35,8 +69,30 @@ namespace ArtPad {
             }
             rows += 1;
             cols += 1;
+            Debug.Print("createTable: rows=" + rows + " cols=" + cols);
 
-            // Reset the rows and columns in the table
+            // Remove any existing tableLayoutPanel
+            if (this.Controls.Contains(tableLayoutPanel)) {
+                tableLayoutPanel.Controls.Clear();
+                tableLayoutPanel.RowStyles.Clear();
+                tableLayoutPanel.ColumnStyles.Clear();
+                this.Controls.Remove(tableLayoutPanel);
+                tableLayoutPanel.Dispose();
+            }
+
+            this.ClientSize =
+            new System.Drawing.Size(config.Size.Width, config.Size.Width);
+
+            tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel.AutoSize = true;
+            this.tableLayoutPanel.ColumnCount = cols;
+            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel.Name = "tableLayoutPanel";
+            this.tableLayoutPanel.RowCount = rows;
+            this.tableLayoutPanel.TabIndex = 0;
+
+            // Set the rows and columns in the table
             tableLayoutPanel.RowCount = rows;
             tableLayoutPanel.ColumnCount = cols;
             float rowPercent = 100.0F / rows;
@@ -61,13 +117,15 @@ namespace ArtPad {
                 keyButton.Margin = new Padding(0);  // Default is 3
                 tableLayoutPanel.Controls.Add(keyButton, key.COL, key.ROW);
             }
+
+            this.Controls.Add(this.tableLayoutPanel);
         }
 
         protected override void OnLoad(System.EventArgs e) {
 #if DEBUG
             Tools.debugForegroundWindows("ArtPadForm.OnLoad");
 #endif
-            populateTable();
+            createTable();
         }
 
         /// <summary>
@@ -196,7 +254,7 @@ namespace ArtPad {
         }
 
         protected override void OnLocationChanged(System.EventArgs e) {
-#if DEBUG
+#if DEBUG && false
             Tools.debugForegroundWindows("ArtPadForm.OnLocationChanged");
 #endif
             base.OnLocationChanged(e);
