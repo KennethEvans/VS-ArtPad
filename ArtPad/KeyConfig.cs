@@ -57,7 +57,7 @@
             }
         }
 
-        public int ROW
+        public int Row
         {
             get
             {
@@ -70,7 +70,7 @@
             }
         }
 
-        public int COL
+        public int Col
         {
             get
             {

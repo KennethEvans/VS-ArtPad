@@ -36,7 +36,7 @@ namespace ArtPad {
             // apparently does not get right mouse events
 #if DEBUG && true
             Tools.debugForegroundWindows("KeyButton.OnMouseUp ("
-                + key.ROW + "," + key.COL + ")");
+                + key.Row + "," + key.Col + ")");
 #endif
             // See if it is a right click
             MouseEventArgs me = (MouseEventArgs)e;
@@ -51,7 +51,7 @@ namespace ArtPad {
         protected override void OnMouseEnter(System.EventArgs e) {
 #if DEBUG && true
             Tools.debugForegroundWindows("KeyButton.OnMouseEnter ("
-                + key.ROW + "," + key.COL + ")");
+                + key.Row + "," + key.Col + ")");
 #endif
             // Save the foreground window here
             Tools.saveForegroundWindow();
@@ -62,7 +62,7 @@ namespace ArtPad {
             base.OnMouseLeave(e);
 #if DEBUG && true
             Tools.debugForegroundWindows("KeyButton.OnMouseLeave ("
-                + key.ROW + "," + key.COL + ")");
+                + key.Row + "," + key.Col + ")");
 #endif
         }
 
@@ -107,13 +107,25 @@ namespace ArtPad {
         /// </summary>
         /// <param name="e"></param>
         protected void handleCommandKey(System.EventArgs e) {
-            // Send the KeyString as a command
-            var process = new Process {
-                StartInfo = new ProcessStartInfo {
-                    FileName = key.KeyString
+            // Process the string to get the filename and arguments
+            var tokens = (key.KeyString).Split(',');
+            if (tokens.Length == 0) {
+                Utils.errMsg("key " + key.Name + " has no command");
+            } else {
+                // Send the KeyString as a command
+                try {
+                    var process = new Process {
+                        StartInfo = new ProcessStartInfo {
+                            FileName = tokens[0],
+                            Arguments = tokens.Length > 1 ? tokens[1] : ""
+                        }
+                    };
+                    process.Start();
+                } catch (System.Exception ex) {
+                    Utils.excMsg("Error invoking COMMAND for key "
+                        + key.Name, ex);
                 }
-            };
-            process.Start();
+            }
 #if DEBUG && false
             Tools.debugForegroundWindows("handleCommandKey (After)");
 #endif

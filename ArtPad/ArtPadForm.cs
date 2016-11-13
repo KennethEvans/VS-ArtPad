@@ -19,7 +19,6 @@ namespace ArtPad {
         public ArtPadForm() {
             config.Keys = Tools.TestKeyConfigs;
             InitializeComponent();
-            //Configuration.writeConfig(config, @"c:\scratch\ArtPad.config");
         }
 
         public ArtPadForm(string[] args) {
@@ -31,8 +30,13 @@ namespace ArtPad {
                 } else {
                     Utils.errMsg("Error reading configuration");
                 }
+            } else {
+                config.Keys = Tools.TestKeyConfigs;
             }
             InitializeComponent();
+#if DEBUG
+            Configuration.writeConfig(config, @"c:\scratch\ArtPad-startup.config");
+#endif
         }
 
         public void reconfigure(string fileName) {
@@ -47,9 +51,13 @@ namespace ArtPad {
             } else {
                 Utils.errMsg("Error reading configuration");
             }
+#if DEBUG
             Debug.Print("reconfigure(2): config: nKeys=" + config.Keys.Count
                 + " Size=" + config.Size);
+#endif
+#if DEBUG
             Configuration.writeConfig(config, @"c:\scratch\ArtPad-reconfigure.config");
+#endif
 
             createTable();
         }
@@ -64,8 +72,8 @@ namespace ArtPad {
             int rows = -1;
             int cols = -1;
             foreach (KeyConfig key in keys) {
-                if (key.COL > cols) cols = key.COL;
-                if (key.ROW > rows) rows = key.ROW;
+                if (key.Col > cols) cols = key.Col;
+                if (key.Row > rows) rows = key.Row;
             }
             rows += 1;
             cols += 1;
@@ -115,7 +123,7 @@ namespace ArtPad {
                 keyButton.Text = key.Name;
                 keyButton.Dock = DockStyle.Fill;
                 keyButton.Margin = new Padding(0);  // Default is 3
-                tableLayoutPanel.Controls.Add(keyButton, key.COL, key.ROW);
+                tableLayoutPanel.Controls.Add(keyButton, key.Col, key.Row);
             }
 
             this.Controls.Add(this.tableLayoutPanel);
