@@ -150,18 +150,21 @@ namespace ArtPad {
             {
                 {
                     return new List<KeyConfig>{
-            new KeyConfig("A","+A", KeyConfig.KeyType.NORMAL, 0, 0),
-            new KeyConfig("B","+B", KeyConfig.KeyType.NORMAL, 0, 1),
-            new KeyConfig("C","+C", KeyConfig.KeyType.NORMAL, 0, 2),
-            new KeyConfig("g","+g", KeyConfig.KeyType.NORMAL, 0, 3),
-            new KeyConfig("x","x", KeyConfig.KeyType.NORMAL, 1, 0),
-            new KeyConfig("y","y", KeyConfig.KeyType.NORMAL, 1, 1),
-            new KeyConfig("z","z", KeyConfig.KeyType.NORMAL, 1, 2),
-            new KeyConfig("f","f", KeyConfig.KeyType.NORMAL, 1, 3),
+            new KeyConfig("A","A", KeyConfig.KeyType.NORMAL, 0, 0),
+            new KeyConfig("a","a", KeyConfig.KeyType.NORMAL, 0, 1),
+            new KeyConfig("a [10]","{a 10}", KeyConfig.KeyType.NORMAL, 0, 2),
+            new KeyConfig("crazy","crazy", KeyConfig.KeyType.NORMAL, 0, 3),
+            new KeyConfig("Undo","^z", KeyConfig.KeyType.NORMAL, 0, 4),
+            new KeyConfig("Cut","^x", KeyConfig.KeyType.NORMAL, 1, 0),
+            new KeyConfig("Copy","^c", KeyConfig.KeyType.NORMAL, 1, 1),
+            new KeyConfig("Paste","^v", KeyConfig.KeyType.NORMAL, 1, 2),
+            new KeyConfig("c","c", KeyConfig.KeyType.NORMAL, 1, 3),
+            new KeyConfig("Redo","^y", KeyConfig.KeyType.NORMAL, 1, 4),
             new KeyConfig("Ctrl","^", KeyConfig.KeyType.HOLD, 2, 0),
             new KeyConfig("Alt","%", KeyConfig.KeyType.HOLD, 2, 1),
             new KeyConfig("Shift","+", KeyConfig.KeyType.HOLD, 2, 2),
-            new KeyConfig("OSK",@"osk.exe", KeyConfig.KeyType.COMMAND, 2, 3),
+            new KeyConfig("v","v", KeyConfig.KeyType.NORMAL, 2, 3),
+            new KeyConfig("OSK",@"osk.exe", KeyConfig.KeyType.COMMAND, 2, 4),
         };
                 }
             }
