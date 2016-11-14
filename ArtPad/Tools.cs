@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using WindowsInput.Native;
+using WindowsInput;
 
 namespace ArtPad {
     public static class Tools {
@@ -84,23 +86,23 @@ namespace ArtPad {
         }
 
         /// <summary>
-        /// Gets a System.Windows.Forms.Key for the given KeyConfig.
+        /// Gets a VirtualKeyCode for the given KeyConfig.
         /// </summary>
         /// <param name="key">The key to use.</param>
         /// <returns></returns>
-        public static System.Windows.Forms.Keys getKeyEnum(KeyConfig key) {
-            System.Windows.Forms.Keys keyEnum;
+        public static VirtualKeyCode getKeyCode(KeyConfig key) {
+            VirtualKeyCode keyCode;
             if (key.KeyString.Equals("^")) { // Ctrl
-                keyEnum = System.Windows.Forms.Keys.ControlKey; // (Not Control)
+                keyCode = VirtualKeyCode.CONTROL;
             } else if (key.KeyString.Equals("%")) { // Alt
-                keyEnum = System.Windows.Forms.Keys.Menu;  // Not (Alt)
+                keyCode = VirtualKeyCode.MENU;
             } else if (key.KeyString.Equals("+")) { // Shift
-                keyEnum = System.Windows.Forms.Keys.ShiftKey;  // Not (Shift)
+                keyCode = VirtualKeyCode.SHIFT;
             } else {
                 throw new ArgumentException(key.KeyString
                     + " is not supported");
             }
-            return keyEnum;
+            return keyCode;
         }
 
         /// <summary>
@@ -113,14 +115,15 @@ namespace ArtPad {
             }
             foreach (KeyConfig key in keys) {
                 if (key.Type == KeyConfig.KeyType.HOLD && key.Pressed == true) {
-                    System.Windows.Forms.Keys keyEnum;
+                    VirtualKeyCode keyCode;
                     try {
-                        keyEnum = Tools.getKeyEnum(key);
+                        keyCode = Tools.getKeyCode(key);
                     } catch (System.ArgumentException) {
                         continue;
                     }
                     key.Pressed = false;
-                    SendInputTools.SendKeyUpAsInput(keyEnum);
+                    var sim = new InputSimulator();
+                    sim.Keyboard.KeyUp(keyCode);
                 }
             }
         }
@@ -181,5 +184,3 @@ namespace ArtPad {
         }
     }
 }
-
-
