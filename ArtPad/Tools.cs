@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
-using WindowsInput.Native;
-using WindowsInput;
 
 namespace ArtPad {
     public static class Tools {
@@ -86,23 +84,23 @@ namespace ArtPad {
         }
 
         /// <summary>
-        /// Gets a VirtualKeyCode for the given KeyConfig.
+        /// Gets a System.Windows.Forms.Key for the given KeyConfig.
         /// </summary>
         /// <param name="key">The key to use.</param>
         /// <returns></returns>
-        public static VirtualKeyCode getKeyCode(KeyConfig key) {
-            VirtualKeyCode keyCode;
+        public static System.Windows.Forms.Keys getKeyEnum(KeyConfig key) {
+            System.Windows.Forms.Keys keyEnum;
             if (key.KeyString.Equals("^")) { // Ctrl
-                keyCode = VirtualKeyCode.CONTROL;
+                keyEnum = System.Windows.Forms.Keys.ControlKey; // (Not Control)
             } else if (key.KeyString.Equals("%")) { // Alt
-                keyCode = VirtualKeyCode.MENU;
+                keyEnum = System.Windows.Forms.Keys.Menu;  // Not (Alt)
             } else if (key.KeyString.Equals("+")) { // Shift
-                keyCode = VirtualKeyCode.SHIFT;
+                keyEnum = System.Windows.Forms.Keys.ShiftKey;  // Not (Shift)
             } else {
                 throw new ArgumentException(key.KeyString
                     + " is not supported");
             }
-            return keyCode;
+            return keyEnum;
         }
 
         /// <summary>
@@ -115,15 +113,14 @@ namespace ArtPad {
             }
             foreach (KeyConfig key in keys) {
                 if (key.Type == KeyConfig.KeyType.HOLD && key.Pressed == true) {
-                    VirtualKeyCode keyCode;
+                    System.Windows.Forms.Keys keyEnum;
                     try {
-                        keyCode = Tools.getKeyCode(key);
+                        keyEnum = Tools.getKeyEnum(key);
                     } catch (System.ArgumentException) {
                         continue;
                     }
                     key.Pressed = false;
-                    var sim = new InputSimulator();
-                    sim.Keyboard.KeyUp(keyCode);
+                    SendInputTools.SendKeyUpAsInput(keyEnum);
                 }
             }
         }

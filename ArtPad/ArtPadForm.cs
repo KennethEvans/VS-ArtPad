@@ -1,11 +1,10 @@
 ﻿#define CHECK_EVENTS
+#undef DEBUG
 
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Diagnostics;
-using WindowsInput;
-using WindowsInput.Native;
 
 namespace ArtPad {
     public partial class ArtPadForm : Form {
@@ -42,7 +41,7 @@ namespace ArtPad {
         public void reconfigure(string fileName) {
             Configuration newConfig = Configuration.readConfig(fileName);
             Debug.Print("reconfigure(1): config: nKeys=" + config.Keys.Count
-                +  " Size=" + config.Size);
+                + " Size=" + config.Size);
             Debug.Print("reconfigure(1): newConfig: nKeys=" + newConfig.Keys.Count
                 + " Size=" + config.Size);
             if (newConfig != null) {
@@ -164,28 +163,9 @@ namespace ArtPad {
             Tools.debugForegroundWindows("ArtPadForm.OnFormClosing");
 #endif
             // Send up events for any pressed keys
-            if (keys != null) { }
-            foreach (KeyConfig key in keys) {
-                if (key.Type == KeyConfig.KeyType.HOLD && key.Pressed == true) {
-                    key.Pressed = false;
-
-                    VirtualKeyCode keyCode;
-                    if (key.KeyString.Equals("^")) { // Ctrl
-                        keyCode = VirtualKeyCode.CONTROL;
-                    } else if (key.KeyString.Equals("%")) { // Alt
-                        keyCode = VirtualKeyCode.MENU;
-                    } else if (key.KeyString.Equals("+")) { // Shift
-                        keyCode = VirtualKeyCode.SHIFT;
-                    } else {
-                        Utils.errMsg("Cannot handle HOLD for " + key.KeyString
-                            + LF + "Must be ^ (Ctrl), % (Alt), or + (Shift)");
-                        return;
-                    }
-                    var sim = new InputSimulator();
-                    sim.Keyboard.KeyUp(keyCode);
-                }
+            if (keys != null) {
+                Tools.sendUpEventsForPressedKeys(keys);
             }
-
             base.OnFormClosing(e);
         }
 

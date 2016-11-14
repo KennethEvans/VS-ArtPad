@@ -76,6 +76,7 @@
       <DependentUpon>ArtPadForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Configuration.cs" />
+    <Compile Include="SendInputTools.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="KeyConfig.cs" />
     <Compile Include="Program.cs" />

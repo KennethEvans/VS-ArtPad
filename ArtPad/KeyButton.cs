@@ -1,8 +1,8 @@
-﻿using System.Diagnostics;
+﻿#undef DEBUG
+
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
-using WindowsInput;
-using WindowsInput.Native;
 
 namespace ArtPad {
     public partial class KeyButton : Button {
@@ -136,22 +136,21 @@ namespace ArtPad {
         /// </summary>
         /// <param name="e"></param>
         protected void handleHoldKey(System.EventArgs e) {
-            VirtualKeyCode keyCode;
+            System.Windows.Forms.Keys keyEnum;
             try {
-                keyCode = Tools.getKeyCode(key);
+                keyEnum = Tools.getKeyEnum(key);
             } catch (System.ArgumentException) {
                 Utils.errMsg("Cannot handle HOLD for " + key.KeyString
                     + LF + "Must be ^ (Ctrl), % (Alt), or + (Shift)");
                 return;
             }
 
-            var sim = new InputSimulator();
             if (key.Pressed) {
                 key.Pressed = false;
-                sim.Keyboard.KeyUp(keyCode);
+                SendInputTools.SendKeyUpAsInput(keyEnum);
                 this.BackColor = Color.FromKnownColor(KnownColor.Control);
             } else {
-                sim.Keyboard.KeyDown(keyCode);
+                SendInputTools.SendKeyDownAsInput(keyEnum);
                 key.Pressed = true;
                 this.BackColor = Color.FromKnownColor(KnownColor.Highlight);
             }
