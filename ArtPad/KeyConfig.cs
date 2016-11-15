@@ -17,6 +17,18 @@
             this.col = col;
         }
 
+        /// <summary>
+        /// Copy constructor.
+        /// </summary>
+        /// <param name="key"></param>
+        public KeyConfig(KeyConfig key) {
+            this.name = key.name;
+            this.keyString = key.keyString;
+            this.type = key.type;
+            this.row = key.row;
+            this.col = key.col;
+        }
+
         // Getters and setters
         public string Name
         {

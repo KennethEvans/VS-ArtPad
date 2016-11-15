@@ -61,6 +61,12 @@
       <DependentUpon>ArtPadForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Configuration.cs" />
+    <Compile Include="EditKeyDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditKeyDialog.Designer.cs">
+      <DependentUpon>EditKeyDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tools.cs" />
     <Compile Include="KeyConfig.cs" />
     <Compile Include="Program.cs" />
@@ -74,6 +80,9 @@
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="ArtPadForm.resx">
       <DependentUpon>ArtPadForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditKeyDialog.resx">
+      <DependentUpon>EditKeyDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KeyButton.resx">
       <DependentUpon>KeyButton.cs</DependentUpon>

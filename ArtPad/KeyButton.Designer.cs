@@ -29,7 +29,8 @@ namespace ArtPad {
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripLoadMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemLoad = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -37,16 +38,25 @@ namespace ArtPad {
             // 
             this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLoadMenuItem});
+            this.toolStripMenuItemLoad,
+            this.toolStripMenuItemEdit});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(250, 30);
+            this.contextMenuStrip.Size = new System.Drawing.Size(250, 56);
+            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
-            // toolStripLoadMenuItem
+            // toolStripMenuItemLoad
             // 
-            this.toolStripLoadMenuItem.Name = "toolStripLoadMenuItem";
-            this.toolStripLoadMenuItem.Size = new System.Drawing.Size(249, 26);
-            this.toolStripLoadMenuItem.Text = "Load Key Configuration...";
-            this.toolStripLoadMenuItem.ToolTipText = "Load a new key configuration file.";
+            this.toolStripMenuItemLoad.Name = "toolStripMenuItemLoad";
+            this.toolStripMenuItemLoad.Size = new System.Drawing.Size(249, 26);
+            this.toolStripMenuItemLoad.Text = "Load Key Configuration...";
+            this.toolStripMenuItemLoad.ToolTipText = "Load a new key configuration file.";
+            // 
+            // toolStripMenuItemEdit
+            // 
+            this.toolStripMenuItemEdit.Name = "toolStripMenuItemEdit";
+            this.toolStripMenuItemEdit.Size = new System.Drawing.Size(249, 26);
+            this.toolStripMenuItemEdit.Text = "Edit...";
+            this.toolStripMenuItemEdit.ToolTipText = "Edit this key.";
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -55,6 +65,7 @@ namespace ArtPad {
         #endregion
 
         private ContextMenuStrip contextMenuStrip;
-        private ToolStripMenuItem toolStripLoadMenuItem;
+        private ToolStripMenuItem toolStripMenuItemLoad;
+        private ToolStripMenuItem toolStripMenuItemEdit;
     }
 }

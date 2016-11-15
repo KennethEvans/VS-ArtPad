@@ -14,21 +14,32 @@ namespace ArtPad {
             InitializeComponent();
 
             // Should have been able to do this in the designer
-            this.toolStripLoadMenuItem.Click +=
+            this.toolStripMenuItemLoad.Click +=
                 new System.EventHandler(this.toolStripLoadMenuItem_Click);
+
+            this.toolStripMenuItemEdit.Click +=
+                new System.EventHandler(this.toolStripEditMenuItem_Click);
         }
 
         void toolStripLoadMenuItem_Click(object sender, System.EventArgs e) {
-            int size = Application.OpenForms.Count;
             ArtPadForm mainForm = (ArtPadForm)FindForm().FindForm();
 
-            // Displays an OpenFileDialog so the user can select a Cursor.
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Configuration Files|*.config";
-            ofd.Title = "Select a Configuration File";
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
-                mainForm.reconfigure(ofd.FileName);
+            // Displays an OpenFileDialog so the user can select a 
+            // KeyConfiguration.
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "Configuration Files|*.config";
+            dlg.Title = "Select a Configuration File";
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                mainForm.reconfigure(dlg.FileName);
             }
+        }
+
+        void toolStripEditMenuItem_Click(object sender, System.EventArgs e) {
+            ArtPadForm mainForm = (ArtPadForm)FindForm().FindForm();
+
+            // Displays an OpenFileDialog so the user can edit the key.
+            EditKeyDialog dlg = new EditKeyDialog(key);
+            dlg.Show();
         }
 
         protected override void OnMouseUp(MouseEventArgs e) {
@@ -157,5 +168,8 @@ namespace ArtPad {
             }
         }
 
+        private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e) {
+
+        }
     }
 }
