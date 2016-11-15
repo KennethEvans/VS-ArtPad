@@ -28,10 +28,11 @@
             this.groupBoxEdit = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelType = new System.Windows.Forms.FlowLayoutPanel();
             this.labelType = new System.Windows.Forms.Label();
+            this.comboBoxType = new System.Windows.Forms.ComboBox();
             this.flowLayoutPanelKeyString = new System.Windows.Forms.FlowLayoutPanel();
             this.labelKeyString = new System.Windows.Forms.Label();
             this.textBoxKeyString = new System.Windows.Forms.TextBox();
-            this.flowLayoutEditPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutName = new System.Windows.Forms.FlowLayoutPanel();
             this.labelName = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.flowLayoutPanelButtons1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -44,12 +45,11 @@
             this.buttonSaveAll = new System.Windows.Forms.Button();
             this.flowLayoutPanelButtons3 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonDismiss = new System.Windows.Forms.Button();
-            this.comboBoxType = new System.Windows.Forms.ComboBox();
             this.editKeyTableLayoutPanel.SuspendLayout();
             this.groupBoxEdit.SuspendLayout();
             this.flowLayoutPanelType.SuspendLayout();
             this.flowLayoutPanelKeyString.SuspendLayout();
-            this.flowLayoutEditPanel1.SuspendLayout();
+            this.flowLayoutName.SuspendLayout();
             this.flowLayoutPanelButtons1.SuspendLayout();
             this.flowLayoutPanelButtons2.SuspendLayout();
             this.flowLayoutPanelButtons3.SuspendLayout();
@@ -76,7 +76,7 @@
             this.editKeyTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.editKeyTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.editKeyTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.editKeyTableLayoutPanel.Size = new System.Drawing.Size(282, 331);
+            this.editKeyTableLayoutPanel.Size = new System.Drawing.Size(282, 310);
             this.editKeyTableLayoutPanel.TabIndex = 0;
             this.editKeyTableLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.editKeyTableLayoutPanel_Paint);
             // 
@@ -95,14 +95,13 @@
             // 
             this.groupBoxEdit.AutoSize = true;
             this.groupBoxEdit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.groupBoxEdit.Controls.Add(this.comboBoxType);
             this.groupBoxEdit.Controls.Add(this.flowLayoutPanelType);
             this.groupBoxEdit.Controls.Add(this.flowLayoutPanelKeyString);
-            this.groupBoxEdit.Controls.Add(this.flowLayoutEditPanel1);
+            this.groupBoxEdit.Controls.Add(this.flowLayoutName);
             this.groupBoxEdit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxEdit.Location = new System.Drawing.Point(3, 40);
             this.groupBoxEdit.Name = "groupBoxEdit";
-            this.groupBoxEdit.Size = new System.Drawing.Size(276, 145);
+            this.groupBoxEdit.Size = new System.Drawing.Size(276, 148);
             this.groupBoxEdit.TabIndex = 1;
             this.groupBoxEdit.TabStop = false;
             this.groupBoxEdit.Text = "Edit";
@@ -112,20 +111,34 @@
             this.flowLayoutPanelType.AutoSize = true;
             this.flowLayoutPanelType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelType.Controls.Add(this.labelType);
-            this.flowLayoutPanelType.Location = new System.Drawing.Point(12, 99);
+            this.flowLayoutPanelType.Controls.Add(this.comboBoxType);
+            this.flowLayoutPanelType.Location = new System.Drawing.Point(12, 97);
             this.flowLayoutPanelType.Name = "flowLayoutPanelType";
-            this.flowLayoutPanelType.Size = new System.Drawing.Size(50, 17);
-            this.flowLayoutPanelType.TabIndex = 2;
+            this.flowLayoutPanelType.Size = new System.Drawing.Size(177, 30);
+            this.flowLayoutPanelType.TabIndex = 4;
             // 
             // labelType
             // 
             this.labelType.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelType.AutoSize = true;
-            this.labelType.Location = new System.Drawing.Point(3, 0);
+            this.labelType.Location = new System.Drawing.Point(3, 6);
             this.labelType.Name = "labelType";
             this.labelType.Size = new System.Drawing.Size(44, 17);
-            this.labelType.TabIndex = 0;
+            this.labelType.TabIndex = 1;
             this.labelType.Text = "Type:";
+            // 
+            // comboBoxType
+            // 
+            this.comboBoxType.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.comboBoxType.FormattingEnabled = true;
+            this.comboBoxType.Items.AddRange(new object[] {
+            "NORMAL",
+            "HOLD",
+            "COMMAND"});
+            this.comboBoxType.Location = new System.Drawing.Point(53, 3);
+            this.comboBoxType.Name = "comboBoxType";
+            this.comboBoxType.Size = new System.Drawing.Size(121, 24);
+            this.comboBoxType.TabIndex = 4;
             // 
             // flowLayoutPanelKeyString
             // 
@@ -156,16 +169,16 @@
             this.textBoxKeyString.Size = new System.Drawing.Size(100, 22);
             this.textBoxKeyString.TabIndex = 1;
             // 
-            // flowLayoutEditPanel1
+            // flowLayoutName
             // 
-            this.flowLayoutEditPanel1.AutoSize = true;
-            this.flowLayoutEditPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutEditPanel1.Controls.Add(this.labelName);
-            this.flowLayoutEditPanel1.Controls.Add(this.textBoxName);
-            this.flowLayoutEditPanel1.Location = new System.Drawing.Point(12, 27);
-            this.flowLayoutEditPanel1.Name = "flowLayoutEditPanel1";
-            this.flowLayoutEditPanel1.Size = new System.Drawing.Size(161, 28);
-            this.flowLayoutEditPanel1.TabIndex = 0;
+            this.flowLayoutName.AutoSize = true;
+            this.flowLayoutName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutName.Controls.Add(this.labelName);
+            this.flowLayoutName.Controls.Add(this.textBoxName);
+            this.flowLayoutName.Location = new System.Drawing.Point(12, 27);
+            this.flowLayoutName.Name = "flowLayoutName";
+            this.flowLayoutName.Size = new System.Drawing.Size(161, 28);
+            this.flowLayoutName.TabIndex = 0;
             // 
             // labelName
             // 
@@ -193,7 +206,7 @@
             this.flowLayoutPanelButtons1.Controls.Add(this.buttonDeleteKey);
             this.flowLayoutPanelButtons1.Controls.Add(this.button3);
             this.flowLayoutPanelButtons1.Controls.Add(this.button4);
-            this.flowLayoutPanelButtons1.Location = new System.Drawing.Point(9, 191);
+            this.flowLayoutPanelButtons1.Location = new System.Drawing.Point(9, 194);
             this.flowLayoutPanelButtons1.Name = "flowLayoutPanelButtons1";
             this.flowLayoutPanelButtons1.Size = new System.Drawing.Size(263, 33);
             this.flowLayoutPanelButtons1.TabIndex = 2;
@@ -239,7 +252,7 @@
             this.flowLayoutPanelButtons2.Controls.Add(this.buttonResetAll);
             this.flowLayoutPanelButtons2.Controls.Add(this.button6);
             this.flowLayoutPanelButtons2.Controls.Add(this.buttonSaveAll);
-            this.flowLayoutPanelButtons2.Location = new System.Drawing.Point(19, 230);
+            this.flowLayoutPanelButtons2.Location = new System.Drawing.Point(19, 233);
             this.flowLayoutPanelButtons2.Name = "flowLayoutPanelButtons2";
             this.flowLayoutPanelButtons2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.flowLayoutPanelButtons2.Size = new System.Drawing.Size(243, 33);
@@ -283,9 +296,9 @@
             this.flowLayoutPanelButtons3.AutoSize = true;
             this.flowLayoutPanelButtons3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelButtons3.Controls.Add(this.buttonDismiss);
-            this.flowLayoutPanelButtons3.Location = new System.Drawing.Point(100, 269);
+            this.flowLayoutPanelButtons3.Location = new System.Drawing.Point(100, 272);
             this.flowLayoutPanelButtons3.Name = "flowLayoutPanelButtons3";
-            this.flowLayoutPanelButtons3.Size = new System.Drawing.Size(81, 59);
+            this.flowLayoutPanelButtons3.Size = new System.Drawing.Size(81, 35);
             this.flowLayoutPanelButtons3.TabIndex = 4;
             // 
             // buttonDismiss
@@ -299,19 +312,6 @@
             this.buttonDismiss.Text = "Dismiss";
             this.buttonDismiss.UseVisualStyleBackColor = true;
             // 
-            // comboBoxType
-            // 
-            this.comboBoxType.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.comboBoxType.FormattingEnabled = true;
-            this.comboBoxType.Items.AddRange(new object[] {
-            "NORMAL",
-            "HOLD",
-            "COMMAND"});
-            this.comboBoxType.Location = new System.Drawing.Point(77, 100);
-            this.comboBoxType.Name = "comboBoxType";
-            this.comboBoxType.Size = new System.Drawing.Size(121, 24);
-            this.comboBoxType.TabIndex = 3;
-            // 
             // EditKeyDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -319,7 +319,7 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(282, 331);
+            this.ClientSize = new System.Drawing.Size(282, 310);
             this.Controls.Add(this.editKeyTableLayoutPanel);
             this.Name = "EditKeyDialog";
             this.Text = "Edit";
@@ -331,8 +331,8 @@
             this.flowLayoutPanelType.PerformLayout();
             this.flowLayoutPanelKeyString.ResumeLayout(false);
             this.flowLayoutPanelKeyString.PerformLayout();
-            this.flowLayoutEditPanel1.ResumeLayout(false);
-            this.flowLayoutEditPanel1.PerformLayout();
+            this.flowLayoutName.ResumeLayout(false);
+            this.flowLayoutName.PerformLayout();
             this.flowLayoutPanelButtons1.ResumeLayout(false);
             this.flowLayoutPanelButtons1.PerformLayout();
             this.flowLayoutPanelButtons2.ResumeLayout(false);
@@ -349,12 +349,10 @@
         private System.Windows.Forms.TableLayoutPanel editKeyTableLayoutPanel;
         private System.Windows.Forms.Label labelRowCol;
         private System.Windows.Forms.GroupBox groupBoxEdit;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelType;
-        private System.Windows.Forms.Label labelType;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelKeyString;
         private System.Windows.Forms.Label labelKeyString;
         private System.Windows.Forms.TextBox textBoxKeyString;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutEditPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutName;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelButtons1;
@@ -367,6 +365,8 @@
         private System.Windows.Forms.Button buttonSaveAll;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelButtons3;
         private System.Windows.Forms.Button buttonDismiss;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelType;
+        private System.Windows.Forms.Label labelType;
         private System.Windows.Forms.ComboBox comboBoxType;
     }
 }
