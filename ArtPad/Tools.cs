@@ -153,7 +153,7 @@ namespace ArtPad {
             new KeyConfig("A","A", KeyConfig.KeyType.NORMAL, 0, 0),
             new KeyConfig("a","a", KeyConfig.KeyType.NORMAL, 0, 1),
             new KeyConfig("a [10]","{a 10}", KeyConfig.KeyType.NORMAL, 0, 2),
-            new KeyConfig("crazy","crazy", KeyConfig.KeyType.NORMAL, 0, 3),
+            new KeyConfig("crazy","crazy", KeyConfig.KeyType.UNUSED, 0, 3),
             new KeyConfig("Undo","^z", KeyConfig.KeyType.NORMAL, 0, 4),
             new KeyConfig("Cut","^x", KeyConfig.KeyType.NORMAL, 1, 0),
             new KeyConfig("Copy","^c", KeyConfig.KeyType.NORMAL, 1, 1),

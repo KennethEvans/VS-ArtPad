@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace ArtPad {
     public partial class ArtPadForm : Form {
@@ -119,7 +120,13 @@ namespace ArtPad {
             KeyButton keyButton;
             foreach (KeyConfig key in keys) {
                 keyButton = new KeyButton(key);
-                keyButton.Text = key.Name;
+                if (key.Type == KeyConfig.KeyType.UNUSED) {
+                    keyButton.Text = "";
+                    keyButton.BackColor =
+                        Color.FromKnownColor(KnownColor.ControlLight);
+                } else {
+                    keyButton.Text = key.Name;
+                }
                 keyButton.Dock = DockStyle.Fill;
                 keyButton.Margin = new Padding(0);  // Default is 3
                 tableLayoutPanel.Controls.Add(keyButton, key.Col, key.Row);

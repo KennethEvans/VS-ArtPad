@@ -96,6 +96,9 @@ namespace ArtPad {
                 case KeyConfig.KeyType.HOLD:
                     handleHoldKey(e);
                     break;
+                case KeyConfig.KeyType.UNUSED:
+                    // Do nothing
+                    break;
                 default:
                     Utils.errMsg("Unhandled key type: " + key.Type);
                     return;
@@ -160,11 +163,13 @@ namespace ArtPad {
             if (key.Pressed) {
                 key.Pressed = false;
                 sim.Keyboard.KeyUp(keyCode);
-                this.BackColor = Color.FromKnownColor(KnownColor.Control);
+                // Use this instead of 
+                // BackColor = Color.FromKnownColor(KnownColor.Control);
+                UseVisualStyleBackColor = true;
             } else {
                 sim.Keyboard.KeyDown(keyCode);
                 key.Pressed = true;
-                this.BackColor = Color.FromKnownColor(KnownColor.Highlight);
+                BackColor = Color.FromKnownColor(KnownColor.Highlight);
             }
         }
 
