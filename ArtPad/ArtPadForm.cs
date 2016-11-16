@@ -16,11 +16,18 @@ namespace ArtPad {
         private Configuration config = new Configuration();
         private List<KeyDef> keyDefs = Tools.TestKeyDefs;
 
+        /// <summary>
+        /// Empty constructor.
+        /// </summary>
         public ArtPadForm() {
             Config.KeyDefs = Tools.TestKeyDefs;
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Constructor to use command-line args.
+        /// </summary>
+        /// <param name="args"></param>
         public ArtPadForm(string[] args) {
             if (args.Length > 0) {
                 Configuration newConfig = Configuration.readConfig(args[0]);
@@ -74,6 +81,10 @@ namespace ArtPad {
             reconfigure(newConfig);
         }
 
+        /// <summary>
+        /// Clears the current TableLayoutPanel, removes it from the controls,
+        /// adds new KeyButtons, then adds the TableLayoutPanel to the Controls.
+        /// </summary>
         protected void createTable() {
             if (keyDefs == null) {
                 Utils.errMsg("No keys are defined");
@@ -81,14 +92,8 @@ namespace ArtPad {
             }
 
             // Get the table size
-            int rows = -1;
-            int cols = -1;
-            foreach (KeyDef keyDef in keyDefs) {
-                if (keyDef.Col > cols) cols = keyDef.Col;
-                if (keyDef.Row > rows) rows = keyDef.Row;
-            }
-            rows += 1;
-            cols += 1;
+            int rows = Config.Rows;
+            int cols = Config.Cols;
             Debug.Print("createTable: rows=" + rows + " cols=" + cols);
 
             // Remove any existing tableLayoutPanel
@@ -209,6 +214,7 @@ namespace ArtPad {
 
         // Define debugging for determining when events are called
         // and the state of the foreground window
+        #region Check events
 #if CHECK_EVENTS
 
         protected override void OnMouseEnter(System.EventArgs e) {
@@ -294,6 +300,7 @@ namespace ArtPad {
         }
 
 #endif //CHECK_EVENTS
+        #endregion Check events
 
     }
 }

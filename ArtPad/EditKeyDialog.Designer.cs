@@ -306,6 +306,7 @@
             this.Controls.Add(this.editKeyTableLayoutPanel);
             this.Name = "EditKeyDialog";
             this.Text = "Edit";
+            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormClosing);
             this.editKeyTableLayoutPanel.ResumeLayout(false);
             this.editKeyTableLayoutPanel.PerformLayout();

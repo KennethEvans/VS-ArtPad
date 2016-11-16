@@ -16,16 +16,30 @@ namespace ArtPad {
 
             // Should have been able to do this in the designer
             this.toolStripMenuItemLoad.Click +=
-                new System.EventHandler(this.toolStripLoadMenuItem_Click);
-
+                new System.EventHandler(this.toolStripMenuItemLoad_Click);
             this.toolStripMenuItemSaveAs.Click +=
-                new System.EventHandler(this.toolStripSaveAsMenuItem_Click);
-
-            this.toolStripMenuItemEdit.Click +=
-                new System.EventHandler(this.toolStripEditMenuItem_Click);
+                new System.EventHandler(this.toolStripAsMenuItemSaveAs_Click);
+            this.toolStripMenuItemEditKey.Click +=
+                new System.EventHandler(this.toolStripMenuItemEdit_Click);
+            this.toolStripMenuItemDeleteRow.Click +=
+                new System.EventHandler(this.toolStripMenuItemDeleteRow_click);
+            this.toolStripMenuItemAddRowBefore.Click +=
+                new System.EventHandler(this.toolStripMenuItemAddRowBefore_click);
+            this.toolStripMenuItemAddRowAfter.Click +=
+                new System.EventHandler(this.toolStripMenuItemAddRowAfter_click);
+            this.toolStripMenuItemDeleteCol.Click +=
+                new System.EventHandler(this.toolStripMenuItemDeleteCol_click);
+            this.toolStripMenuItemAddColBefore.Click +=
+                new System.EventHandler(this.toolStripMenuItemAddColBefore_click);
+            this.toolStripMenuItemAddColAfter.Click +=
+                new System.EventHandler(this.toolStripMenuItemAddColAfter_click);
+            this.toolStripMenuItemSort.Click +=
+                new System.EventHandler(this.toolStripMenuItemSort_click);
+            this.toolStripMenuItemCreateNew.Click +=
+                new System.EventHandler(this.toolStripMenuItemCreateNew_click);
         }
 
-        void toolStripLoadMenuItem_Click(object sender, System.EventArgs e) {
+        void toolStripMenuItemLoad_Click(object sender, System.EventArgs e) {
 
             // Displays an OpenFileDialog so the user can select a 
             // KeyConfiguration
@@ -38,7 +52,7 @@ namespace ArtPad {
             }
         }
 
-        void toolStripSaveAsMenuItem_Click(object sender, System.EventArgs e) {
+        void toolStripAsMenuItemSaveAs_Click(object sender, System.EventArgs e) {
             // Displays an OpenFileDialog so the user can select a 
             // KeyConfiguration
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
@@ -50,7 +64,7 @@ namespace ArtPad {
             }
         }
 
-        void toolStripEditMenuItem_Click(object sender, System.EventArgs e) {
+        void toolStripMenuItemEdit_Click(object sender, System.EventArgs e) {
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
             // Create, show, or visiblethe EditKeyDialog as appropriate
             if (editKeyDlg == null) {
@@ -60,6 +74,61 @@ namespace ArtPad {
                 editKeyDlg.Visible = true;
                 editKeyDlg.resetContents(keyDef, artPad);
             }
+        }
+
+        void toolStripMenuItemDeleteRow_click(object sender, System.EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            Configuration config = artPad.Config;
+            config.deleteRow(keyDef.Row);
+            artPad.reconfigure(config);
+        }
+
+        void toolStripMenuItemAddRowBefore_click(object sender, System.EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            Configuration config = artPad.Config;
+            config.insertRowBefore(keyDef.Row);
+            artPad.reconfigure(config);
+        }
+
+        void toolStripMenuItemAddRowAfter_click(object sender, System.EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            Configuration config = artPad.Config;
+            config.insertRowAfter(keyDef.Row);
+            artPad.reconfigure(config);
+        }
+
+        void toolStripMenuItemDeleteCol_click(object sender, System.EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            Configuration config = artPad.Config;
+            config.deleteCol(keyDef.Col);
+            artPad.reconfigure(config);
+        }
+
+        void toolStripMenuItemAddColBefore_click(object sender, System.EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            Configuration config = artPad.Config;
+            config.insertColBefore(keyDef.Col);
+            artPad.reconfigure(config);
+        }
+
+        void toolStripMenuItemAddColAfter_click(object sender, System.EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            Configuration config = artPad.Config;
+            config.insertColAfter(keyDef.Col);
+            artPad.reconfigure(config);
+        }
+
+        void toolStripMenuItemSort_click(object sender, System.EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            Configuration config = artPad.Config;
+            config.sort();
+            artPad.reconfigure(config);
+        }
+
+        void toolStripMenuItemCreateNew_click(object sender, System.EventArgs e) {
+            //ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            //Configuration config = Configuration.generateNewConfiguration();
+            //artPad.reconfigure(config);
         }
 
         protected override void OnMouseUp(MouseEventArgs e) {
