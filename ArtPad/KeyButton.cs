@@ -54,11 +54,11 @@ namespace ArtPad {
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
             // Create, show, or visiblethe EditKeyDialog as appropriate
             if (editKeyDlg == null) {
-                editKeyDlg = new EditKeyDialog(keyDef, this, artPad);
+                editKeyDlg = new EditKeyDialog(keyDef, artPad);
                 editKeyDlg.Show();
             } else {
                 editKeyDlg.Visible = true;
-                editKeyDlg.resetContents(keyDef, this, artPad);
+                editKeyDlg.resetContents(keyDef, artPad);
             }
         }
 

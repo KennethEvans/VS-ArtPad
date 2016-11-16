@@ -11,18 +11,16 @@ using Newtonsoft.Json;
 
 namespace ArtPad {
     public partial class EditKeyDialog : Form {
-        private KeyButton button;
         private KeyDef keyDefOrig;
         private ArtPadForm artPad;
 
-        public EditKeyDialog(KeyDef keyDef, KeyButton button, ArtPadForm artPad) {
+        public EditKeyDialog(KeyDef keyDef, ArtPadForm artPad) {
             InitializeComponent();
-            resetContents(keyDef, button, artPad);
+            resetContents(keyDef, artPad);
         }
 
-        public void resetContents(KeyDef keyDef, KeyButton button, ArtPadForm artPad) {
+        public void resetContents(KeyDef keyDef, ArtPadForm artPad) {
             keyDefOrig = new KeyDef(keyDef);
-            this.button = button;
             this.artPad = artPad;
             populateControls(keyDef);
         }
@@ -90,16 +88,10 @@ namespace ArtPad {
                 }
                 populateControls(newKeyDef);
             }
-
         }
-
 
         private void resetButton_click(object sender, MouseEventArgs e) {
             populateControls(keyDefOrig);
-        }
-
-        private void deleteKeyButton_click(object sender, MouseEventArgs e) {
-
         }
 
         private void setKeyButton_click(object sender, MouseEventArgs e) {
@@ -112,20 +104,8 @@ namespace ArtPad {
                 return;
             }
             config.KeyDefs[index] = newKeyDef;
+            keyDefOrig = newKeyDef;
             artPad.reconfigure(config);
-            this.Visible = false;
-        }
-
-        private void resetAllButton_click(object sender, MouseEventArgs e) {
-
-        }
-
-        private void setAllButton_click(object sender, MouseEventArgs e) {
-
-        }
-
-        private void saveAllButton_click(object sender, MouseEventArgs e) {
-
         }
 
         private void dismissButton_click(object sender, MouseEventArgs e) {

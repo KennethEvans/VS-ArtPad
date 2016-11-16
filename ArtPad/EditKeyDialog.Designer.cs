@@ -40,13 +40,7 @@
             this.buttonPaste = new System.Windows.Forms.Button();
             this.buttonReset = new System.Windows.Forms.Button();
             this.flowLayoutPanelButtons2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.buttonDeleteKey = new System.Windows.Forms.Button();
             this.buttonSetKey = new System.Windows.Forms.Button();
-            this.flowLayoutPanelButtons3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.buttonResetAll = new System.Windows.Forms.Button();
-            this.buttonSetAll = new System.Windows.Forms.Button();
-            this.buttonSaveAll = new System.Windows.Forms.Button();
-            this.flowLayoutPanelButtons4 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonDismiss = new System.Windows.Forms.Button();
             this.editKeyTableLayoutPanel.SuspendLayout();
             this.groupBoxEdit.SuspendLayout();
@@ -55,8 +49,6 @@
             this.flowLayoutName.SuspendLayout();
             this.flowLayoutPanelButtons1.SuspendLayout();
             this.flowLayoutPanelButtons2.SuspendLayout();
-            this.flowLayoutPanelButtons3.SuspendLayout();
-            this.flowLayoutPanelButtons4.SuspendLayout();
             this.SuspendLayout();
             // 
             // editKeyTableLayoutPanel
@@ -69,20 +61,18 @@
             this.editKeyTableLayoutPanel.Controls.Add(this.groupBoxEdit, 0, 1);
             this.editKeyTableLayoutPanel.Controls.Add(this.flowLayoutPanelButtons1, 0, 2);
             this.editKeyTableLayoutPanel.Controls.Add(this.flowLayoutPanelButtons2, 0, 3);
-            this.editKeyTableLayoutPanel.Controls.Add(this.flowLayoutPanelButtons3, 0, 4);
-            this.editKeyTableLayoutPanel.Controls.Add(this.flowLayoutPanelButtons4, 0, 5);
             this.editKeyTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.editKeyTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.editKeyTableLayoutPanel.Name = "editKeyTableLayoutPanel";
-            this.editKeyTableLayoutPanel.RowCount = 7;
-            this.editKeyTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.editKeyTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.editKeyTableLayoutPanel.RowCount = 4;
             this.editKeyTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.editKeyTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.editKeyTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.editKeyTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.editKeyTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.editKeyTableLayoutPanel.Size = new System.Drawing.Size(282, 362);
+            this.editKeyTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.editKeyTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.editKeyTableLayoutPanel.Size = new System.Drawing.Size(282, 275);
             this.editKeyTableLayoutPanel.TabIndex = 0;
             this.editKeyTableLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.editKeyTableLayoutPanel_Paint);
             // 
@@ -260,30 +250,18 @@
             this.flowLayoutPanelButtons2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.flowLayoutPanelButtons2.AutoSize = true;
             this.flowLayoutPanelButtons2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanelButtons2.Controls.Add(this.buttonDeleteKey);
             this.flowLayoutPanelButtons2.Controls.Add(this.buttonSetKey);
-            this.flowLayoutPanelButtons2.Location = new System.Drawing.Point(54, 233);
+            this.flowLayoutPanelButtons2.Controls.Add(this.buttonDismiss);
+            this.flowLayoutPanelButtons2.Location = new System.Drawing.Point(60, 233);
             this.flowLayoutPanelButtons2.Name = "flowLayoutPanelButtons2";
-            this.flowLayoutPanelButtons2.Size = new System.Drawing.Size(174, 33);
+            this.flowLayoutPanelButtons2.Size = new System.Drawing.Size(162, 39);
             this.flowLayoutPanelButtons2.TabIndex = 2;
-            // 
-            // buttonDeleteKey
-            // 
-            this.buttonDeleteKey.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonDeleteKey.AutoSize = true;
-            this.buttonDeleteKey.Location = new System.Drawing.Point(3, 3);
-            this.buttonDeleteKey.Name = "buttonDeleteKey";
-            this.buttonDeleteKey.Size = new System.Drawing.Size(87, 27);
-            this.buttonDeleteKey.TabIndex = 1;
-            this.buttonDeleteKey.Text = "Delete Key";
-            this.buttonDeleteKey.UseVisualStyleBackColor = true;
-            this.buttonDeleteKey.MouseClick += new System.Windows.Forms.MouseEventHandler(this.deleteKeyButton_click);
             // 
             // buttonSetKey
             // 
             this.buttonSetKey.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.buttonSetKey.AutoSize = true;
-            this.buttonSetKey.Location = new System.Drawing.Point(96, 3);
+            this.buttonSetKey.Location = new System.Drawing.Point(3, 3);
             this.buttonSetKey.Name = "buttonSetKey";
             this.buttonSetKey.Size = new System.Drawing.Size(75, 27);
             this.buttonSetKey.TabIndex = 2;
@@ -291,75 +269,14 @@
             this.buttonSetKey.UseVisualStyleBackColor = true;
             this.buttonSetKey.MouseClick += new System.Windows.Forms.MouseEventHandler(this.setKeyButton_click);
             // 
-            // flowLayoutPanelButtons3
-            // 
-            this.flowLayoutPanelButtons3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.flowLayoutPanelButtons3.AutoSize = true;
-            this.flowLayoutPanelButtons3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanelButtons3.Controls.Add(this.buttonResetAll);
-            this.flowLayoutPanelButtons3.Controls.Add(this.buttonSetAll);
-            this.flowLayoutPanelButtons3.Controls.Add(this.buttonSaveAll);
-            this.flowLayoutPanelButtons3.Location = new System.Drawing.Point(19, 272);
-            this.flowLayoutPanelButtons3.Name = "flowLayoutPanelButtons3";
-            this.flowLayoutPanelButtons3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.flowLayoutPanelButtons3.Size = new System.Drawing.Size(243, 33);
-            this.flowLayoutPanelButtons3.TabIndex = 3;
-            // 
-            // buttonResetAll
-            // 
-            this.buttonResetAll.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonResetAll.Location = new System.Drawing.Point(3, 5);
-            this.buttonResetAll.Name = "buttonResetAll";
-            this.buttonResetAll.Size = new System.Drawing.Size(75, 23);
-            this.buttonResetAll.TabIndex = 0;
-            this.buttonResetAll.Text = "Reset All";
-            this.buttonResetAll.UseVisualStyleBackColor = true;
-            this.buttonResetAll.MouseClick += new System.Windows.Forms.MouseEventHandler(this.resetAllButton_click);
-            // 
-            // buttonSetAll
-            // 
-            this.buttonSetAll.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonSetAll.AutoSize = true;
-            this.buttonSetAll.Location = new System.Drawing.Point(84, 3);
-            this.buttonSetAll.Name = "buttonSetAll";
-            this.buttonSetAll.Size = new System.Drawing.Size(75, 27);
-            this.buttonSetAll.TabIndex = 1;
-            this.buttonSetAll.Text = "Set All";
-            this.buttonSetAll.UseVisualStyleBackColor = true;
-            this.buttonSetAll.MouseClick += new System.Windows.Forms.MouseEventHandler(this.setAllButton_click);
-            // 
-            // buttonSaveAll
-            // 
-            this.buttonSaveAll.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonSaveAll.AutoSize = true;
-            this.buttonSaveAll.Location = new System.Drawing.Point(165, 3);
-            this.buttonSaveAll.Name = "buttonSaveAll";
-            this.buttonSaveAll.Size = new System.Drawing.Size(75, 27);
-            this.buttonSaveAll.TabIndex = 2;
-            this.buttonSaveAll.Text = "Save All";
-            this.buttonSaveAll.UseVisualStyleBackColor = true;
-            this.buttonSaveAll.MouseClick += new System.Windows.Forms.MouseEventHandler(this.saveAllButton_click);
-            // 
-            // flowLayoutPanelButtons4
-            // 
-            this.flowLayoutPanelButtons4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.flowLayoutPanelButtons4.AutoSize = true;
-            this.flowLayoutPanelButtons4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanelButtons4.Controls.Add(this.buttonDismiss);
-            this.flowLayoutPanelButtons4.Location = new System.Drawing.Point(100, 311);
-            this.flowLayoutPanelButtons4.Name = "flowLayoutPanelButtons4";
-            this.flowLayoutPanelButtons4.Size = new System.Drawing.Size(81, 33);
-            this.flowLayoutPanelButtons4.TabIndex = 4;
-            this.flowLayoutPanelButtons4.WrapContents = false;
-            // 
             // buttonDismiss
             // 
             this.buttonDismiss.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.buttonDismiss.AutoSize = true;
-            this.buttonDismiss.Location = new System.Drawing.Point(3, 3);
+            this.buttonDismiss.Location = new System.Drawing.Point(84, 3);
             this.buttonDismiss.Name = "buttonDismiss";
             this.buttonDismiss.Size = new System.Drawing.Size(75, 27);
-            this.buttonDismiss.TabIndex = 0;
+            this.buttonDismiss.TabIndex = 3;
             this.buttonDismiss.Text = "Dismiss";
             this.buttonDismiss.UseVisualStyleBackColor = true;
             this.buttonDismiss.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dismissButton_click);
@@ -371,7 +288,7 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(282, 362);
+            this.ClientSize = new System.Drawing.Size(282, 275);
             this.Controls.Add(this.editKeyTableLayoutPanel);
             this.Name = "EditKeyDialog";
             this.Text = "Edit";
@@ -390,10 +307,6 @@
             this.flowLayoutPanelButtons1.PerformLayout();
             this.flowLayoutPanelButtons2.ResumeLayout(false);
             this.flowLayoutPanelButtons2.PerformLayout();
-            this.flowLayoutPanelButtons3.ResumeLayout(false);
-            this.flowLayoutPanelButtons3.PerformLayout();
-            this.flowLayoutPanelButtons4.ResumeLayout(false);
-            this.flowLayoutPanelButtons4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -411,14 +324,7 @@
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelButtons2;
-        private System.Windows.Forms.Button buttonDeleteKey;
         private System.Windows.Forms.Button buttonSetKey;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelButtons3;
-        private System.Windows.Forms.Button buttonResetAll;
-        private System.Windows.Forms.Button buttonSetAll;
-        private System.Windows.Forms.Button buttonSaveAll;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelButtons4;
-        private System.Windows.Forms.Button buttonDismiss;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelType;
         private System.Windows.Forms.Label labelType;
         private System.Windows.Forms.ComboBox comboBoxType;
@@ -426,5 +332,6 @@
         private System.Windows.Forms.Button buttonCopy;
         private System.Windows.Forms.Button buttonPaste;
         private System.Windows.Forms.Button buttonReset;
+        private System.Windows.Forms.Button buttonDismiss;
     }
 }
