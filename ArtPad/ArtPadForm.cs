@@ -17,7 +17,7 @@ namespace ArtPad {
         private List<KeyConfig> keys = Tools.TestKeyConfigs;
 
         public ArtPadForm() {
-            config.Keys = Tools.TestKeyConfigs;
+            Config.Keys = Tools.TestKeyConfigs;
             InitializeComponent();
         }
 
@@ -25,29 +25,28 @@ namespace ArtPad {
             if (args.Length > 0) {
                 Configuration newConfig = Configuration.readConfig(args[0]);
                 if (newConfig != null) {
-                    config = newConfig;
-                    keys = config.Keys;
+                    Config = newConfig;
+                    keys = Config.Keys;
                 } else {
                     Utils.errMsg("Error reading configuration");
                 }
             } else {
-                config.Keys = Tools.TestKeyConfigs;
+                Config.Keys = Tools.TestKeyConfigs;
             }
             InitializeComponent();
 #if DEBUG
-            Configuration.writeConfig(config, @"c:\scratch\ArtPad-startup.config");
+            saveConfiguration(@"c:\scratch\ArtPad-startup.config");
 #endif
         }
 
-        public void reconfigure(string fileName) {
-            Configuration newConfig = Configuration.readConfig(fileName);
-            Debug.Print("reconfigure(1): config: nKeys=" + config.Keys.Count
-                + " Size=" + config.Size);
-            Debug.Print("reconfigure(1): newConfig: nKeys=" + newConfig.Keys.Count
-                + " Size=" + config.Size);
+        /// <summary>
+        /// Resets the keys configuration.
+        /// </summary>
+        /// <param name="newConfig"></param>
+        public void reconfigure(Configuration newConfig) {
             if (newConfig != null) {
-                config = newConfig;
-                keys = config.Keys;
+                Config = newConfig;
+                keys = Config.Keys;
             } else {
                 Utils.errMsg("Error reading configuration");
             }
@@ -56,10 +55,23 @@ namespace ArtPad {
                 + " Size=" + config.Size);
 #endif
 #if DEBUG
-            Configuration.writeConfig(config, @"c:\scratch\ArtPad-reconfigure.config");
+            saveConfiguration(@"c:\scratch\ArtPad-reconfigure.config");
 #endif
-
             createTable();
+        }
+
+        /// <summary>
+        /// Resets the keys configuration using the configuration from the
+        /// given file.
+        /// </summary>
+        /// <param name="fileName"></param>
+        public void reconfigure(string fileName) {
+            Configuration newConfig = Configuration.readConfig(fileName);
+            Debug.Print("reconfigure(1): config: nKeys=" + Config.Keys.Count
+                + " Size=" + Config.Size);
+            Debug.Print("reconfigure(1): newConfig: nKeys=" + newConfig.Keys.Count
+                + " Size=" + Config.Size);
+            reconfigure(newConfig);
         }
 
         protected void createTable() {
@@ -89,7 +101,7 @@ namespace ArtPad {
             }
 
             this.ClientSize =
-            new System.Drawing.Size(config.Size.Width, config.Size.Width);
+            new System.Drawing.Size(Config.Size.Width, Config.Size.Width);
 
             tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel.AutoSize = true;
@@ -151,6 +163,19 @@ namespace ArtPad {
             get
             {
                 return true;
+            }
+        }
+
+        public Configuration Config
+        {
+            get
+            {
+                return config;
+            }
+
+            set
+            {
+                config = value;
             }
         }
 

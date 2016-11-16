@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace ArtPad {
-    class Configuration {
+    public class Configuration {
         private List<KeyConfig> keys = new List<KeyConfig>();
         private Size size = new Size(300, 300);
 
@@ -19,7 +19,8 @@ namespace ArtPad {
                     (System.IO.File.ReadAllText(fileName));
                 return newConfig;
             } catch (Exception ex) {
-                Utils.excMsg("Error reading configuration from" + Utils.LF, ex);
+                Utils.excMsg("Error reading configuration from "
+                     + fileName, ex);
                 return null;
             }
         }

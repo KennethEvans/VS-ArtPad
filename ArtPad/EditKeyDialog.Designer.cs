@@ -228,6 +228,7 @@
             this.buttonCopy.TabIndex = 2;
             this.buttonCopy.Text = "Copy";
             this.buttonCopy.UseVisualStyleBackColor = true;
+            this.buttonCopy.Click += new System.EventHandler(this.copyButton_click);
             // 
             // buttonPaste
             // 
@@ -239,6 +240,7 @@
             this.buttonPaste.TabIndex = 3;
             this.buttonPaste.Text = "Paste";
             this.buttonPaste.UseVisualStyleBackColor = true;
+            this.buttonPaste.Click += new System.EventHandler(this.pasteButton_click);
             // 
             // flowLayoutPanelButtons2
             // 
@@ -263,6 +265,7 @@
             this.buttonDeleteKey.TabIndex = 1;
             this.buttonDeleteKey.Text = "Delete Key";
             this.buttonDeleteKey.UseVisualStyleBackColor = true;
+            this.buttonDeleteKey.MouseClick += new System.Windows.Forms.MouseEventHandler(this.deleteKeyButton_click);
             // 
             // button3
             // 
@@ -274,6 +277,7 @@
             this.button3.TabIndex = 3;
             this.button3.Text = "Reset Key";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.resetKeyButton_click);
             // 
             // button4
             // 
@@ -285,6 +289,7 @@
             this.button4.TabIndex = 2;
             this.button4.Text = "Set Key";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.setKeyButton_click);
             // 
             // flowLayoutPanelButtons3
             // 
@@ -309,6 +314,7 @@
             this.buttonResetAll.TabIndex = 0;
             this.buttonResetAll.Text = "Reset All";
             this.buttonResetAll.UseVisualStyleBackColor = true;
+            this.buttonResetAll.MouseClick += new System.Windows.Forms.MouseEventHandler(this.resetAllButton_click);
             // 
             // button6
             // 
@@ -320,6 +326,7 @@
             this.button6.TabIndex = 1;
             this.button6.Text = "Set All";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.MouseClick += new System.Windows.Forms.MouseEventHandler(this.setAllButton_click);
             // 
             // buttonSaveAll
             // 
@@ -331,6 +338,7 @@
             this.buttonSaveAll.TabIndex = 2;
             this.buttonSaveAll.Text = "Save All";
             this.buttonSaveAll.UseVisualStyleBackColor = true;
+            this.buttonSaveAll.MouseClick += new System.Windows.Forms.MouseEventHandler(this.saveAllButton_click);
             // 
             // flowLayoutPanelButtons4
             // 
@@ -354,6 +362,7 @@
             this.buttonDismiss.TabIndex = 0;
             this.buttonDismiss.Text = "Dismiss";
             this.buttonDismiss.UseVisualStyleBackColor = true;
+            this.buttonDismiss.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dismissButton_click);
             // 
             // EditKeyDialog
             // 
@@ -366,6 +375,7 @@
             this.Controls.Add(this.editKeyTableLayoutPanel);
             this.Name = "EditKeyDialog";
             this.Text = "Edit";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormClosing);
             this.editKeyTableLayoutPanel.ResumeLayout(false);
             this.editKeyTableLayoutPanel.PerformLayout();
             this.groupBoxEdit.ResumeLayout(false);

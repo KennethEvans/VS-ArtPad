@@ -7,6 +7,7 @@ using WindowsInput.Native;
 namespace ArtPad {
     public partial class KeyButton : Button {
         private string LF = System.Environment.NewLine;
+        private static EditKeyDialog editKeyDlg;
         private KeyConfig key;
 
         public KeyButton(KeyConfig key) {
@@ -17,29 +18,50 @@ namespace ArtPad {
             this.toolStripMenuItemLoad.Click +=
                 new System.EventHandler(this.toolStripLoadMenuItem_Click);
 
+            this.toolStripMenuItemSaveAs.Click +=
+                new System.EventHandler(this.toolStripSaveAsMenuItem_Click);
+
             this.toolStripMenuItemEdit.Click +=
                 new System.EventHandler(this.toolStripEditMenuItem_Click);
         }
 
         void toolStripLoadMenuItem_Click(object sender, System.EventArgs e) {
-            ArtPadForm mainForm = (ArtPadForm)FindForm().FindForm();
 
             // Displays an OpenFileDialog so the user can select a 
-            // KeyConfiguration.
+            // KeyConfiguration
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Filter = "Configuration Files|*.config";
             dlg.Title = "Select a Configuration File";
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
-                mainForm.reconfigure(dlg.FileName);
+                artPad.reconfigure(dlg.FileName);
+            }
+        }
+
+        void toolStripSaveAsMenuItem_Click(object sender, System.EventArgs e) {
+            // Displays an OpenFileDialog so the user can select a 
+            // KeyConfiguration
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Filter = "Configuration Files|*.config";
+            dlg.Title = "Select a Configuration File";
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                Configuration.writeConfig(artPad.Config, dlg.FileName);
             }
         }
 
         void toolStripEditMenuItem_Click(object sender, System.EventArgs e) {
-            ArtPadForm mainForm = (ArtPadForm)FindForm().FindForm();
-
-            // Displays an OpenFileDialog so the user can edit the key.
-            EditKeyDialog dlg = new EditKeyDialog(key);
-            dlg.Show();
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            // Create, show, or visiblethe EditKeyDialog as appropriate
+            if (editKeyDlg == null) {
+                editKeyDlg = new EditKeyDialog(key, this, artPad);
+                editKeyDlg.Show();
+            }
+            if (editKeyDlg.Visible) {
+                editKeyDlg.populateControls(key);
+            } else {
+                editKeyDlg.Visible = true;
+            }
         }
 
         protected override void OnMouseUp(MouseEventArgs e) {

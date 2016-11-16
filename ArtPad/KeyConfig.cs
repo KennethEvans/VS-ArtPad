@@ -1,4 +1,6 @@
-﻿namespace ArtPad {
+﻿using Newtonsoft.Json;
+
+namespace ArtPad {
     public class KeyConfig {
         public enum KeyType { NORMAL, HOLD, COMMAND, UNUSED };
 
@@ -9,6 +11,7 @@
         private int col;
         private bool pressed;
 
+        [JsonConstructor]
         public KeyConfig(string name, string keyString, KeyType type, int row, int col) {
             this.name = name;
             this.keyString = keyString;
