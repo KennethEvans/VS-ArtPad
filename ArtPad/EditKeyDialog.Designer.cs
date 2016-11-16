@@ -38,13 +38,13 @@
             this.flowLayoutPanelButtons1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonCopy = new System.Windows.Forms.Button();
             this.buttonPaste = new System.Windows.Forms.Button();
+            this.buttonReset = new System.Windows.Forms.Button();
             this.flowLayoutPanelButtons2 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonDeleteKey = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.buttonSetKey = new System.Windows.Forms.Button();
             this.flowLayoutPanelButtons3 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonResetAll = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.buttonSetAll = new System.Windows.Forms.Button();
             this.buttonSaveAll = new System.Windows.Forms.Button();
             this.flowLayoutPanelButtons4 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonDismiss = new System.Windows.Forms.Button();
@@ -212,9 +212,10 @@
             this.flowLayoutPanelButtons1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelButtons1.Controls.Add(this.buttonCopy);
             this.flowLayoutPanelButtons1.Controls.Add(this.buttonPaste);
-            this.flowLayoutPanelButtons1.Location = new System.Drawing.Point(48, 194);
+            this.flowLayoutPanelButtons1.Controls.Add(this.buttonReset);
+            this.flowLayoutPanelButtons1.Location = new System.Drawing.Point(3, 194);
             this.flowLayoutPanelButtons1.Name = "flowLayoutPanelButtons1";
-            this.flowLayoutPanelButtons1.Size = new System.Drawing.Size(186, 33);
+            this.flowLayoutPanelButtons1.Size = new System.Drawing.Size(275, 33);
             this.flowLayoutPanelButtons1.TabIndex = 1;
             this.flowLayoutPanelButtons1.WrapContents = false;
             // 
@@ -228,7 +229,7 @@
             this.buttonCopy.TabIndex = 2;
             this.buttonCopy.Text = "Copy";
             this.buttonCopy.UseVisualStyleBackColor = true;
-            this.buttonCopy.Click += new System.EventHandler(this.copyButton_click);
+            this.buttonCopy.MouseClick += new System.Windows.Forms.MouseEventHandler(this.copyButton_click);
             // 
             // buttonPaste
             // 
@@ -240,7 +241,19 @@
             this.buttonPaste.TabIndex = 3;
             this.buttonPaste.Text = "Paste";
             this.buttonPaste.UseVisualStyleBackColor = true;
-            this.buttonPaste.Click += new System.EventHandler(this.pasteButton_click);
+            this.buttonPaste.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pasteButton_click);
+            // 
+            // buttonReset
+            // 
+            this.buttonReset.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.buttonReset.AutoSize = true;
+            this.buttonReset.Location = new System.Drawing.Point(189, 3);
+            this.buttonReset.Name = "buttonReset";
+            this.buttonReset.Size = new System.Drawing.Size(83, 27);
+            this.buttonReset.TabIndex = 4;
+            this.buttonReset.Text = "Reset";
+            this.buttonReset.UseVisualStyleBackColor = true;
+            this.buttonReset.MouseClick += new System.Windows.Forms.MouseEventHandler(this.resetButton_click);
             // 
             // flowLayoutPanelButtons2
             // 
@@ -248,11 +261,10 @@
             this.flowLayoutPanelButtons2.AutoSize = true;
             this.flowLayoutPanelButtons2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelButtons2.Controls.Add(this.buttonDeleteKey);
-            this.flowLayoutPanelButtons2.Controls.Add(this.button3);
-            this.flowLayoutPanelButtons2.Controls.Add(this.button4);
-            this.flowLayoutPanelButtons2.Location = new System.Drawing.Point(9, 233);
+            this.flowLayoutPanelButtons2.Controls.Add(this.buttonSetKey);
+            this.flowLayoutPanelButtons2.Location = new System.Drawing.Point(54, 233);
             this.flowLayoutPanelButtons2.Name = "flowLayoutPanelButtons2";
-            this.flowLayoutPanelButtons2.Size = new System.Drawing.Size(263, 33);
+            this.flowLayoutPanelButtons2.Size = new System.Drawing.Size(174, 33);
             this.flowLayoutPanelButtons2.TabIndex = 2;
             // 
             // buttonDeleteKey
@@ -267,29 +279,17 @@
             this.buttonDeleteKey.UseVisualStyleBackColor = true;
             this.buttonDeleteKey.MouseClick += new System.Windows.Forms.MouseEventHandler(this.deleteKeyButton_click);
             // 
-            // button3
+            // buttonSetKey
             // 
-            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button3.AutoSize = true;
-            this.button3.Location = new System.Drawing.Point(96, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(83, 27);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Reset Key";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.resetKeyButton_click);
-            // 
-            // button4
-            // 
-            this.button4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button4.AutoSize = true;
-            this.button4.Location = new System.Drawing.Point(185, 3);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 27);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "Set Key";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.setKeyButton_click);
+            this.buttonSetKey.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.buttonSetKey.AutoSize = true;
+            this.buttonSetKey.Location = new System.Drawing.Point(96, 3);
+            this.buttonSetKey.Name = "buttonSetKey";
+            this.buttonSetKey.Size = new System.Drawing.Size(75, 27);
+            this.buttonSetKey.TabIndex = 2;
+            this.buttonSetKey.Text = "Set Key";
+            this.buttonSetKey.UseVisualStyleBackColor = true;
+            this.buttonSetKey.MouseClick += new System.Windows.Forms.MouseEventHandler(this.setKeyButton_click);
             // 
             // flowLayoutPanelButtons3
             // 
@@ -297,7 +297,7 @@
             this.flowLayoutPanelButtons3.AutoSize = true;
             this.flowLayoutPanelButtons3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelButtons3.Controls.Add(this.buttonResetAll);
-            this.flowLayoutPanelButtons3.Controls.Add(this.button6);
+            this.flowLayoutPanelButtons3.Controls.Add(this.buttonSetAll);
             this.flowLayoutPanelButtons3.Controls.Add(this.buttonSaveAll);
             this.flowLayoutPanelButtons3.Location = new System.Drawing.Point(19, 272);
             this.flowLayoutPanelButtons3.Name = "flowLayoutPanelButtons3";
@@ -316,17 +316,17 @@
             this.buttonResetAll.UseVisualStyleBackColor = true;
             this.buttonResetAll.MouseClick += new System.Windows.Forms.MouseEventHandler(this.resetAllButton_click);
             // 
-            // button6
+            // buttonSetAll
             // 
-            this.button6.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button6.AutoSize = true;
-            this.button6.Location = new System.Drawing.Point(84, 3);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 27);
-            this.button6.TabIndex = 1;
-            this.button6.Text = "Set All";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.MouseClick += new System.Windows.Forms.MouseEventHandler(this.setAllButton_click);
+            this.buttonSetAll.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.buttonSetAll.AutoSize = true;
+            this.buttonSetAll.Location = new System.Drawing.Point(84, 3);
+            this.buttonSetAll.Name = "buttonSetAll";
+            this.buttonSetAll.Size = new System.Drawing.Size(75, 27);
+            this.buttonSetAll.TabIndex = 1;
+            this.buttonSetAll.Text = "Set All";
+            this.buttonSetAll.UseVisualStyleBackColor = true;
+            this.buttonSetAll.MouseClick += new System.Windows.Forms.MouseEventHandler(this.setAllButton_click);
             // 
             // buttonSaveAll
             // 
@@ -412,11 +412,10 @@
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelButtons2;
         private System.Windows.Forms.Button buttonDeleteKey;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonSetKey;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelButtons3;
         private System.Windows.Forms.Button buttonResetAll;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button buttonSetAll;
         private System.Windows.Forms.Button buttonSaveAll;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelButtons4;
         private System.Windows.Forms.Button buttonDismiss;
@@ -426,5 +425,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelButtons1;
         private System.Windows.Forms.Button buttonCopy;
         private System.Windows.Forms.Button buttonPaste;
+        private System.Windows.Forms.Button buttonReset;
     }
 }

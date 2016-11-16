@@ -14,7 +14,7 @@ namespace ArtPad {
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
 
         private Configuration config = new Configuration();
-        private List<KeyDef> keysDefs = Tools.TestKeyDefs;
+        private List<KeyDef> keyDefs = Tools.TestKeyDefs;
 
         public ArtPadForm() {
             Config.KeyDefs = Tools.TestKeyDefs;
@@ -26,7 +26,7 @@ namespace ArtPad {
                 Configuration newConfig = Configuration.readConfig(args[0]);
                 if (newConfig != null) {
                     Config = newConfig;
-                    keysDefs = Config.KeyDefs;
+                    keyDefs = Config.KeyDefs;
                 } else {
                     Utils.errMsg("Error reading configuration");
                 }
@@ -46,18 +46,12 @@ namespace ArtPad {
         public void reconfigure(Configuration newConfig) {
             if (newConfig != null) {
                 Config = newConfig;
-                keysDefs = Config.KeyDefs;
+                keyDefs = Config.KeyDefs;
             } else {
                 Utils.errMsg("Error reading configuration");
             }
-#if DEBUG
-            Debug.Print("reconfigure(2): config: nKeys=" + config.Keys.Count
-                + " Size=" + config.Size);
-#endif
-#if DEBUG
-            saveConfiguration(@"c:\scratch\ArtPad-reconfigure.config");
-#endif
             createTable();
+            Invalidate();
         }
 
         /// <summary>
@@ -67,15 +61,21 @@ namespace ArtPad {
         /// <param name="fileName"></param>
         public void reconfigure(string fileName) {
             Configuration newConfig = Configuration.readConfig(fileName);
-            Debug.Print("reconfigure(1): config: nKeys=" + Config.KeyDefs.Count
-                + " Size=" + Config.Size);
-            Debug.Print("reconfigure(1): newConfig: nKeys=" + newConfig.KeyDefs.Count
-                + " Size=" + Config.Size);
+            if (newConfig.KeyDefs.Count == 0) {
+                DialogResult res = MessageBox.Show("There are no keys in:"
+                    + LF + fileName
+                    + LF + "The contents may be wrong."
+                    + LF + LF + "Ok to continue?",
+                    "Warning", MessageBoxButtons.YesNo);
+                if (res != DialogResult.Yes) {
+                    return;
+                }
+            }
             reconfigure(newConfig);
         }
 
         protected void createTable() {
-            if (keysDefs == null) {
+            if (keyDefs == null) {
                 Utils.errMsg("No keys are defined");
                 return;
             }
@@ -83,7 +83,7 @@ namespace ArtPad {
             // Get the table size
             int rows = -1;
             int cols = -1;
-            foreach (KeyDef keyDef in keysDefs) {
+            foreach (KeyDef keyDef in keyDefs) {
                 if (keyDef.Col > cols) cols = keyDef.Col;
                 if (keyDef.Row > rows) rows = keyDef.Row;
             }
@@ -130,7 +130,7 @@ namespace ArtPad {
 
             // Set the key definitions into the table
             KeyButton keyButton;
-            foreach (KeyDef keyDef in keysDefs) {
+            foreach (KeyDef keyDef in keyDefs) {
                 keyButton = new KeyButton(keyDef);
                 if (keyDef.Type == KeyDef.KeyType.UNUSED) {
                     keyButton.Text = "";
@@ -195,8 +195,8 @@ namespace ArtPad {
             Tools.debugForegroundWindows("ArtPadForm.OnFormClosing");
 #endif
             // Send up events for any pressed keys
-            if (keysDefs != null) {
-                Tools.sendUpEventsForPressedKeys(keysDefs);
+            if (keyDefs != null) {
+                Tools.sendUpEventsForPressedKeys(keyDefs);
             }
             base.OnFormClosing(e);
         }

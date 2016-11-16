@@ -56,11 +56,9 @@ namespace ArtPad {
             if (editKeyDlg == null) {
                 editKeyDlg = new EditKeyDialog(keyDef, this, artPad);
                 editKeyDlg.Show();
-            }
-            if (editKeyDlg.Visible) {
-                editKeyDlg.populateControls(keyDef);
             } else {
                 editKeyDlg.Visible = true;
+                editKeyDlg.resetContents(keyDef, this, artPad);
             }
         }
 
