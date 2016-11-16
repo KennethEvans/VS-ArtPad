@@ -8,10 +8,10 @@ namespace ArtPad {
     public partial class KeyButton : Button {
         private string LF = System.Environment.NewLine;
         private static EditKeyDialog editKeyDlg;
-        private KeyConfig key;
+        private KeyDef keyDef;
 
-        public KeyButton(KeyConfig key) {
-            this.key = key;
+        public KeyButton(KeyDef key) {
+            this.keyDef = key;
             InitializeComponent();
 
             // Should have been able to do this in the designer
@@ -54,11 +54,11 @@ namespace ArtPad {
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
             // Create, show, or visiblethe EditKeyDialog as appropriate
             if (editKeyDlg == null) {
-                editKeyDlg = new EditKeyDialog(key, this, artPad);
+                editKeyDlg = new EditKeyDialog(keyDef, this, artPad);
                 editKeyDlg.Show();
             }
             if (editKeyDlg.Visible) {
-                editKeyDlg.populateControls(key);
+                editKeyDlg.populateControls(keyDef);
             } else {
                 editKeyDlg.Visible = true;
             }
@@ -69,7 +69,7 @@ namespace ArtPad {
             // apparently does not get right mouse events
 #if DEBUG && true
             Tools.debugForegroundWindows("KeyButton.OnMouseUp ("
-                + key.Row + "," + key.Col + ")");
+                + keyDef.Row + "," + keyDef.Col + ")");
 #endif
             // See if it is a right click
             MouseEventArgs me = (MouseEventArgs)e;
@@ -84,7 +84,7 @@ namespace ArtPad {
         protected override void OnMouseEnter(System.EventArgs e) {
 #if DEBUG && true
             Tools.debugForegroundWindows("KeyButton.OnMouseEnter ("
-                + key.Row + "," + key.Col + ")");
+                + keyDef.Row + "," + keyDef.Col + ")");
 #endif
             // Save the foreground window here
             Tools.saveForegroundWindow();
@@ -95,7 +95,7 @@ namespace ArtPad {
             base.OnMouseLeave(e);
 #if DEBUG && true
             Tools.debugForegroundWindows("KeyButton.OnMouseLeave ("
-                + key.Row + "," + key.Col + ")");
+                + keyDef.Row + "," + keyDef.Col + ")");
 #endif
         }
 
@@ -108,21 +108,21 @@ namespace ArtPad {
             Tools.debugForegroundWindows("KeyButton.OnClick (After)");
             debug.print("KeyButton.OnClick (After): Sending: " + keyConfig.KeyString);
 #endif
-            switch (key.Type) {
-                case KeyConfig.KeyType.NORMAL:
+            switch (keyDef.Type) {
+                case KeyDef.KeyType.NORMAL:
                     handleNormalKey(e);
                     break;
-                case KeyConfig.KeyType.COMMAND:
+                case KeyDef.KeyType.COMMAND:
                     handleCommandKey(e);
                     break;
-                case KeyConfig.KeyType.HOLD:
+                case KeyDef.KeyType.HOLD:
                     handleHoldKey(e);
                     break;
-                case KeyConfig.KeyType.UNUSED:
+                case KeyDef.KeyType.UNUSED:
                     // Do nothing
                     break;
                 default:
-                    Utils.errMsg("Unhandled key type: " + key.Type);
+                    Utils.errMsg("Unhandled key type: " + keyDef.Type);
                     return;
             }
         }
@@ -134,7 +134,7 @@ namespace ArtPad {
         protected void handleNormalKey(System.EventArgs e) {
             // Send the KeyString
             if (!FindForm().Equals(Tools.HForegroundWindow)) {
-                SendKeys.Send(key.KeyString);
+                SendKeys.Send(keyDef.KeyString);
             }
         }
 
@@ -144,9 +144,9 @@ namespace ArtPad {
         /// <param name="e"></param>
         protected void handleCommandKey(System.EventArgs e) {
             // Process the string to get the filename and arguments
-            var tokens = (key.KeyString).Split(',');
+            var tokens = (keyDef.KeyString).Split(',');
             if (tokens.Length == 0) {
-                Utils.errMsg("key " + key.Name + " has no command");
+                Utils.errMsg("key " + keyDef.Name + " has no command");
             } else {
                 // Send the KeyString as a command
                 try {
@@ -159,7 +159,7 @@ namespace ArtPad {
                     process.Start();
                 } catch (System.Exception ex) {
                     Utils.excMsg("Error invoking COMMAND for key "
-                        + key.Name, ex);
+                        + keyDef.Name, ex);
                 }
             }
 #if DEBUG && false
@@ -174,23 +174,23 @@ namespace ArtPad {
         protected void handleHoldKey(System.EventArgs e) {
             VirtualKeyCode keyCode;
             try {
-                keyCode = Tools.getKeyCode(key);
+                keyCode = Tools.getKeyCode(keyDef);
             } catch (System.ArgumentException) {
-                Utils.errMsg("Cannot handle HOLD for " + key.KeyString
+                Utils.errMsg("Cannot handle HOLD for " + keyDef.KeyString
                     + LF + "Must be ^ (Ctrl), % (Alt), or + (Shift)");
                 return;
             }
 
             var sim = new InputSimulator();
-            if (key.Pressed) {
-                key.Pressed = false;
+            if (keyDef.Pressed) {
+                keyDef.Pressed = false;
                 sim.Keyboard.KeyUp(keyCode);
                 // Use this instead of 
                 // BackColor = Color.FromKnownColor(KnownColor.Control);
                 UseVisualStyleBackColor = true;
             } else {
                 sim.Keyboard.KeyDown(keyCode);
-                key.Pressed = true;
+                keyDef.Pressed = true;
                 BackColor = Color.FromKnownColor(KnownColor.Highlight);
             }
         }

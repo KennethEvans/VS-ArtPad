@@ -68,7 +68,7 @@
       <DependentUpon>EditKeyDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Tools.cs" />
-    <Compile Include="KeyConfig.cs" />
+    <Compile Include="KeyDef.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="KeyButton.cs">

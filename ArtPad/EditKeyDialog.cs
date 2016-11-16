@@ -11,23 +11,23 @@ using System.Windows.Forms;
 namespace ArtPad {
     public partial class EditKeyDialog : Form {
         private KeyButton button;
-        private KeyConfig keyOrig;
+        private KeyDef keyOrig;
         private ArtPadForm artPad;
 
-        public EditKeyDialog(KeyConfig key, KeyButton button, ArtPadForm artPad) {
+        public EditKeyDialog(KeyDef keyDef, KeyButton button, ArtPadForm artPad) {
             InitializeComponent();
-            keyOrig = new KeyConfig(key);
+            keyOrig = new KeyDef(keyDef);
             this.button = button;
             this.artPad = artPad;
-            populateControls(key);
+            populateControls(keyDef);
         }
 
-        public void populateControls(KeyConfig key) {
+        public void populateControls(KeyDef keyDef) {
             this.labelRowCol.Text = "Edit Key Button ("
-                + key.Row + "," + key.Col + ")";
-            this.textBoxName.Text = key.Name;
-            this.textBoxKeyString.Text = key.KeyString;
-            this.comboBoxType.SelectedIndex = (int)key.Type;
+                + keyDef.Row + "," + keyDef.Col + ")";
+            this.textBoxName.Text = keyDef.Name;
+            this.textBoxKeyString.Text = keyDef.KeyString;
+            this.comboBoxType.SelectedIndex = (int)keyDef.Type;
         }
 
         private void OnFormClosing(object sender, FormClosingEventArgs e) {
@@ -62,17 +62,17 @@ namespace ArtPad {
             string name = textBoxName.Text;
             string keyString = this.textBoxKeyString.Text;
             int sel = this.comboBoxType.SelectedIndex;
-            KeyConfig.KeyType type = (KeyConfig.KeyType)sel;
-            KeyConfig newKey = new KeyConfig(name, keyString, type,
+            KeyDef.KeyType type = (KeyDef.KeyType)sel;
+            KeyDef newKey = new KeyDef(name, keyString, type,
                 keyOrig.Row, keyOrig.Col);
             Configuration config = artPad.Config;
-            int index = config.Keys.FindIndex(
-                key => key.Row == newKey.Row && key.Col == newKey.Col);
+            int index = config.KeyDefs.FindIndex(
+                keyDef => keyDef.Row == newKey.Row && keyDef.Col == newKey.Col);
             if (index == -1) {
-                Utils.errMsg("Error finding key to set");
+                Utils.errMsg("Error finding key definition to set");
                 return;
             }
-            config.Keys[index] = new KeyConfig(newKey);
+            config.KeyDefs[index] = new KeyDef(newKey);
             artPad.reconfigure(config);
             this.Visible = false;
         }

@@ -14,10 +14,10 @@ namespace ArtPad {
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
 
         private Configuration config = new Configuration();
-        private List<KeyConfig> keys = Tools.TestKeyConfigs;
+        private List<KeyDef> keysDefs = Tools.TestKeyDefs;
 
         public ArtPadForm() {
-            Config.Keys = Tools.TestKeyConfigs;
+            Config.KeyDefs = Tools.TestKeyDefs;
             InitializeComponent();
         }
 
@@ -26,12 +26,12 @@ namespace ArtPad {
                 Configuration newConfig = Configuration.readConfig(args[0]);
                 if (newConfig != null) {
                     Config = newConfig;
-                    keys = Config.Keys;
+                    keysDefs = Config.KeyDefs;
                 } else {
                     Utils.errMsg("Error reading configuration");
                 }
             } else {
-                Config.Keys = Tools.TestKeyConfigs;
+                Config.KeyDefs = Tools.TestKeyDefs;
             }
             InitializeComponent();
 #if DEBUG
@@ -40,13 +40,13 @@ namespace ArtPad {
         }
 
         /// <summary>
-        /// Resets the keys configuration.
+        /// Resets the key configuration.
         /// </summary>
         /// <param name="newConfig"></param>
         public void reconfigure(Configuration newConfig) {
             if (newConfig != null) {
                 Config = newConfig;
-                keys = Config.Keys;
+                keysDefs = Config.KeyDefs;
             } else {
                 Utils.errMsg("Error reading configuration");
             }
@@ -61,21 +61,21 @@ namespace ArtPad {
         }
 
         /// <summary>
-        /// Resets the keys configuration using the configuration from the
+        /// Resets the configuration using the configuration from the
         /// given file.
         /// </summary>
         /// <param name="fileName"></param>
         public void reconfigure(string fileName) {
             Configuration newConfig = Configuration.readConfig(fileName);
-            Debug.Print("reconfigure(1): config: nKeys=" + Config.Keys.Count
+            Debug.Print("reconfigure(1): config: nKeys=" + Config.KeyDefs.Count
                 + " Size=" + Config.Size);
-            Debug.Print("reconfigure(1): newConfig: nKeys=" + newConfig.Keys.Count
+            Debug.Print("reconfigure(1): newConfig: nKeys=" + newConfig.KeyDefs.Count
                 + " Size=" + Config.Size);
             reconfigure(newConfig);
         }
 
         protected void createTable() {
-            if (keys == null) {
+            if (keysDefs == null) {
                 Utils.errMsg("No keys are defined");
                 return;
             }
@@ -83,9 +83,9 @@ namespace ArtPad {
             // Get the table size
             int rows = -1;
             int cols = -1;
-            foreach (KeyConfig key in keys) {
-                if (key.Col > cols) cols = key.Col;
-                if (key.Row > rows) rows = key.Row;
+            foreach (KeyDef keyDef in keysDefs) {
+                if (keyDef.Col > cols) cols = keyDef.Col;
+                if (keyDef.Row > rows) rows = keyDef.Row;
             }
             rows += 1;
             cols += 1;
@@ -128,20 +128,20 @@ namespace ArtPad {
                                 colPercent));
             }
 
-            // Set the keys into the table
+            // Set the key definitions into the table
             KeyButton keyButton;
-            foreach (KeyConfig key in keys) {
-                keyButton = new KeyButton(key);
-                if (key.Type == KeyConfig.KeyType.UNUSED) {
+            foreach (KeyDef keyDef in keysDefs) {
+                keyButton = new KeyButton(keyDef);
+                if (keyDef.Type == KeyDef.KeyType.UNUSED) {
                     keyButton.Text = "";
                     keyButton.BackColor =
                         Color.FromKnownColor(KnownColor.ControlLight);
                 } else {
-                    keyButton.Text = key.Name;
+                    keyButton.Text = keyDef.Name;
                 }
                 keyButton.Dock = DockStyle.Fill;
                 keyButton.Margin = new Padding(0);  // Default is 3
-                tableLayoutPanel.Controls.Add(keyButton, key.Col, key.Row);
+                tableLayoutPanel.Controls.Add(keyButton, keyDef.Col, keyDef.Row);
             }
 
             this.Controls.Add(this.tableLayoutPanel);
@@ -195,8 +195,8 @@ namespace ArtPad {
             Tools.debugForegroundWindows("ArtPadForm.OnFormClosing");
 #endif
             // Send up events for any pressed keys
-            if (keys != null) {
-                Tools.sendUpEventsForPressedKeys(keys);
+            if (keysDefs != null) {
+                Tools.sendUpEventsForPressedKeys(keysDefs);
             }
             base.OnFormClosing(e);
         }

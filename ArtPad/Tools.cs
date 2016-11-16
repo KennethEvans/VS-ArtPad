@@ -88,18 +88,18 @@ namespace ArtPad {
         /// <summary>
         /// Gets a VirtualKeyCode for the given KeyConfig.
         /// </summary>
-        /// <param name="key">The key to use.</param>
+        /// <param name="keyDef">The key definition to use.</param>
         /// <returns></returns>
-        public static VirtualKeyCode getKeyCode(KeyConfig key) {
+        public static VirtualKeyCode getKeyCode(KeyDef keyDef) {
             VirtualKeyCode keyCode;
-            if (key.KeyString.Equals("^")) { // Ctrl
+            if (keyDef.KeyString.Equals("^")) { // Ctrl
                 keyCode = VirtualKeyCode.CONTROL;
-            } else if (key.KeyString.Equals("%")) { // Alt
+            } else if (keyDef.KeyString.Equals("%")) { // Alt
                 keyCode = VirtualKeyCode.MENU;
-            } else if (key.KeyString.Equals("+")) { // Shift
+            } else if (keyDef.KeyString.Equals("+")) { // Shift
                 keyCode = VirtualKeyCode.SHIFT;
             } else {
-                throw new ArgumentException(key.KeyString
+                throw new ArgumentException(keyDef.KeyString
                     + " is not supported");
             }
             return keyCode;
@@ -108,20 +108,20 @@ namespace ArtPad {
         /// <summary>
         /// Sends up events for any pressed keys in the given keyConfig list.
         /// </summary>
-        /// <param name="TestKeyConfigs">List of keys to use.</param>
-        public static void sendUpEventsForPressedKeys(List<KeyConfig> keys) {
-            if (keys == null) {
+        /// <param name="keyDefs">List of key definitions to use.</param>
+        public static void sendUpEventsForPressedKeys(List<KeyDef> keyDefs) {
+            if (keyDefs == null) {
                 return;
             }
-            foreach (KeyConfig key in keys) {
-                if (key.Type == KeyConfig.KeyType.HOLD && key.Pressed == true) {
+            foreach (KeyDef keyDef in keyDefs) {
+                if (keyDef.Type == KeyDef.KeyType.HOLD && keyDef.Pressed == true) {
                     VirtualKeyCode keyCode;
                     try {
-                        keyCode = Tools.getKeyCode(key);
+                        keyCode = Tools.getKeyCode(keyDef);
                     } catch (System.ArgumentException) {
                         continue;
                     }
-                    key.Pressed = false;
+                    keyDef.Pressed = false;
                     var sim = new InputSimulator();
                     sim.Keyboard.KeyUp(keyCode);
                 }
@@ -144,27 +144,27 @@ namespace ArtPad {
         /// <summary>
         /// A hard-coded list of KeyConfig's for testing.
         /// </summary>
-        public static List<KeyConfig> TestKeyConfigs
+        public static List<KeyDef> TestKeyDefs
         {
             get
             {
                 {
-                    return new List<KeyConfig>{
-            new KeyConfig("A","A", KeyConfig.KeyType.NORMAL, 0, 0),
-            new KeyConfig("a","a", KeyConfig.KeyType.NORMAL, 0, 1),
-            new KeyConfig("a [10]","{a 10}", KeyConfig.KeyType.NORMAL, 0, 2),
-            new KeyConfig("crazy","crazy", KeyConfig.KeyType.UNUSED, 0, 3),
-            new KeyConfig("Undo","^z", KeyConfig.KeyType.NORMAL, 0, 4),
-            new KeyConfig("Cut","^x", KeyConfig.KeyType.NORMAL, 1, 0),
-            new KeyConfig("Copy","^c", KeyConfig.KeyType.NORMAL, 1, 1),
-            new KeyConfig("Paste","^v", KeyConfig.KeyType.NORMAL, 1, 2),
-            new KeyConfig("c","c", KeyConfig.KeyType.NORMAL, 1, 3),
-            new KeyConfig("Redo","^y", KeyConfig.KeyType.NORMAL, 1, 4),
-            new KeyConfig("Ctrl","^", KeyConfig.KeyType.HOLD, 2, 0),
-            new KeyConfig("Alt","%", KeyConfig.KeyType.HOLD, 2, 1),
-            new KeyConfig("Shift","+", KeyConfig.KeyType.HOLD, 2, 2),
-            new KeyConfig("v","v", KeyConfig.KeyType.NORMAL, 2, 3),
-            new KeyConfig("OSK",@"osk.exe", KeyConfig.KeyType.COMMAND, 2, 4),
+                    return new List<KeyDef>{
+            new KeyDef("A","A", KeyDef.KeyType.NORMAL, 0, 0),
+            new KeyDef("a","a", KeyDef.KeyType.NORMAL, 0, 1),
+            new KeyDef("a [10]","{a 10}", KeyDef.KeyType.NORMAL, 0, 2),
+            new KeyDef("crazy","crazy", KeyDef.KeyType.UNUSED, 0, 3),
+            new KeyDef("Undo","^z", KeyDef.KeyType.NORMAL, 0, 4),
+            new KeyDef("Cut","^x", KeyDef.KeyType.NORMAL, 1, 0),
+            new KeyDef("Copy","^c", KeyDef.KeyType.NORMAL, 1, 1),
+            new KeyDef("Paste","^v", KeyDef.KeyType.NORMAL, 1, 2),
+            new KeyDef("c","c", KeyDef.KeyType.NORMAL, 1, 3),
+            new KeyDef("Redo","^y", KeyDef.KeyType.NORMAL, 1, 4),
+            new KeyDef("Ctrl","^", KeyDef.KeyType.HOLD, 2, 0),
+            new KeyDef("Alt","%", KeyDef.KeyType.HOLD, 2, 1),
+            new KeyDef("Shift","+", KeyDef.KeyType.HOLD, 2, 2),
+            new KeyDef("v","v", KeyDef.KeyType.NORMAL, 2, 3),
+            new KeyDef("OSK",@"osk.exe", KeyDef.KeyType.COMMAND, 2, 4),
         };
                 }
             }

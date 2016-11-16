@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 
 namespace ArtPad {
-    public class KeyConfig {
+    public class KeyDef {
         public enum KeyType { NORMAL, HOLD, COMMAND, UNUSED };
 
         private string name;
@@ -12,7 +12,7 @@ namespace ArtPad {
         private bool pressed;
 
         [JsonConstructor]
-        public KeyConfig(string name, string keyString, KeyType type, int row, int col) {
+        public KeyDef(string name, string keyString, KeyType type, int row, int col) {
             this.name = name;
             this.keyString = keyString;
             this.type = type;
@@ -23,13 +23,13 @@ namespace ArtPad {
         /// <summary>
         /// Copy constructor.
         /// </summary>
-        /// <param name="key"></param>
-        public KeyConfig(KeyConfig key) {
-            this.name = key.name;
-            this.keyString = key.keyString;
-            this.type = key.type;
-            this.row = key.row;
-            this.col = key.col;
+        /// <param name="keyDef"></param>
+        public KeyDef(KeyDef keyDef) {
+            this.name = keyDef.name;
+            this.keyString = keyDef.keyString;
+            this.type = keyDef.type;
+            this.row = keyDef.row;
+            this.col = keyDef.col;
         }
 
         // Getters and setters

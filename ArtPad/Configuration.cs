@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 
 namespace ArtPad {
     public class Configuration {
-        private List<KeyConfig> keys = new List<KeyConfig>();
+        private List<KeyDef> keyDefs = new List<KeyDef>();
         private Size size = new Size(300, 300);
 
         public static Configuration readConfig(string fileName) {
@@ -31,16 +31,16 @@ namespace ArtPad {
         }
 
         // Getters and setters
-        public List<KeyConfig> Keys
+        public List<KeyDef> KeyDefs
         {
             get
             {
-                return keys;
+                return keyDefs;
             }
 
             set
             {
-                keys = value;
+                keyDefs = value;
             }
         }
 

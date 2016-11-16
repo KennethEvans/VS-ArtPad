@@ -53,7 +53,7 @@ namespace ArtPad {
             this.toolStripMenuItemLoad.Name = "toolStripMenuItemLoad";
             this.toolStripMenuItemLoad.Size = new System.Drawing.Size(239, 26);
             this.toolStripMenuItemLoad.Text = "Load Configuration...";
-            this.toolStripMenuItemLoad.ToolTipText = "Load a new key configuration file.";
+            this.toolStripMenuItemLoad.ToolTipText = "Load a new configuration file.";
             // 
             // toolStripMenuItemEdit
             // 
@@ -67,7 +67,7 @@ namespace ArtPad {
             this.toolStripMenuItemSaveAs.Name = "toolStripMenuItemSaveAs";
             this.toolStripMenuItemSaveAs.Size = new System.Drawing.Size(249, 26);
             this.toolStripMenuItemSaveAs.Text = "Save Configuration As...";
-            this.toolStripMenuItemSaveAs.ToolTipText = "Save the current key configuration.";
+            this.toolStripMenuItemSaveAs.ToolTipText = "Save the current configuration.";
             // 
             // toolStripSeparator1
             // 
