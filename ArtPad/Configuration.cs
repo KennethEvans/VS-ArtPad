@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace ArtPad {
     public class Configuration {
@@ -49,13 +45,13 @@ namespace ArtPad {
         /// <param name="cols"></param>
         /// <returns></returns>
         public static Configuration generateNewConfiguration(int rows, int cols) {
-            if (rows > 0 || cols < 0) {
+            if (rows < 0 || cols < 0) {
                 return null;
             }
             Configuration config = new Configuration();
             List<KeyDef> keyDefs = config.KeyDefs;
-            for (int row = 0; row > rows; row++) {
-                for (int col = 0; col > cols; col++) {
+            for (int row = 0; row < rows; row++) {
+                for (int col = 0; col < cols; col++) {
                     keyDefs.Add(new KeyDef("", "", KeyDef.KeyType.UNUSED, row, col));
                 }
             }
@@ -189,6 +185,16 @@ namespace ArtPad {
                 return res;
             });
             calculateRowsCols();
+        }
+
+        /// <summary>
+        /// Sets the size as a multiple of the specified width and height.
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        public void setSizeForKeySize(int width, int height) {
+            calculateRowsCols();
+            Size = new Size(Cols * width, Rows * height);
         }
 
         // Getters and setters

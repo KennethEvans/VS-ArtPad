@@ -37,6 +37,8 @@ namespace ArtPad {
                 new System.EventHandler(this.toolStripMenuItemSort_click);
             this.toolStripMenuItemCreateNew.Click +=
                 new System.EventHandler(this.toolStripMenuItemCreateNew_click);
+            this.toolStripMenuItemSetKeySize.Click +=
+                new System.EventHandler(this.toolStripMenuItemSetKeySize_click);
         }
 
         void toolStripMenuItemLoad_Click(object sender, System.EventArgs e) {
@@ -56,6 +58,7 @@ namespace ArtPad {
             // Displays an OpenFileDialog so the user can select a 
             // KeyConfiguration
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            artPad.Config.setSizeForKeySize(Width, Height);
             SaveFileDialog dlg = new SaveFileDialog();
             dlg.Filter = "Configuration Files|*.config";
             dlg.Title = "Select a Configuration File";
@@ -80,6 +83,7 @@ namespace ArtPad {
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
             Configuration config = artPad.Config;
             config.deleteRow(keyDef.Row);
+            config.setSizeForKeySize(Width, Height);
             artPad.reconfigure(config);
         }
 
@@ -87,6 +91,7 @@ namespace ArtPad {
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
             Configuration config = artPad.Config;
             config.insertRowBefore(keyDef.Row);
+            config.setSizeForKeySize(Width, Height);
             artPad.reconfigure(config);
         }
 
@@ -94,6 +99,7 @@ namespace ArtPad {
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
             Configuration config = artPad.Config;
             config.insertRowAfter(keyDef.Row);
+            config.setSizeForKeySize(Width, Height);
             artPad.reconfigure(config);
         }
 
@@ -101,6 +107,7 @@ namespace ArtPad {
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
             Configuration config = artPad.Config;
             config.deleteCol(keyDef.Col);
+            config.setSizeForKeySize(Width, Height);
             artPad.reconfigure(config);
         }
 
@@ -108,6 +115,7 @@ namespace ArtPad {
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
             Configuration config = artPad.Config;
             config.insertColBefore(keyDef.Col);
+            config.setSizeForKeySize(Width, Height);
             artPad.reconfigure(config);
         }
 
@@ -115,6 +123,7 @@ namespace ArtPad {
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
             Configuration config = artPad.Config;
             config.insertColAfter(keyDef.Col);
+            config.setSizeForKeySize(Width, Height);
             artPad.reconfigure(config);
         }
 
@@ -126,9 +135,33 @@ namespace ArtPad {
         }
 
         void toolStripMenuItemCreateNew_click(object sender, System.EventArgs e) {
-            //ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-            //Configuration config = Configuration.generateNewConfiguration();
-            //artPad.reconfigure(config);
+            NumericEntry2Dialog dlg = new NumericEntry2Dialog();
+            dlg.Text = "Contents";
+            dlg.Label1.Text = "Rows";
+            dlg.Label2.Text = "Columns";
+
+            if (dlg.ShowDialog() == DialogResult.OK) {
+                ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+                Configuration config =
+                    Configuration.generateNewConfiguration((int)dlg.NumericUpDown1.Value,
+                    (int)dlg.NumericUpDown2.Value);
+                config.setSizeForKeySize(Width, Height);
+                artPad.reconfigure(config);
+            }
+        }
+
+        void toolStripMenuItemSetKeySize_click(object sender, System.EventArgs e) {
+            NumericEntry2Dialog dlg = new NumericEntry2Dialog();
+            dlg.Text = "Key Size";
+            dlg.Label1.Text = "Width";
+            dlg.Label2.Text = "Height";
+            if (dlg.ShowDialog() == DialogResult.OK) {
+                ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+                Configuration config = artPad.Config;
+                config.setSizeForKeySize((int)dlg.NumericUpDown1.Value,
+                    (int)dlg.NumericUpDown2.Value);
+                artPad.reconfigure(config);
+            }
         }
 
         protected override void OnMouseUp(MouseEventArgs e) {

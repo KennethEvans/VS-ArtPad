@@ -34,16 +34,17 @@ namespace ArtPad {
             this.toolStripMenuItemDeleteRow = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemAddRowBefore = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemAddRowAfter = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemDeleteCol = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemAddColBefore = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemAddColAfter = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemSort = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemCreateNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemSetKeySize = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemSort = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemLoad = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemSaveAs = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,8 +79,9 @@ namespace ArtPad {
             this.toolStripMenuItemAddColBefore,
             this.toolStripMenuItemAddColAfter,
             this.toolStripSeparator3,
-            this.toolStripMenuItemSort,
-            this.toolStripMenuItemCreateNew});
+            this.toolStripMenuItemCreateNew,
+            this.toolStripMenuItemSetKeySize,
+            this.toolStripMenuItemSort});
             this.toolStripMenuItemEditKeys.Name = "toolStripMenuItemEditKeys";
             this.toolStripMenuItemEditKeys.Size = new System.Drawing.Size(242, 26);
             this.toolStripMenuItemEditKeys.Text = "Edit Key Configuration...";
@@ -106,6 +108,11 @@ namespace ArtPad {
             this.toolStripMenuItemAddRowAfter.Text = "Add Row After";
             this.toolStripMenuItemAddRowAfter.ToolTipText = "Add a row after this one.";
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(262, 6);
+            // 
             // toolStripMenuItemDeleteCol
             // 
             this.toolStripMenuItemDeleteCol.Name = "toolStripMenuItemDeleteCol";
@@ -127,12 +134,10 @@ namespace ArtPad {
             this.toolStripMenuItemAddColAfter.Text = "Add Column After";
             this.toolStripMenuItemAddColAfter.ToolTipText = "Add a column after this one.";
             // 
-            // toolStripMenuItemSort
+            // toolStripSeparator3
             // 
-            this.toolStripMenuItemSort.Name = "toolStripMenuItemSort";
-            this.toolStripMenuItemSort.Size = new System.Drawing.Size(265, 26);
-            this.toolStripMenuItemSort.Text = "Sort";
-            this.toolStripMenuItemSort.ToolTipText = "Sort the key configuration list.";
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(262, 6);
             // 
             // toolStripMenuItemCreateNew
             // 
@@ -140,6 +145,19 @@ namespace ArtPad {
             this.toolStripMenuItemCreateNew.Size = new System.Drawing.Size(265, 26);
             this.toolStripMenuItemCreateNew.Text = "Create New Configuration...";
             this.toolStripMenuItemCreateNew.ToolTipText = "Create a new key configuration .";
+            // 
+            // toolStripMenuItemSetKeySize
+            // 
+            this.toolStripMenuItemSetKeySize.Name = "toolStripMenuItemSetKeySize";
+            this.toolStripMenuItemSetKeySize.Size = new System.Drawing.Size(265, 26);
+            this.toolStripMenuItemSetKeySize.Text = "Set Key Size...";
+            // 
+            // toolStripMenuItemSort
+            // 
+            this.toolStripMenuItemSort.Name = "toolStripMenuItemSort";
+            this.toolStripMenuItemSort.Size = new System.Drawing.Size(265, 26);
+            this.toolStripMenuItemSort.Text = "Sort";
+            this.toolStripMenuItemSort.ToolTipText = "Sort the key configuration list.";
             // 
             // toolStripSeparator1
             // 
@@ -159,16 +177,6 @@ namespace ArtPad {
             this.toolStripMenuItemSaveAs.Size = new System.Drawing.Size(242, 26);
             this.toolStripMenuItemSaveAs.Text = "Save Configuration As...";
             this.toolStripMenuItemSaveAs.ToolTipText = "Save the current configuration.";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(262, 6);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(239, 6);
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -190,6 +198,7 @@ namespace ArtPad {
         private ToolStripMenuItem toolStripMenuItemAddColAfter;
         private ToolStripMenuItem toolStripMenuItemSort;
         private ToolStripMenuItem toolStripMenuItemCreateNew;
+        private ToolStripMenuItem toolStripMenuItemSetKeySize;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripSeparator toolStripSeparator3;
     }

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Runtime.InteropServices;
 using System.Diagnostics;
-using WindowsInput.Native;
+using System.Runtime.InteropServices;
+using System.Text;
 using WindowsInput;
+using WindowsInput.Native;
 
 namespace ArtPad {
     public static class Tools {

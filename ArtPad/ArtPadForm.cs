@@ -3,13 +3,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using System.Diagnostics;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace ArtPad {
     public partial class ArtPadForm : Form {
         private string LF = Utils.LF;
+        private int defaultKeySize = 60;
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
 
@@ -21,6 +22,7 @@ namespace ArtPad {
         /// </summary>
         public ArtPadForm() {
             Config.KeyDefs = Tools.TestKeyDefs;
+            Config.setSizeForKeySize(defaultKeySize, defaultKeySize);
             InitializeComponent();
         }
 
@@ -39,6 +41,7 @@ namespace ArtPad {
                 }
             } else {
                 Config.KeyDefs = Tools.TestKeyDefs;
+                Config.setSizeForKeySize(defaultKeySize, defaultKeySize);
             }
             InitializeComponent();
 #if DEBUG
@@ -51,12 +54,21 @@ namespace ArtPad {
         /// </summary>
         /// <param name="newConfig"></param>
         public void reconfigure(Configuration newConfig) {
-            if (newConfig != null) {
-                Config = newConfig;
-                keyDefs = Config.KeyDefs;
-            } else {
-                Utils.errMsg("Error reading configuration");
+            if (newConfig == null) {
+                Utils.errMsg("New configuration is null");
+                return;
             }
+            if (newConfig.KeyDefs.Count == 0) {
+                DialogResult res = MessageBox.Show(
+                    "There are no keys in the specified configuration"
+                    + LF + "Ok to continue?",
+                    "Warning", MessageBoxButtons.YesNo);
+                if (res != DialogResult.Yes) {
+                    return;
+                }
+            }
+            Config = newConfig;
+            keyDefs = Config.KeyDefs;
             createTable();
             Invalidate();
         }
@@ -84,6 +96,7 @@ namespace ArtPad {
         /// <summary>
         /// Clears the current TableLayoutPanel, removes it from the controls,
         /// adds new KeyButtons, then adds the TableLayoutPanel to the Controls.
+        /// It resizes the client area to fit the size in the Configuration.
         /// </summary>
         protected void createTable() {
             if (keyDefs == null) {
@@ -105,8 +118,7 @@ namespace ArtPad {
                 tableLayoutPanel.Dispose();
             }
 
-            this.ClientSize =
-            new System.Drawing.Size(Config.Size.Width, Config.Size.Width);
+            ClientSize = new Size(Config.Size.Width, Config.Size.Height);
 
             tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel.AutoSize = true;
@@ -149,14 +161,14 @@ namespace ArtPad {
                 tableLayoutPanel.Controls.Add(keyButton, keyDef.Col, keyDef.Row);
             }
 
-            this.Controls.Add(this.tableLayoutPanel);
+            Controls.Add(tableLayoutPanel);
         }
 
         protected override void OnLoad(System.EventArgs e) {
 #if DEBUG
             Tools.debugForegroundWindows("ArtPadForm.OnLoad");
 #endif
-            createTable();
+            reconfigure(Config);
         }
 
         /// <summary>
