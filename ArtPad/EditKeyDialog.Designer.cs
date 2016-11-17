@@ -113,7 +113,7 @@
             this.flowLayoutPanelType.Controls.Add(this.comboBoxType);
             this.flowLayoutPanelType.Location = new System.Drawing.Point(12, 97);
             this.flowLayoutPanelType.Name = "flowLayoutPanelType";
-            this.flowLayoutPanelType.Size = new System.Drawing.Size(153, 30);
+            this.flowLayoutPanelType.Size = new System.Drawing.Size(247, 30);
             this.flowLayoutPanelType.TabIndex = 4;
             // 
             // labelType
@@ -138,7 +138,7 @@
             "UNUSED"});
             this.comboBoxType.Location = new System.Drawing.Point(53, 3);
             this.comboBoxType.Name = "comboBoxType";
-            this.comboBoxType.Size = new System.Drawing.Size(97, 24);
+            this.comboBoxType.Size = new System.Drawing.Size(191, 24);
             this.comboBoxType.TabIndex = 4;
             this.toolTip.SetToolTip(this.comboBoxType, "The type of this key.");
             // 
