@@ -1,5 +1,5 @@
 ﻿#define CHECK_EVENTS
-#undef DEBUG
+//#undef DEBUG
 
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace ArtPad {
     public partial class ArtPadForm : Form {
         private string LF = Utils.LF;
-        private int defaultKeySize = 60;
+        private int defaultKeySize = 50;
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
 
@@ -45,7 +45,7 @@ namespace ArtPad {
             }
             InitializeComponent();
 #if DEBUG
-            saveConfiguration(@"c:\scratch\ArtPad-startup.config");
+            Configuration.writeConfig(Config, @"c:\scratch\ArtPad-startup.config");
 #endif
         }
 
@@ -114,39 +114,50 @@ namespace ArtPad {
                 tableLayoutPanel.Controls.Clear();
                 tableLayoutPanel.RowStyles.Clear();
                 tableLayoutPanel.ColumnStyles.Clear();
-                this.Controls.Remove(tableLayoutPanel);
+                Controls.Remove(tableLayoutPanel);
                 tableLayoutPanel.Dispose();
             }
 
-            ClientSize = new Size(Config.Size.Width, Config.Size.Height);
+            ClientSize = new Size(Config.Size.Width,
+                Config.Size.Height);
 
             tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel.AutoSize = true;
-            this.tableLayoutPanel.ColumnCount = cols;
-            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = rows;
-            this.tableLayoutPanel.TabIndex = 0;
-
+            tableLayoutPanel.AutoSize = true;
+            tableLayoutPanel.ColumnCount = cols;
+            tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            tableLayoutPanel.Name = "tableLayoutPanel";
+            tableLayoutPanel.RowCount = rows;
+            tableLayoutPanel.TabIndex = 0;
+            tableLayoutPanel.Margin = new Padding(0);
+#if false
+            Debug.Print("tableLayoutPanel: margin=" + tableLayoutPanel.Margin);
+            Debug.Print("tableLayoutPanel: padding=" + tableLayoutPanel.Padding);
+#endif
             // Set the rows and columns in the table
             tableLayoutPanel.RowCount = rows;
             tableLayoutPanel.ColumnCount = cols;
+            tableLayoutPanel.AutoSize = true;
+            tableLayoutPanel.Dock = DockStyle.Fill;
             float rowPercent = 100.0F / rows;
             float colPercent = 100.0F / cols;
             for (int row = 0; row < rows; row++) {
                 this.tableLayoutPanel.RowStyles.
-             Add(new RowStyle(SizeType.Percent, rowPercent));
+                    Add(new RowStyle(SizeType.Percent, rowPercent));
             }
             for (int col = 0; col < cols; col++) {
                 tableLayoutPanel.ColumnStyles.
-                            Add(new System.Windows.Forms.ColumnStyle(
-                                System.Windows.Forms.SizeType.Percent,
-                                colPercent));
+                    Add(new System.Windows.Forms.ColumnStyle(
+                    System.Windows.Forms.SizeType.Percent, colPercent));
             }
 
             // Set the key definitions into the table
             KeyButton keyButton;
+            int buttonWidth = Config.Size.Width / Config.Cols;
+            if (buttonWidth <= 0) buttonWidth = 50;
+            int buttonHeight = Config.Size.Height / Config.Rows;
+            if (buttonHeight <= 0) buttonHeight = 50;
+
             foreach (KeyDef keyDef in keyDefs) {
                 keyButton = new KeyButton(keyDef);
                 if (keyDef.Type == KeyDef.KeyType.UNUSED) {
@@ -157,10 +168,18 @@ namespace ArtPad {
                     keyButton.Text = keyDef.Name;
                 }
                 keyButton.Dock = DockStyle.Fill;
-                keyButton.Margin = new Padding(0);  // Default is 3
+                keyButton.Margin = new Padding(0);
+                keyButton.Width = buttonWidth;
+                keyButton.Height = buttonHeight;
+                keyButton.AutoSize = true;
+                keyButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
                 tableLayoutPanel.Controls.Add(keyButton, keyDef.Col, keyDef.Row);
+#if False
+                Debug.Print("keyButton: AutoSize=" + keyButton.AutoSize);
+                Debug.Print("keyButton: MinimumSize=" + keyButton.MinimumSize);
+                Debug.Print("keyButton: AutoSizeMode=" + keyButton.AutoSizeMode);
+#endif
             }
-
             Controls.Add(tableLayoutPanel);
         }
 
@@ -226,7 +245,7 @@ namespace ArtPad {
 
         // Define debugging for determining when events are called
         // and the state of the foreground window
-        #region Check events
+#region Check events
 #if CHECK_EVENTS
 
         protected override void OnMouseEnter(System.EventArgs e) {
@@ -312,7 +331,7 @@ namespace ArtPad {
         }
 
 #endif //CHECK_EVENTS
-        #endregion Check events
+#endregion Check events
 
     }
 }

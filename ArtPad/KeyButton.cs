@@ -135,13 +135,14 @@ namespace ArtPad {
         }
 
         void toolStripMenuItemCreateNew_click(object sender, System.EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
             NumericEntry2Dialog dlg = new NumericEntry2Dialog();
             dlg.Text = "Contents";
             dlg.Label1.Text = "Rows";
             dlg.Label2.Text = "Columns";
-
+            dlg.NumericUpDown1.Value = artPad.Config.Rows;
+            dlg.NumericUpDown2.Value = artPad.Config.Cols;
             if (dlg.ShowDialog() == DialogResult.OK) {
-                ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
                 Configuration config =
                     Configuration.generateNewConfiguration((int)dlg.NumericUpDown1.Value,
                     (int)dlg.NumericUpDown2.Value);
@@ -155,6 +156,8 @@ namespace ArtPad {
             dlg.Text = "Key Size";
             dlg.Label1.Text = "Width";
             dlg.Label2.Text = "Height";
+            dlg.NumericUpDown1.Value = Width;
+            dlg.NumericUpDown2.Value = Height;
             if (dlg.ShowDialog() == DialogResult.OK) {
                 ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
                 Configuration config = artPad.Config;
