@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -13,6 +14,7 @@ namespace ArtPad {
     public partial class ArtPadForm : Form {
         private string LF = Utils.LF;
         private int defaultKeySize = 50;
+        private string lastConfigFile;
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
 
@@ -39,8 +41,22 @@ namespace ArtPad {
         /// </summary>
         /// <param name="args"></param>
         private void initialize(string[] args) {
+            // Read persistent settings
+            lastConfigFile = Properties.Settings.Default.LastConfigFile;
+            Point lastLocation = Properties.Settings.Default.LastLocation;
+
             if (args == null || args.Length > 0) {
                 Configuration newConfig = Configuration.readConfig(args[0]);
+                if (newConfig != null) {
+                    Config = newConfig;
+                    keyDefs = Config.KeyDefs;
+                    lastConfigFile = args[0];
+                } else {
+                    Utils.errMsg("Error reading configuration");
+                }
+            } else if (File.Exists(lastConfigFile)) {
+                Configuration newConfig =
+                    Configuration.readConfig(lastConfigFile);
                 if (newConfig != null) {
                     Config = newConfig;
                     keyDefs = Config.KeyDefs;
@@ -51,11 +67,18 @@ namespace ArtPad {
                 Config.KeyDefs = Tools.TestKeyDefs;
                 Config.setSizeForKeySize(defaultKeySize, defaultKeySize);
             }
+
+            // Set the Location to the lastLocation
+            if (lastLocation != null) {
+                Location = lastLocation;
+            }
+
             InitializeComponent();
 
 #if DEBUG
             Tools.printModuleInfo();
-            Configuration.writeConfig(Config, @"c:\scratch\ArtPad-startup.config");
+            Configuration.writeConfig(Config,
+                @"c:\scratch\ArtPad-startup.config");
 #endif
         }
 
@@ -100,6 +123,7 @@ namespace ArtPad {
                     return;
                 }
             }
+            lastConfigFile = fileName;
             reconfigure(newConfig);
         }
 
@@ -225,6 +249,19 @@ namespace ArtPad {
             }
         }
 
+        public string LastConfigFile
+        {
+            get
+            {
+                return lastConfigFile;
+            }
+
+            set
+            {
+                lastConfigFile = value;
+            }
+        }
+
         protected override void OnResizeEnd(System.EventArgs e) {
             base.OnResizeEnd(e);
 #if DEBUG
@@ -244,6 +281,9 @@ namespace ArtPad {
             if (keyDefs != null) {
                 Tools.sendUpEventsForPressedKeys(keyDefs);
             }
+            Properties.Settings.Default.LastConfigFile= lastConfigFile;
+            Properties.Settings.Default.LastLocation = Location;
+            Properties.Settings.Default.Save();
             base.OnFormClosing(e);
         }
 
@@ -255,7 +295,7 @@ namespace ArtPad {
 
         // Define debugging for determining when events are called
         // and the state of the foreground window
-#region Check events
+        #region Check events
 #if CHECK_EVENTS
 
         protected override void OnMouseEnter(System.EventArgs e) {
@@ -341,7 +381,7 @@ namespace ArtPad {
         }
 
 #endif //CHECK_EVENTS
-#endregion Check events
+        #endregion Check events
 
     }
 }

@@ -33,6 +33,7 @@
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(282, 255);
             this.Name = "ArtPadForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "ArtPad";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.ArtPadForm_Load);
