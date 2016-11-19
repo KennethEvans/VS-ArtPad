@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using WindowsInput;
@@ -128,7 +130,7 @@ namespace ArtPad {
             }
         }
 
-
+        #region DEBUG
 #if DEBUG
         /// <summary>
         /// Generic debugging printout for examining foreground windows.
@@ -139,7 +141,44 @@ namespace ArtPad {
                 + getForegroundWindowTitle()
                 + ", Saved: " + getSavedForegroundWindowTitle());
         }
-#endif
+
+        /// <summary>
+        /// Prints PortableExecutableKinds and PortableExecutableKinds
+        /// information for the Manifest Module or for each module in the
+        /// assembly.
+        /// </summary>
+        public static void printModuleInfo() {
+            PortableExecutableKinds peKinds;
+            ImageFileMachine imageFileMachine;
+
+            var assembly = Assembly.GetExecutingAssembly();
+            assembly.ManifestModule.GetPEKind(out peKinds, out imageFileMachine);
+            Debug.Print("*********************************************");
+            Debug.Print(assembly.ManifestModule.Name + ": " + peKinds
+                + " " + imageFileMachine);
+            Debug.Print("*********************************************");
+
+#if false
+            // Do this for all the modules
+            var modules = assembly.GetModules();
+            var kinds = new List<PortableExecutableKinds>();
+            var images = new List<ImageFileMachine>();
+            Debug.Print("*********************************************");
+            foreach (var module in modules) {
+                module.GetPEKind(out peKinds, out imageFileMachine);
+                Debug.Print(module.Name + ": " + peKinds
+                    + " " + imageFileMachine);
+
+                kinds.Add(peKinds);
+                images.Add(imageFileMachine);
+            }
+            Debug.Print("*********************************************");
+            var distinctKinds = kinds.Distinct().ToList();
+            var distinctImages = images.Distinct().ToList();
+#endif // false
+        }
+#endif // Debug
+        #endregion DEBUG
 
         /// <summary>
         /// A hard-coded list of KeyConfig's for testing.

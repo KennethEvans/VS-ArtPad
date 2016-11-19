@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace ArtPad {
@@ -21,9 +23,7 @@ namespace ArtPad {
         /// Empty constructor.
         /// </summary>
         public ArtPadForm() {
-            Config.KeyDefs = Tools.TestKeyDefs;
-            Config.setSizeForKeySize(defaultKeySize, defaultKeySize);
-            InitializeComponent();
+            initialize(null);
         }
 
         /// <summary>
@@ -31,7 +31,15 @@ namespace ArtPad {
         /// </summary>
         /// <param name="args"></param>
         public ArtPadForm(string[] args) {
-            if (args.Length > 0) {
+            initialize(args);
+        }
+
+        /// <summary>
+        /// Initialization (called by all constructors).
+        /// </summary>
+        /// <param name="args"></param>
+        private void initialize(string[] args) {
+            if (args == null || args.Length > 0) {
                 Configuration newConfig = Configuration.readConfig(args[0]);
                 if (newConfig != null) {
                     Config = newConfig;
@@ -44,7 +52,9 @@ namespace ArtPad {
                 Config.setSizeForKeySize(defaultKeySize, defaultKeySize);
             }
             InitializeComponent();
+
 #if DEBUG
+            Tools.printModuleInfo();
             Configuration.writeConfig(Config, @"c:\scratch\ArtPad-startup.config");
 #endif
         }
