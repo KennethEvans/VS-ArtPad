@@ -68,6 +68,13 @@ namespace ArtPad {
                 Config.setSizeForKeySize(defaultKeySize, defaultKeySize);
             }
 
+            // Set the location to the saved location
+            // (will be modified in reconfigure)
+            Point lastLocation = Properties.Settings.Default.LastLocation;
+            if(lastLocation != null) {
+                Location = lastLocation;
+            }
+
             InitializeComponent();
 #if DEBUG
             Tools.printModuleInfo();
@@ -94,6 +101,8 @@ namespace ArtPad {
                     return;
                 }
             }
+            Properties.Settings.Default.LastLocation = Location;
+
             Config = newConfig;
             keyDefs = Config.KeyDefs;
             createTable();
