@@ -19,7 +19,7 @@ namespace ArtPad {
         }
 
         public void populateControls(KeyDef keyDef) {
-            this.labelRowCol.Text = "Edit Key Button ("
+            this.labelRowCol.Text = "Button ("
                 + keyDef.Row + "," + keyDef.Col + ")";
             this.textBoxName.Text = keyDef.Name;
             this.textBoxKeyString.Text = keyDef.KeyString;
