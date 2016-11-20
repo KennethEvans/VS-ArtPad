@@ -15,6 +15,7 @@ namespace ArtPad {
         private string LF = Utils.LF;
         private int defaultKeySize = 50;
         private string lastConfigFile;
+        private static Point defaultLocation = new Point(50, 50);
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
 
@@ -43,7 +44,6 @@ namespace ArtPad {
         private void initialize(string[] args) {
             // Read persistent settings
             lastConfigFile = Properties.Settings.Default.LastConfigFile;
-            Point lastLocation = Properties.Settings.Default.LastLocation;
 
             if (args == null || args.Length > 0) {
                 Configuration newConfig = Configuration.readConfig(args[0]);
@@ -68,13 +68,7 @@ namespace ArtPad {
                 Config.setSizeForKeySize(defaultKeySize, defaultKeySize);
             }
 
-            // Set the Location to the lastLocation
-            if (lastLocation != null) {
-                Location = lastLocation;
-            }
-
             InitializeComponent();
-
 #if DEBUG
             Tools.printModuleInfo();
             Configuration.writeConfig(Config,
@@ -104,6 +98,31 @@ namespace ArtPad {
             keyDefs = Config.KeyDefs;
             createTable();
             Invalidate();
+
+            // Set the Location to the lastLocation
+            Point lastLocation = Properties.Settings.Default.LastLocation;
+            if (lastLocation == null) {
+                lastLocation = defaultLocation;
+            }
+            Rectangle bounds = this.Bounds;
+            Rectangle screenBounds = Screen.FromControl(this).Bounds;
+            Debug.Print("LastLocation (Before) =" + lastLocation);
+            Debug.Print("Bounds =" + bounds);
+            Debug.Print("Screen =" + screenBounds);
+            if (lastLocation.X < 0) {
+                lastLocation.X = screenBounds.Left;
+            }
+            if (lastLocation.X > screenBounds.Right - Bounds.Width) {
+                lastLocation.X = screenBounds.Right - Bounds.Width;
+            }
+            if (lastLocation.Y < 0) {
+                lastLocation.Y = screenBounds.Top;
+            }
+            if (lastLocation.Y > screenBounds.Bottom - Bounds.Height) {
+                lastLocation.Y = screenBounds.Bottom - Bounds.Height;
+            }
+            this.Location = lastLocation;
+            Debug.Print("LastLocation (After) =" + lastLocation);
         }
 
         /// <summary>
@@ -281,7 +300,7 @@ namespace ArtPad {
             if (keyDefs != null) {
                 Tools.sendUpEventsForPressedKeys(keyDefs);
             }
-            Properties.Settings.Default.LastConfigFile= lastConfigFile;
+            Properties.Settings.Default.LastConfigFile = lastConfigFile;
             Properties.Settings.Default.LastLocation = Location;
             Properties.Settings.Default.Save();
             base.OnFormClosing(e);
