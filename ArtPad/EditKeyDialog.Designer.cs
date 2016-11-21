@@ -25,14 +25,10 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.editKeyTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.labelRowCol = new System.Windows.Forms.Label();
             this.flowLayoutPanelType = new System.Windows.Forms.FlowLayoutPanel();
             this.labelType = new System.Windows.Forms.Label();
             this.comboBoxType = new System.Windows.Forms.ComboBox();
-            this.labelKeyString = new System.Windows.Forms.Label();
-            this.textBoxKeyString = new System.Windows.Forms.TextBox();
-            this.labelName = new System.Windows.Forms.Label();
-            this.textBoxName = new System.Windows.Forms.TextBox();
+            this.labelRowCol = new System.Windows.Forms.Label();
             this.flowLayoutPanelButtons1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonCopy = new System.Windows.Forms.Button();
             this.buttonPaste = new System.Windows.Forms.Button();
@@ -40,9 +36,13 @@
             this.flowLayoutPanelButtons2 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonSetKey = new System.Windows.Forms.Button();
             this.buttonDismiss = new System.Windows.Forms.Button();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanelName = new System.Windows.Forms.TableLayoutPanel();
+            this.textBoxName = new System.Windows.Forms.TextBox();
+            this.labelName = new System.Windows.Forms.Label();
             this.tableLayoutPanelKeyString = new System.Windows.Forms.TableLayoutPanel();
+            this.textBoxKeyString = new System.Windows.Forms.TextBox();
+            this.labelKeyString = new System.Windows.Forms.Label();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.editKeyTableLayoutPanel.SuspendLayout();
             this.flowLayoutPanelType.SuspendLayout();
             this.flowLayoutPanelButtons1.SuspendLayout();
@@ -77,18 +77,6 @@
             this.editKeyTableLayoutPanel.TabIndex = 0;
             this.editKeyTableLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.editKeyTableLayoutPanel_Paint);
             // 
-            // labelRowCol
-            // 
-            this.labelRowCol.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelRowCol.Location = new System.Drawing.Point(25, 10);
-            this.labelRowCol.Margin = new System.Windows.Forms.Padding(10);
-            this.labelRowCol.Name = "labelRowCol";
-            this.labelRowCol.Size = new System.Drawing.Size(262, 17);
-            this.labelRowCol.TabIndex = 0;
-            this.labelRowCol.Text = "Edit Key (Row,Column)";
-            this.labelRowCol.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip.SetToolTip(this.labelRowCol, "The position of the key you are editing.");
-            // 
             // flowLayoutPanelType
             // 
             this.flowLayoutPanelType.AutoSize = true;
@@ -98,7 +86,7 @@
             this.flowLayoutPanelType.Location = new System.Drawing.Point(3, 108);
             this.flowLayoutPanelType.Name = "flowLayoutPanelType";
             this.flowLayoutPanelType.Size = new System.Drawing.Size(247, 30);
-            this.flowLayoutPanelType.TabIndex = 4;
+            this.flowLayoutPanelType.TabIndex = 3;
             // 
             // labelType
             // 
@@ -107,7 +95,7 @@
             this.labelType.Location = new System.Drawing.Point(3, 6);
             this.labelType.Name = "labelType";
             this.labelType.Size = new System.Drawing.Size(44, 17);
-            this.labelType.TabIndex = 1;
+            this.labelType.TabIndex = 0;
             this.labelType.Text = "Type:";
             this.toolTip.SetToolTip(this.labelType, "The type of this key.");
             // 
@@ -123,48 +111,20 @@
             this.comboBoxType.Location = new System.Drawing.Point(53, 3);
             this.comboBoxType.Name = "comboBoxType";
             this.comboBoxType.Size = new System.Drawing.Size(191, 24);
-            this.comboBoxType.TabIndex = 4;
+            this.comboBoxType.TabIndex = 1;
             this.toolTip.SetToolTip(this.comboBoxType, "The type of this key.");
             // 
-            // labelKeyString
+            // labelRowCol
             // 
-            this.labelKeyString.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelKeyString.AutoSize = true;
-            this.labelKeyString.Location = new System.Drawing.Point(3, 5);
-            this.labelKeyString.Name = "labelKeyString";
-            this.labelKeyString.Size = new System.Drawing.Size(77, 17);
-            this.labelKeyString.TabIndex = 0;
-            this.labelKeyString.Text = "Key String:";
-            this.toolTip.SetToolTip(this.labelKeyString, "The key string that is sent.");
-            // 
-            // textBoxKeyString
-            // 
-            this.textBoxKeyString.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxKeyString.Location = new System.Drawing.Point(86, 3);
-            this.textBoxKeyString.Name = "textBoxKeyString";
-            this.textBoxKeyString.Size = new System.Drawing.Size(218, 22);
-            this.textBoxKeyString.TabIndex = 1;
-            this.toolTip.SetToolTip(this.textBoxKeyString, "The key string that is sent.");
-            // 
-            // labelName
-            // 
-            this.labelName.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(3, 5);
-            this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(49, 17);
-            this.labelName.TabIndex = 0;
-            this.labelName.Text = "Name:";
-            this.toolTip.SetToolTip(this.labelName, "The name that appears on the key.");
-            // 
-            // textBoxName
-            // 
-            this.textBoxName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxName.Location = new System.Drawing.Point(58, 3);
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(246, 22);
-            this.textBoxName.TabIndex = 1;
-            this.toolTip.SetToolTip(this.textBoxName, "The name that appears on the key.");
+            this.labelRowCol.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelRowCol.Location = new System.Drawing.Point(25, 10);
+            this.labelRowCol.Margin = new System.Windows.Forms.Padding(10);
+            this.labelRowCol.Name = "labelRowCol";
+            this.labelRowCol.Size = new System.Drawing.Size(262, 17);
+            this.labelRowCol.TabIndex = 0;
+            this.labelRowCol.Text = "Edit Key (Row,Column)";
+            this.labelRowCol.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip.SetToolTip(this.labelRowCol, "The position of the key you are editing.");
             // 
             // flowLayoutPanelButtons1
             // 
@@ -177,7 +137,7 @@
             this.flowLayoutPanelButtons1.Location = new System.Drawing.Point(19, 144);
             this.flowLayoutPanelButtons1.Name = "flowLayoutPanelButtons1";
             this.flowLayoutPanelButtons1.Size = new System.Drawing.Size(275, 33);
-            this.flowLayoutPanelButtons1.TabIndex = 1;
+            this.flowLayoutPanelButtons1.TabIndex = 4;
             this.flowLayoutPanelButtons1.WrapContents = false;
             // 
             // buttonCopy
@@ -187,7 +147,7 @@
             this.buttonCopy.Location = new System.Drawing.Point(3, 3);
             this.buttonCopy.Name = "buttonCopy";
             this.buttonCopy.Size = new System.Drawing.Size(87, 27);
-            this.buttonCopy.TabIndex = 2;
+            this.buttonCopy.TabIndex = 0;
             this.buttonCopy.Text = "Copy";
             this.toolTip.SetToolTip(this.buttonCopy, "Copy a Json string representing the current key settings to the clipboard.");
             this.buttonCopy.UseVisualStyleBackColor = true;
@@ -200,7 +160,7 @@
             this.buttonPaste.Location = new System.Drawing.Point(96, 3);
             this.buttonPaste.Name = "buttonPaste";
             this.buttonPaste.Size = new System.Drawing.Size(87, 27);
-            this.buttonPaste.TabIndex = 3;
+            this.buttonPaste.TabIndex = 1;
             this.buttonPaste.Text = "Paste";
             this.toolTip.SetToolTip(this.buttonPaste, "Paste a Json string representing a key to the current settings in the dialog..");
             this.buttonPaste.UseVisualStyleBackColor = true;
@@ -213,7 +173,7 @@
             this.buttonReset.Location = new System.Drawing.Point(189, 3);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(83, 27);
-            this.buttonReset.TabIndex = 4;
+            this.buttonReset.TabIndex = 2;
             this.buttonReset.Text = "Reset";
             this.toolTip.SetToolTip(this.buttonReset, "Reset the key settings to the original values when starting to edit.");
             this.buttonReset.UseVisualStyleBackColor = true;
@@ -229,7 +189,7 @@
             this.flowLayoutPanelButtons2.Location = new System.Drawing.Point(75, 183);
             this.flowLayoutPanelButtons2.Name = "flowLayoutPanelButtons2";
             this.flowLayoutPanelButtons2.Size = new System.Drawing.Size(162, 34);
-            this.flowLayoutPanelButtons2.TabIndex = 2;
+            this.flowLayoutPanelButtons2.TabIndex = 5;
             // 
             // buttonSetKey
             // 
@@ -238,7 +198,7 @@
             this.buttonSetKey.Location = new System.Drawing.Point(3, 3);
             this.buttonSetKey.Name = "buttonSetKey";
             this.buttonSetKey.Size = new System.Drawing.Size(75, 27);
-            this.buttonSetKey.TabIndex = 2;
+            this.buttonSetKey.TabIndex = 0;
             this.buttonSetKey.Text = "Set Key";
             this.toolTip.SetToolTip(this.buttonSetKey, "Set the current values to the key button in ArtPad.");
             this.buttonSetKey.UseVisualStyleBackColor = true;
@@ -251,7 +211,7 @@
             this.buttonDismiss.Location = new System.Drawing.Point(84, 3);
             this.buttonDismiss.Name = "buttonDismiss";
             this.buttonDismiss.Size = new System.Drawing.Size(75, 27);
-            this.buttonDismiss.TabIndex = 3;
+            this.buttonDismiss.TabIndex = 1;
             this.buttonDismiss.Text = "Dismiss";
             this.toolTip.SetToolTip(this.buttonDismiss, "Dismiss this dialog (make it not visible).");
             this.buttonDismiss.UseVisualStyleBackColor = true;
@@ -272,7 +232,27 @@
             this.tableLayoutPanelName.RowCount = 1;
             this.tableLayoutPanelName.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelName.Size = new System.Drawing.Size(307, 28);
-            this.tableLayoutPanelName.TabIndex = 3;
+            this.tableLayoutPanelName.TabIndex = 1;
+            // 
+            // textBoxName
+            // 
+            this.textBoxName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxName.Location = new System.Drawing.Point(58, 3);
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.Size = new System.Drawing.Size(246, 22);
+            this.textBoxName.TabIndex = 1;
+            this.toolTip.SetToolTip(this.textBoxName, "The name that appears on the key.");
+            // 
+            // labelName
+            // 
+            this.labelName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelName.AutoSize = true;
+            this.labelName.Location = new System.Drawing.Point(3, 5);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(49, 17);
+            this.labelName.TabIndex = 0;
+            this.labelName.Text = "Name:";
+            this.toolTip.SetToolTip(this.labelName, "The name that appears on the key.");
             // 
             // tableLayoutPanelKeyString
             // 
@@ -289,7 +269,27 @@
             this.tableLayoutPanelKeyString.RowCount = 1;
             this.tableLayoutPanelKeyString.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelKeyString.Size = new System.Drawing.Size(307, 28);
-            this.tableLayoutPanelKeyString.TabIndex = 4;
+            this.tableLayoutPanelKeyString.TabIndex = 2;
+            // 
+            // textBoxKeyString
+            // 
+            this.textBoxKeyString.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxKeyString.Location = new System.Drawing.Point(86, 3);
+            this.textBoxKeyString.Name = "textBoxKeyString";
+            this.textBoxKeyString.Size = new System.Drawing.Size(218, 22);
+            this.textBoxKeyString.TabIndex = 0;
+            this.toolTip.SetToolTip(this.textBoxKeyString, "The key string that is sent.");
+            // 
+            // labelKeyString
+            // 
+            this.labelKeyString.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelKeyString.AutoSize = true;
+            this.labelKeyString.Location = new System.Drawing.Point(3, 5);
+            this.labelKeyString.Name = "labelKeyString";
+            this.labelKeyString.Size = new System.Drawing.Size(77, 17);
+            this.labelKeyString.TabIndex = 0;
+            this.labelKeyString.Text = "Key String:";
+            this.toolTip.SetToolTip(this.labelKeyString, "The key string that is sent.");
             // 
             // EditKeyDialog
             // 

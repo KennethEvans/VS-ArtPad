@@ -116,7 +116,7 @@ namespace ArtPad {
                 return;
             }
             foreach (KeyDef keyDef in keyDefs) {
-                if (keyDef.Type == KeyDef.KeyType.HOLD && keyDef.Pressed == true) {
+                if (keyDef.Type == KeyDef.KeyType.HOLD) {
                     VirtualKeyCode keyCode;
                     try {
                         keyCode = Tools.getKeyCode(keyDef);

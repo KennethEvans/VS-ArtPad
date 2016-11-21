@@ -11,34 +11,36 @@ namespace ArtPad {
         private KeyDef keyDef;
 
         public KeyButton(KeyDef key) {
-            this.keyDef = key;
+            keyDef = key;
             InitializeComponent();
 
             // Should have been able to do this in the designer
-            this.toolStripMenuItemLoad.Click +=
-                new System.EventHandler(this.toolStripMenuItemLoad_Click);
-            this.toolStripMenuItemSaveAs.Click +=
-                new System.EventHandler(this.toolStripAsMenuItemSaveAs_Click);
-            this.toolStripMenuItemEditKey.Click +=
-                new System.EventHandler(this.toolStripMenuItemEdit_Click);
-            this.toolStripMenuItemDeleteRow.Click +=
-                new System.EventHandler(this.toolStripMenuItemDeleteRow_click);
-            this.toolStripMenuItemAddRowBefore.Click +=
-                new System.EventHandler(this.toolStripMenuItemAddRowBefore_click);
-            this.toolStripMenuItemAddRowAfter.Click +=
-                new System.EventHandler(this.toolStripMenuItemAddRowAfter_click);
-            this.toolStripMenuItemDeleteCol.Click +=
-                new System.EventHandler(this.toolStripMenuItemDeleteCol_click);
-            this.toolStripMenuItemAddColBefore.Click +=
-                new System.EventHandler(this.toolStripMenuItemAddColBefore_click);
-            this.toolStripMenuItemAddColAfter.Click +=
-                new System.EventHandler(this.toolStripMenuItemAddColAfter_click);
-            this.toolStripMenuItemSort.Click +=
-                new System.EventHandler(this.toolStripMenuItemSort_click);
-            this.toolStripMenuItemCreateNew.Click +=
-                new System.EventHandler(this.toolStripMenuItemCreateNew_click);
-            this.toolStripMenuItemSetKeySize.Click +=
-                new System.EventHandler(this.toolStripMenuItemSetKeySize_click);
+            toolStripMenuItemLoad.Click +=
+                new System.EventHandler(toolStripMenuItemLoad_Click);
+            toolStripMenuItemSaveAs.Click +=
+                new System.EventHandler(toolStripAsMenuItemSaveAs_Click);
+            toolStripMenuItemEditKey.Click +=
+                new System.EventHandler(toolStripMenuItemEdit_Click);
+            toolStripMenuItemDeleteRow.Click +=
+                new System.EventHandler(toolStripMenuItemDeleteRow_click);
+            toolStripMenuItemAddRowBefore.Click +=
+                new System.EventHandler(toolStripMenuItemAddRowBefore_click);
+            toolStripMenuItemAddRowAfter.Click +=
+                new System.EventHandler(toolStripMenuItemAddRowAfter_click);
+            toolStripMenuItemDeleteCol.Click +=
+                new System.EventHandler(toolStripMenuItemDeleteCol_click);
+            toolStripMenuItemAddColBefore.Click +=
+                new System.EventHandler(toolStripMenuItemAddColBefore_click);
+            toolStripMenuItemAddColAfter.Click +=
+                new System.EventHandler(toolStripMenuItemAddColAfter_click);
+            toolStripMenuItemSort.Click +=
+                new System.EventHandler(toolStripMenuItemSort_click);
+            toolStripMenuItemCreateNew.Click +=
+                new System.EventHandler(toolStripMenuItemCreateNew_click);
+            toolStripMenuItemSetKeySize.Click +=
+                new System.EventHandler(toolStripMenuItemSetKeySize_click);
+            toolStripMenuItemHoldKeysUp.Click +=
+                new System.EventHandler(toolStripMenuItemHoldKeysUp_click);
         }
 
         void toolStripMenuItemLoad_Click(object sender, System.EventArgs e) {
@@ -164,6 +166,17 @@ namespace ArtPad {
                 config.setSizeForKeySize((int)dlg.NumericUpDown1.Value,
                     (int)dlg.NumericUpDown2.Value);
                 artPad.reconfigure(config);
+            }
+        }
+
+        void toolStripMenuItemHoldKeysUp_click(object sender, System.EventArgs e) {
+            try {
+                ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+                Configuration config = artPad.Config;
+                Tools.sendUpEventsForPressedKeys(config.KeyDefs);
+                artPad.reconfigure(config);
+            } catch (System.Exception ex) {
+                Utils.excMsg("Error sending key up events", ex);
             }
         }
 

@@ -45,6 +45,8 @@ namespace ArtPad {
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemLoad = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemSaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemHoldKeysUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,9 +58,11 @@ namespace ArtPad {
             this.toolStripMenuItemEditKeys,
             this.toolStripSeparator1,
             this.toolStripMenuItemLoad,
-            this.toolStripMenuItemSaveAs});
+            this.toolStripMenuItemSaveAs,
+            this.toolStripSeparator4,
+            this.toolStripMenuItemHoldKeysUp});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(243, 114);
+            this.contextMenuStrip.Size = new System.Drawing.Size(243, 146);
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
             // toolStripMenuItemEditKey
@@ -177,6 +181,18 @@ namespace ArtPad {
             this.toolStripMenuItemSaveAs.Size = new System.Drawing.Size(242, 26);
             this.toolStripMenuItemSaveAs.Text = "Save Configuration As...";
             this.toolStripMenuItemSaveAs.ToolTipText = "Save the current configuration.";
+            // 
+            // toolStripMenuItemHoldKeysUp
+            // 
+            this.toolStripMenuItemHoldKeysUp.Name = "toolStripMenuItemHoldKeysUp";
+            this.toolStripMenuItemHoldKeysUp.Size = new System.Drawing.Size(242, 26);
+            this.toolStripMenuItemHoldKeysUp.Text = "Send Hold Keys Up";
+            this.toolStripMenuItemHoldKeysUp.ToolTipText = "Send up events for all hold keys. (May fix application in a bad state.)";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(239, 6);
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -201,5 +217,7 @@ namespace ArtPad {
         private ToolStripMenuItem toolStripMenuItemSetKeySize;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripSeparator toolStripSeparator3;
+        private ToolStripMenuItem toolStripMenuItemHoldKeysUp;
+        private ToolStripSeparator toolStripSeparator4;
     }
 }

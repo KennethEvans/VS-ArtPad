@@ -19,11 +19,11 @@ namespace ArtPad {
         }
 
         public void populateControls(KeyDef keyDef) {
-            this.labelRowCol.Text = "Button ("
+            labelRowCol.Text = "Button ("
                 + keyDef.Row + "," + keyDef.Col + ")";
-            this.textBoxName.Text = keyDef.Name;
-            this.textBoxKeyString.Text = keyDef.KeyString;
-            this.comboBoxType.SelectedIndex = (int)keyDef.Type;
+            textBoxName.Text = keyDef.Name;
+            textBoxKeyString.Text = keyDef.KeyString;
+            comboBoxType.SelectedIndex = (int)keyDef.Type;
         }
 
         public KeyDef keyDefFromDialog() {
