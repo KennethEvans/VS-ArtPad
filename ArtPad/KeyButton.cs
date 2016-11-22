@@ -1,6 +1,8 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 using WindowsInput;
 using WindowsInput.Native;
 
@@ -41,6 +43,10 @@ namespace ArtPad {
                 new System.EventHandler(toolStripMenuItemSetKeySize_click);
             toolStripMenuItemHoldKeysUp.Click +=
                 new System.EventHandler(toolStripMenuItemHoldKeysUp_click);
+            toolStripMenuItemCopyKey.Click +=
+                new System.EventHandler(toolStripMenuItemCopyKey_click);
+            toolStripMenuItemPasteKey.Click +=
+                new System.EventHandler(toolStripMenuItemPasteKey_click);
         }
 
         void toolStripMenuItemLoad_Click(object sender, System.EventArgs e) {
@@ -178,6 +184,48 @@ namespace ArtPad {
             } catch (System.Exception ex) {
                 Utils.excMsg("Error sending key up events", ex);
             }
+        }
+
+        void toolStripMenuItemCopyKey_click(object sender, System.EventArgs e) {
+            try {
+                string json =
+                    JsonConvert.SerializeObject(keyDef, Formatting.Indented);
+                Clipboard.SetText(json);
+            } catch (System.Exception ex) {
+                Utils.excMsg("Error sending key up events", ex);
+            }
+        }
+
+        void toolStripMenuItemPasteKey_click(object sender, System.EventArgs e) {
+            IDataObject ClipData = Clipboard.GetDataObject();
+            if (!ClipData.GetDataPresent(DataFormats.Text)) {
+                Utils.errMsg("Clipboard does not contain a key definition");
+                return;
+            }
+            string json = Clipboard.GetData(DataFormats.Text).ToString();
+            KeyDef newKeyDef;
+            try {
+                newKeyDef = JsonConvert.DeserializeObject<KeyDef>(json);
+            } catch (Exception ex) {
+                Utils.excMsg(
+                    "Error converting clipboard contents to a "
+                    + "key definition", ex);
+                return;
+            }
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            Configuration config = artPad.Config;
+            newKeyDef.Row = keyDef.Row;
+            newKeyDef.Col = keyDef.Col;
+            int index = config.KeyDefs.FindIndex(
+                keyDef =>
+                keyDef.Row == newKeyDef.Row && keyDef.Col == newKeyDef.Col);
+            if (index == -1) {
+                Utils.errMsg("Error finding key definition to set");
+                return;
+            }
+            config.setSizeForKeySize(Width, Height);
+            config.KeyDefs[index] = newKeyDef;
+            artPad.reconfigure(config);
         }
 
         protected override void OnMouseUp(MouseEventArgs e) {

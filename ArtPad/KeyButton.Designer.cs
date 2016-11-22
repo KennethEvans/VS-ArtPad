@@ -45,8 +45,10 @@ namespace ArtPad {
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemLoad = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemSaveAs = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemHoldKeysUp = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemHoldKeysUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemCopyKey = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemPasteKey = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,6 +57,8 @@ namespace ArtPad {
             this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemEditKey,
+            this.toolStripMenuItemCopyKey,
+            this.toolStripMenuItemPasteKey,
             this.toolStripMenuItemEditKeys,
             this.toolStripSeparator1,
             this.toolStripMenuItemLoad,
@@ -62,7 +66,7 @@ namespace ArtPad {
             this.toolStripSeparator4,
             this.toolStripMenuItemHoldKeysUp});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(243, 146);
+            this.contextMenuStrip.Size = new System.Drawing.Size(243, 172);
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
             // toolStripMenuItemEditKey
@@ -182,6 +186,11 @@ namespace ArtPad {
             this.toolStripMenuItemSaveAs.Text = "Save Configuration As...";
             this.toolStripMenuItemSaveAs.ToolTipText = "Save the current configuration.";
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(239, 6);
+            // 
             // toolStripMenuItemHoldKeysUp
             // 
             this.toolStripMenuItemHoldKeysUp.Name = "toolStripMenuItemHoldKeysUp";
@@ -189,10 +198,19 @@ namespace ArtPad {
             this.toolStripMenuItemHoldKeysUp.Text = "Send Hold Keys Up";
             this.toolStripMenuItemHoldKeysUp.ToolTipText = "Send up events for all hold keys. (May fix application in a bad state.)";
             // 
-            // toolStripSeparator4
+            // toolStripMenuItemCopyKey
             // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(239, 6);
+            this.toolStripMenuItemCopyKey.Name = "toolStripMenuItemCopyKey";
+            this.toolStripMenuItemCopyKey.Size = new System.Drawing.Size(242, 26);
+            this.toolStripMenuItemCopyKey.Text = "Copy Key";
+            this.toolStripMenuItemCopyKey.ToolTipText = "Copy the definition for this key to the clipboard.";
+            // 
+            // toolStripMenuItemPasteKey
+            // 
+            this.toolStripMenuItemPasteKey.Name = "toolStripMenuItemPasteKey";
+            this.toolStripMenuItemPasteKey.Size = new System.Drawing.Size(242, 26);
+            this.toolStripMenuItemPasteKey.Text = "Paste Key";
+            this.toolStripMenuItemPasteKey.ToolTipText = "Set the definition for this key from a key definition in the clipboard.";
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -219,5 +237,7 @@ namespace ArtPad {
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripMenuItem toolStripMenuItemHoldKeysUp;
         private ToolStripSeparator toolStripSeparator4;
+        private ToolStripMenuItem toolStripMenuItemCopyKey;
+        private ToolStripMenuItem toolStripMenuItemPasteKey;
     }
 }

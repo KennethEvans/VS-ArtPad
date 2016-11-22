@@ -75,7 +75,7 @@ namespace ArtPad {
                     newKeyDef = JsonConvert.DeserializeObject<KeyDef>(json);
                 } catch (Exception ex) {
                     Utils.excMsg(
-                        "Error converting clibboard contents to a "
+                        "Error converting clipboard contents to a "
                         + "key definition", ex);
                     return;
                 }
@@ -91,7 +91,8 @@ namespace ArtPad {
             KeyDef newKeyDef = keyDefFromDialog();
             Configuration config = artPad.Config;
             int index = config.KeyDefs.FindIndex(
-                keyDef => keyDef.Row == newKeyDef.Row && keyDef.Col == newKeyDef.Col);
+                keyDef =>
+                keyDef.Row == newKeyDef.Row && keyDef.Col == newKeyDef.Col);
             if (index == -1) {
                 Utils.errMsg("Error finding key definition to set");
                 return;
