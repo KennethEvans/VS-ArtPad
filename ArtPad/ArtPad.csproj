@@ -108,6 +108,12 @@
     <Compile Include="EditKeyDialog.Designer.cs">
       <DependentUpon>EditKeyDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="ScrolledHTMLDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScrolledHTMLDialog.Designer.cs">
+      <DependentUpon>ScrolledHTMLDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="NumericEntry2Dialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +152,9 @@
     <EmbeddedResource Include="NumericEntry2Dialog.resx">
       <DependentUpon>NumericEntry2Dialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ScrolledHTMLDialog.resx">
+      <DependentUpon>ScrolledHTMLDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -174,6 +183,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ArtPad.ico" />
+    <Content Include="Help\Overview.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

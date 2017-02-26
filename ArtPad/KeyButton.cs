@@ -10,6 +10,7 @@ namespace ArtPad {
     public partial class KeyButton : Button {
         private string LF = System.Environment.NewLine;
         private static EditKeyDialog editKeyDlg;
+        private static ScrolledHTMLDialog overviewDlg;
         private KeyDef keyDef;
 
         public KeyButton(KeyDef key) {
@@ -47,6 +48,10 @@ namespace ArtPad {
                 new System.EventHandler(toolStripMenuItemCopyKey_click);
             toolStripMenuItemPasteKey.Click +=
                 new System.EventHandler(toolStripMenuItemPasteKey_click);
+            toolStripMenuItemOverview.Click +=
+                new System.EventHandler(toolStripMenuItemOverview_click);
+            toolStripMenuItemAbout.Click +=
+                new System.EventHandler(toolStripMenuItemAbout_click);
         }
 
         void toolStripMenuItemLoad_Click(object sender, System.EventArgs e) {
@@ -77,7 +82,7 @@ namespace ArtPad {
 
         void toolStripMenuItemEdit_Click(object sender, System.EventArgs e) {
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-            // Create, show, or visiblethe EditKeyDialog as appropriate
+            // Create, show, or set visible the EditKeyDialog as appropriate
             if (editKeyDlg == null) {
                 editKeyDlg = new EditKeyDialog(keyDef, artPad);
                 editKeyDlg.Show();
@@ -227,6 +232,27 @@ namespace ArtPad {
             config.KeyDefs[index] = newKeyDef;
             artPad.reconfigure(config);
         }
+
+        void toolStripMenuItemOverview_click(object sender, System.EventArgs e) {
+            // Create, show, or set visible the overviewDialog as appropriate
+            if (overviewDlg == null) {
+                overviewDlg = new ScrolledHTMLDialog();
+                overviewDlg.Show();
+            } else {
+                overviewDlg.Visible = true;
+            }
+        }
+
+        void toolStripMenuItemAbout_click(object sender, System.EventArgs e) {
+            // Create, show, or set visible the About Dialog as appropriate
+            //if (overviewDlg == null) {
+            //    overviewDlg = new ScrolledHTMLDialog();
+            //    overviewDlg.Show();
+            //} else {
+            //    overviewDlg.Visible = true;
+            //}
+        }
+
 
         protected override void OnMouseUp(MouseEventArgs e) {
             // Use this for showing the context menu because OnClick
