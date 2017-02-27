@@ -244,15 +244,9 @@ namespace ArtPad {
         }
 
         void toolStripMenuItemAbout_click(object sender, System.EventArgs e) {
-            // Create, show, or set visible the About Dialog as appropriate
-            //if (overviewDlg == null) {
-            //    overviewDlg = new ScrolledHTMLDialog();
-            //    overviewDlg.Show();
-            //} else {
-            //    overviewDlg.Visible = true;
-            //}
+            AboutBox dlg = new AboutBox();
+            dlg.ShowDialog();
         }
-
 
         protected override void OnMouseUp(MouseEventArgs e) {
             // Use this for showing the context menu because OnClick

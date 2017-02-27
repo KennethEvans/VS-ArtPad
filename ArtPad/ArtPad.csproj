@@ -95,6 +95,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="ArtPadForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,6 +137,9 @@
       <DependentUpon>KeyButton.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils.cs" />
+    <EmbeddedResource Include="AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ArtPadForm.resx">
       <DependentUpon>ArtPadForm.cs</DependentUpon>
     </EmbeddedResource>
