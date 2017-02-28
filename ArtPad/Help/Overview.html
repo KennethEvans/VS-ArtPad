@@ -1,38 +1,185 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<link href="book.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Windows Performance Viewer</title>
+<title>ArtPad</title>
 </head>
-
 <body>
-<h1 align="center"><strong>Windows Performance Viewer Overview</strong></h1>
-<p align="left">Windows Performance Viewer accesses the Windows event logs and presents details of the performance in convenient ways. The logs used in this application are those provided by Microsoft-Windows-Diagnostics-Performance. You will probably have to run it as administrator to get access to the diagnostic logs.</p>
-<h3><strong>Boot Performance</strong></h3>
-<p align="left">These data are found in the Applications and Services Logs | Microsoft | Windows | Diagnostics-Performance | Operational for Event ID = 100.</p>
-<p align="left">The&nbsp;<em>BootTime</em>&nbsp;is the sum of the&nbsp;<em>MainPathBootTime,</em>&nbsp;and the&nbsp;<em>BootPostBootTime</em>&nbsp;and is the best figure of merit for the time it takes to boot. The&nbsp;<em>MainPathBootTime</em>&nbsp;is roughly the time it takes for the desktop to become functional. There is not enough space in this overview to describe all the available parameters. There is more information on the web.</p>
-<h3 align="left"><strong>File Menu</strong></h3>
-<p align="left"><strong>Create Boot CSV File</strong></p>
-<p align="left">Allows you to make a CSV file of all the data and to open it in a spreadsheet. The latter should work if you have a file association for .csv.</p>
-<p align="left"><strong>Boot Plots...</strong></p>
-<p align="left">Allows you to plot any of the parameters found as a function of the&nbsp;<em>BootStartTime</em>, or in fact, any of the other parameters. The default plot is&nbsp;<em>BootTime</em>,&nbsp;<em>MainPathBootTime</em>, and&nbsp;<em>BootPostBootTime</em>as a function of&nbsp;<em>BootStartTime</em>. The plot view has a list box to the left with all the parameters at the top and buttons at the bottom. You can multi-select items to plot on the y axis and single-select an item to appear on the x axis. Not all parameters on the x axis give sensible results. You can however use parameters such as&nbsp;<em>Index</em>,&nbsp;<em>BootStartTime</em>,&nbsp;<em>BootEndTime</em>, and&nbsp;<em>UserBootInstance</em>meaningfully. You can also reset the plot to the default and print it.</p>
-<p align="left"><strong>Provider Information...</strong></p>
-<p align="left">Provides information about the Microsoft-Windows-Diagnostics-Performance provider. This includes the logs and events provided.</p>
-<p align="left"><strong>Boot Events...</strong></p>
-<p align="left">A listing of the boot events in the logs. These are events with IDs in the 100's.</p>
-<p align="left"><strong>Shutdown Events...</strong></p>
-<p align="left">A listing of the shutdown events in the logs. These are events with IDs in the 200's.</p>
-<p align="left"><strong>Standby Events...</strong></p>
-<p align="left">A listing of the standby events in the logs. These are events with IDs in the 300's.</p>
-<p align="left"><strong>Monitoring Events...</strong></p>
-<p align="left">A listing of monitoring events in the logs. These are events with IDs in the 400's.</p>
-<p align="left"><strong>Other Events...</strong></p>
-<p align="left">A listing of other events in the logs. These are events with IDs starting with 500 or greater.</p>
-<p align="left"><strong>Run Event Viewer...</strong></p>
-<p align="left">Starts the Windows Event Viewer. This viewer has information about all Windows events, and has more information about performance, in particular, than this application. The performance events are found under Applications and Services Logs | Microsoft | Windows | Diagnostics-Performance.</p>
-<p align="left"><strong>Exit</strong></p>
-<p align="left">Exits the application.</p>
-<h3 align="left"><strong>Help Menu</strong></h3>
+<h1 align="center"><strong><img src="ArtPad.256x256.png" alt="Logo" width="96" height="96" align="middle" />ArtPad Overview</strong></h1>
+<p align="left">ArtPad is primarily designed for graphics applications that can use a pen input. These include Photoshop, Painter, Manga Studio, Rebelle, and others. Computers such as the Surface Pro,  Surface Book, and Cintiq provide pressure-sensitive pens. The problem is that most of these applications rely on a large number of sometimes complicated keystroke sequences to do things in the application. These sequences are hard to enter with the pen.</p>
+<p align="left">ArtPad is a small keypad  that should stay on top of your application and allow you to enter these sequences by tapping on one of its keys. The keys, the number of rows and columns, their size, their label, and what keystrokes they send is configurable, so you can set it up as you want. It is like an on-screen keyboard except that it sends key sequences rather than a single key. It also has some special options, such as running a command. </p>
+<p align="left">ArtPad comes comes with a default configuration of keys. You can change the keys, and it will remember the last used configuration the next time it starts. You can also save the configuration as a file, and load a saved configuration file. The file is in JSON syntax, but can be intuitively edited in a text editor without really needing to understand JSON. Configuration files have the extension .config. This is an example key configuration that sends Ctrl-C:</p>
+<pre> {
+   &quot;Name&quot;: &quot;Copy&quot;,
+   &quot;KeyString&quot;: &quot;^c&quot;,
+   &quot;Type&quot;: 0,
+   &quot;Row&quot;: 1,
+   &quot;Col&quot;: 1,
+   &quot;Pressed&quot;: false
+ },
+</pre>
+<h3>Keys</h3>
+<p>A key has five properties:</p>
+<ol>
+  <li>Name: The label that shows on the key.</li>
+  <li>KeyString: The keystroke sequence that is sent.</li>
+  <li>Type: There are four types, NORMAL (0), HOLD (1), COMMAND (2), and UNUSED (3).</li>
+  <li>Row: The row on the keypad, 0, 1, 2, ....</li>
+  <li>Col: The column on the keypad, 0, 1, 2, ....</li>
+  <li>Pressed: Whether the keys is pressed or not (should always be left at false when editing and saving).</li>
+</ol>
+<p>The Name, Row, and Col should be self-explanatory. The type is the most complicated and is discussed below. Pressed only applies if the Type is HOLD, and is discussed under the HOLD type. </p>
+<h3>KeyString</h3>
+<p>ArtPad uses SendKeys from the .Net Framework.  Each sequence is represented by one or more characters. To send a single character (except for special characters) just enter the character. For the special characters +, ^, %, and ~, use {+}, { ^}, {%}, and {~}. Similarly for the special characters (, ), {, }, [, and ] enclose them in braces. </p>
+<p>Here are some of the more commonly-used  keys that are special or are not characters:</p>
+<table width="50%" border="0">
+  <tr>
+    <td><strong>Key</strong></td>
+    <td><strong>Code</strong></td>
+  </tr>
+  <tr>
+    <td>^</td>
+    <td>Ctrl</td>
+  </tr>
+  <tr>
+    <td>+</td>
+    <td>Shift</td>
+  </tr>
+  <tr>
+    <td>%</td>
+    <td>Alt</td>
+  </tr>
+  <tr>
+    <td>~</td>
+    <td>Enter</td>
+  </tr>
+  <tr>
+    <td>{</td>
+    <td>{{} (Also }) </td>
+  </tr>
+  <tr>
+    <td>(</td>
+    <td>{(} (Also )) </td>
+  </tr>
+  <tr>
+    <td>DEL or DELETE</td>
+    <td>{DELETE} or {DEL}</td>
+  </tr>
+  <tr>
+    <td>DOWN ARROW</td>
+    <td>{DOWN} (Also UP, LEFT, RIGHT)</td>
+  </tr>
+  <tr>
+    <td>END</td>
+    <td>{END} (Also HOME) </td>
+  </tr>
+  <tr>
+    <td>ESC</td>
+    <td>{ESC}</td>
+  </tr>
+  <tr>
+    <td>HOME</td>
+    <td>{HOME}</td>
+  </tr>
+  <tr>
+    <td>INS or INSERT</td>
+    <td>{INSERT} or {INS}</td>
+  </tr>
+  <tr>
+    <td>TAB</td>
+    <td>{TAB}</td>
+  </tr>
+  <tr>
+    <td>F1</td>
+    <td>{F1} (And others) </td>
+  </tr>
+  <tr>
+    <td>Keypad add</td>
+    <td>{ADD} (Also subtract, multiply, divide) </td>
+  </tr>
+  <tr>
+    <td>PAGE DOWN</td>
+    <td>{PGDN} (Also UP) </td>
+  </tr>
+  <tr>
+    <td>NUMLOCK</td>
+    <td>{NUMLOCK}</td>
+  </tr>
+</table>
+<p>Here are some examples:</p>
+<table width="40%" border="0">
+  <tr>
+    <td>Ctrl-C</td>
+    <td>^c</td>
+  </tr>
+  <tr>
+    <td>Alt-C</td>
+    <td>%c</td>
+  </tr>
+  <tr>
+    <td>Shift-Ctrl-S</td>
+    <td>^S</td>
+  </tr>
+  <tr>
+    <td>Ctrl-E, Ctrl-C </td>
+    <td>^(ec) or ^e^c </td>
+  </tr>
+  <tr>
+    <td>Shift-E, Shift-C </td>
+    <td>EC or +(EC) or +E+C or +e+c </td>
+  </tr>
+  <tr>
+    <td>Shift-E, C </td>
+    <td>+EC</td>
+  </tr>
+  <tr>
+    <td>A</td>
+    <td>A or +a or +A</td>
+  </tr>
+  <tr>
+    <td>Press h 10 times </td>
+    <td>{h 10} </td>
+  </tr>
+  <tr>
+    <td>Press LEFT ARROW 5 times </td>
+    <td>{LEFT 5} </td>
+  </tr>
+  <tr>
+    <td>Ctrl-C</td>
+    <td>^c</td>
+  </tr>
+  <tr>
+    <td>aabcdE12</td>
+    <td>aabcdE12</td>
+  </tr>
+</table>
+<p>For a comple list of the syntax see <a href="https://msdn.microsoft.com/en-us/library/system.windows.forms.sendkeys.send(v=vs.110).aspx">https://msdn.microsoft.com/en-us/library/system.windows.forms.sendkeys.send(v=vs.110).aspx</a> or search for SendKeys. </p>
+<h3>TYPE</h3>
+<p><strong>NORMAL</strong></p>
+<p>This indicates that the key sends a normal key sequence with the KeyString as described above. </p>
+<p><strong>HOLD</strong></p>
+<p>This indicates that the key should be held down after it is sent. The KeyString must be one of ^, +, %. It is used to perform the same as the Ctrl, Shift, and Alt keys on the keyboard. For example, the sequence ^c with HOLD means the Ctrl key will stay down as if you pressed and held it. When a key is in the held state, it will be highlighted. All further keys sent from ArtPad or typed at the keyboard will be with that that key, e.g.Ctrl, held down. </p>
+<p>Note that if a key such as Ctrl is left held down when the active application changes, it will likely cause trouble with the next application or the desktop. For this reason there is a menu item to &quot;Send Hold Keys Up&quot;. This should fix the problem, even if ArtPad must be restarted to do it. It may also work to press the physical key on the keyboard twice or to press both physical keys on the keyboard together. In the worst case, you many have to log off and back on or restart. Being careful about leaving keys held down is the best approach.</p>
+<p><strong>COMMAND</strong></p>
+<p>This indicates that instead of sending keys, a command is run. The KeyString is the path to the command. If the command is in your PATH, then entering the name of the command is sufficient. Otherwise the full path must be specified. You can optionally type a comma after the command followed by options for the command.</p>
+<p>When editing in ArtPad itself, use a single backslash \ for the directory separator. In the JSON configuration file, you will have to use a double backslash \\.</p>
+<p>Note that you can call another instance of ArtPad. For example:</p>
+<pre>\bin\artpad.exe,\MyArtPadDir\Photoshop.config </pre>
+<p>will open another instance of ArtPad when the ArtPad executable is in \bin and your Photoshop configuration file is in \MyArtPadDir.</p>
+<p>You could also use C:\bin instead of \bin if bin is on your C drive. Typically, you can use whatever you can use at a command prompt. </p>
+<p>There are two onscreen keyboards you may want to consider.</p>
+<p>TabTip is the tablet keypad. In some applications it will come up automatically when you need to enter text, such as a file name for saving. Other applications don't support this feature, so you need a keypad. You can start TabTip with the following:</p>
+<pre>\Program Files\Common Files\Microsoft Shared\ink\TabTip.exe </pre>
+<p>OSK is another onscreen keyboard that has come with Windows for some time. On 64-bit Windows 10, you should be able to use:</p>
+<pre>\windows\system32\osk.exe</pre>
+<p>Whether you can use just osk.exe and whether it works at all depends on the version of Windows and on whether it is a 64-bit or 32-bit platform. You may have to experiment. Note that ArtPad is built for Any CPU <em>without</em> 32-bit preferred. It thus runs as 64-bit on 64-bit systems and 32-bit on 32-bit systems. </p>
+<p><strong>UNUSED</strong></p>
+<p>This indicates you don't want to use this key for now. There will be no label, and the configuration will be ignored. </p>
+<h3>Operation</h3>
+<h3>Menus</h3>
+<p>There are no menus below the title bar in order to save space. There is only a context menu, accessed by right-clicking any key. Use the X on the title bar to close ArtPad. </p>
+<h3>Help Menu</h3>
 <p align="left"><strong>Overview</strong></p>
 <p align="left">This overview.</p>
 <p align="left"><strong>About</strong></p>

@@ -192,6 +192,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ArtPad.ico" />
+    <Content Include="Help\ArtPad.256x256.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\book.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Help\Overview.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
