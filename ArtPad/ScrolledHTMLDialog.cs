@@ -27,5 +27,17 @@ namespace ArtPad {
                 Visible = false;
             }
         }
+
+        private void OnButtonBackClick(object sender, EventArgs e) {
+            webBrowser.GoBack();
+        }
+
+        private void OnButtonForwardClick(object sender, EventArgs e) {
+            webBrowser.GoForward();
+        }
+
+        private void OnButtonCancelClick(object sender, EventArgs e) {
+            this.Visible = false;
+        }
     }
 }
