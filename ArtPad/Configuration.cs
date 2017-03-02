@@ -9,6 +9,8 @@ namespace ArtPad {
         private Size size = new Size(300, 300);
         private int rows = 0;
         private int cols = 0;
+        private string fontName="";
+        private float fontSize;
 
         /// <summary>
         /// Reads a configuration from the specified file name.
@@ -248,6 +250,32 @@ namespace ArtPad {
             set
             {
                 cols = value;
+            }
+        }
+
+        public string FontName
+        {
+            get
+            {
+                return fontName;
+            }
+
+            set
+            {
+                fontName = value;
+            }
+        }
+
+        public float FontSize
+        {
+            get
+            {
+                return fontSize;
+            }
+
+            set
+            {
+                fontSize = value;
             }
         }
     }
