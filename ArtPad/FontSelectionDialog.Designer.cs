@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 
 namespace ArtPad {
-    partial class NumericEntry2Dialog {
+    partial class FontSelectionDialog {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -25,11 +25,11 @@ namespace ArtPad {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NumericEntry2Dialog));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FontSelectionDialog));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
@@ -38,7 +38,6 @@ namespace ArtPad {
             this.buttonCancel = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.flowLayoutPanel3.SuspendLayout();
@@ -59,19 +58,19 @@ namespace ArtPad {
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(584, 207);
-            this.tableLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(613, 206);
+            this.tableLayoutPanel1.TabIndex = 1;
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel1.Controls.Add(this.label1);
-            this.flowLayoutPanel1.Controls.Add(this.numericUpDown1);
+            this.flowLayoutPanel1.Controls.Add(this.comboBox1);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(6, 6);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(349, 50);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(556, 46);
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.WrapContents = false;
             // 
@@ -79,26 +78,21 @@ namespace ArtPad {
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 9);
+            this.label1.Location = new System.Drawing.Point(6, 7);
             this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 32);
+            this.label1.Size = new System.Drawing.Size(90, 32);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Rows";
+            this.label1.Text = "Name";
             // 
-            // numericUpDown1
+            // comboBox1
             // 
-            this.numericUpDown1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.numericUpDown1.Location = new System.Drawing.Point(103, 6);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(6);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(240, 38);
-            this.numericUpDown1.TabIndex = 1;
+            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(105, 3);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(448, 39);
+            this.comboBox1.TabIndex = 2;
             // 
             // flowLayoutPanel2
             // 
@@ -107,10 +101,10 @@ namespace ArtPad {
             this.flowLayoutPanel2.Controls.Add(this.label2);
             this.flowLayoutPanel2.Controls.Add(this.numericUpDown2);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(6, 68);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(6, 64);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(572, 50);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(601, 50);
             this.flowLayoutPanel2.TabIndex = 1;
             this.flowLayoutPanel2.WrapContents = false;
             // 
@@ -121,14 +115,14 @@ namespace ArtPad {
             this.label2.Location = new System.Drawing.Point(6, 9);
             this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 32);
+            this.label2.Size = new System.Drawing.Size(120, 32);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Cols";
+            this.label2.Text = "Size (pt)";
             // 
             // numericUpDown2
             // 
             this.numericUpDown2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.numericUpDown2.Location = new System.Drawing.Point(90, 6);
+            this.numericUpDown2.Location = new System.Drawing.Point(138, 6);
             this.numericUpDown2.Margin = new System.Windows.Forms.Padding(6);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             100000,
@@ -146,10 +140,10 @@ namespace ArtPad {
             this.flowLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel3.Controls.Add(this.buttonOk);
             this.flowLayoutPanel3.Controls.Add(this.buttonCancel);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(130, 130);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(144, 126);
             this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(324, 71);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(324, 74);
             this.flowLayoutPanel3.TabIndex = 2;
             this.flowLayoutPanel3.WrapContents = false;
             // 
@@ -175,22 +169,21 @@ namespace ArtPad {
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // NumericEntry2Dialog
+            // FontSelectionDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 207);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(613, 206);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6);
-            this.Name = "NumericEntry2Dialog";
-            this.Text = "Choose Size";
+            this.Name = "FontSelectionDialog";
+            this.Text = "Choose Font";
             this.TopMost = true;
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
@@ -204,13 +197,13 @@ namespace ArtPad {
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.ComboBox comboBox1;
 
         public Label Label1
         {
@@ -238,16 +231,16 @@ namespace ArtPad {
             }
         }
 
-        public NumericUpDown NumericUpDown1
+        public ComboBox ComboBox1
         {
             get
             {
-                return numericUpDown1;
+                return comboBox1;
             }
 
             set
             {
-                numericUpDown1 = value;
+                comboBox1 = value;
             }
         }
 

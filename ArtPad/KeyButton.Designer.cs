@@ -53,6 +53,8 @@ namespace ArtPad {
             this.toolStripMenuItemHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemOverview = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemSetFont = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -107,9 +109,11 @@ namespace ArtPad {
             this.toolStripMenuItemAddColBefore,
             this.toolStripMenuItemAddColAfter,
             this.toolStripSeparator3,
-            this.toolStripMenuItemCreateNew,
             this.toolStripMenuItemSetKeySize,
-            this.toolStripMenuItemSort});
+            this.toolStripMenuItemSetFont,
+            this.toolStripMenuItemSort,
+            this.toolStripSeparator6,
+            this.toolStripMenuItemCreateNew});
             this.toolStripMenuItemEditKeys.Name = "toolStripMenuItemEditKeys";
             this.toolStripMenuItemEditKeys.Size = new System.Drawing.Size(450, 46);
             this.toolStripMenuItemEditKeys.Text = "Edit Key Configuration...";
@@ -243,6 +247,17 @@ namespace ArtPad {
             this.toolStripMenuItemAbout.Name = "toolStripMenuItemAbout";
             this.toolStripMenuItemAbout.Size = new System.Drawing.Size(276, 46);
             this.toolStripMenuItemAbout.Text = "About...";
+            // 
+            // toolStripMenuItemSetFont
+            // 
+            this.toolStripMenuItemSetFont.Name = "toolStripMenuItemSetFont";
+            this.toolStripMenuItemSetFont.Size = new System.Drawing.Size(498, 46);
+            this.toolStripMenuItemSetFont.Text = "Set Font...";
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(495, 6);
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -275,5 +290,7 @@ namespace ArtPad {
         private ToolStripMenuItem toolStripMenuItemHelp;
         private ToolStripMenuItem toolStripMenuItemOverview;
         private ToolStripMenuItem toolStripMenuItemAbout;
+        private ToolStripMenuItem toolStripMenuItemSetFont;
+        private ToolStripSeparator toolStripSeparator6;
     }
 }

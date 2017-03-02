@@ -16,6 +16,8 @@ namespace ArtPad {
         private int defaultKeySize = 50;
         private string lastConfigFile;
         private static Point defaultLocation = new Point(50, 50);
+        private string defaultFontName;
+        private float defaultFontSize = 0;
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
 
@@ -71,11 +73,16 @@ namespace ArtPad {
             // Set the location to the saved location
             // (will be modified in reconfigure)
             Point lastLocation = Properties.Settings.Default.LastLocation;
-            if(lastLocation != null) {
+            if (lastLocation != null) {
                 Location = lastLocation;
             }
 
             InitializeComponent();
+
+            // Get the default font
+            defaultFontName = this.Font.Name;
+            defaultFontSize = this.Font.SizeInPoints;
+
 #if DEBUG
             Tools.printModuleInfo();
             Configuration.writeConfig(Config,
@@ -194,26 +201,27 @@ namespace ArtPad {
             tableLayoutPanel.Margin = new Padding(0);
 
             // Font
-            string fontName=null;
+            string fontName = config.FontName;
+            float fontSize = config.FontSize;
             Font font = null;
-            if (config.FontSize > 0) {
-                if (config.FontName != null && config.FontName.Length > 0) {
-                    fontName = config.FontName;
-                } else {
-                    fontName = this.Font.Name;
+            if (fontSize <= 0) fontSize = defaultFontSize;
+            if (config.FontName == null || config.FontName.Length <= 0) {
+                fontName = defaultFontName;
+            }
+            try {
+                font = new Font(fontName, fontSize);
+                tableLayoutPanel.Font = font;
+                config.FontName = font.Name;
+                config.FontSize = font.SizeInPoints;
+                if (!font.Name.Equals(fontName) || !font.Size.Equals(config.FontSize)) {
+                    Utils.errMsg("Error loading "
+                        + fontName + " " + config.FontSize + " pt" + LF
+                        + "Using "
+                        + font.Name + " " + font.SizeInPoints + " pt");
                 }
-                try {
-                    font = new Font(fontName, config.FontSize);
-                    this.Font = font;
-                    if(!font.Name.Equals(fontName) || !font.Size.Equals(config.FontSize)) {
-                        Utils.errMsg("Error loading "
-                            + fontName + " " + config.FontSize + " pt" + LF
-                            + "Using " + font.Name + " " + font.Size + " pt");
-                    }
-                } catch(Exception ex) {
-                    Utils.excMsg("Cannot create font " + fontName
-                        + " " + config.FontSize + " pt", ex);
-                }
+            } catch (Exception ex) {
+                Utils.excMsg("Cannot create font " + fontName
+                    + " " + config.FontSize + " pt", ex);
             }
 #if false
             Debug.Print("tableLayoutPanel: margin=" + tableLayoutPanel.Margin);

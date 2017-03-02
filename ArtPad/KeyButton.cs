@@ -42,6 +42,8 @@ namespace ArtPad {
                 new System.EventHandler(toolStripMenuItemCreateNew_click);
             toolStripMenuItemSetKeySize.Click +=
                 new System.EventHandler(toolStripMenuItemSetKeySize_click);
+            toolStripMenuItemSetFont.Click +=
+                new System.EventHandler(toolStripMenuItemSetFont_click);
             toolStripMenuItemHoldKeysUp.Click +=
                 new System.EventHandler(toolStripMenuItemHoldKeysUp_click);
             toolStripMenuItemCopyKey.Click +=
@@ -176,6 +178,36 @@ namespace ArtPad {
                 Configuration config = artPad.Config;
                 config.setSizeForKeySize((int)dlg.NumericUpDown1.Value,
                     (int)dlg.NumericUpDown2.Value);
+                artPad.reconfigure(config);
+            }
+        }
+
+        void toolStripMenuItemSetFont_click(object sender, System.EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            Configuration config = artPad.Config;
+            FontSelectionDialog dlg = new FontSelectionDialog();
+            dlg.Text = "Key Size";
+            dlg.Label1.Text = "Name";
+            dlg.Label2.Text = "Size (pt)";
+            System.Drawing.Text.InstalledFontCollection installedFontCollection =
+                new System.Drawing.Text.InstalledFontCollection();
+            FontFamily[] fontFamilies = installedFontCollection.Families;
+            int count = fontFamilies.Length;
+            int selectedIndex = -1;
+            string name;
+            for (int i = 0; i < count; i++) {
+                name = fontFamilies[i].Name;
+                dlg.ComboBox1.Items.Add(name);
+                if (name.Equals(config.FontName)) {
+                    selectedIndex = i;
+                }
+            }
+            dlg.ComboBox1.SelectedIndex = selectedIndex;
+            dlg.NumericUpDown2.DecimalPlaces = 1;
+            dlg.NumericUpDown2.Value = (Decimal)config.FontSize;
+            if (dlg.ShowDialog() == DialogResult.OK) {
+                config.FontName = dlg.ComboBox1.Text;
+                config.FontSize = (float)dlg.NumericUpDown2.Value;
                 artPad.reconfigure(config);
             }
         }
