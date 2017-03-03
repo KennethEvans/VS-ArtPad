@@ -33,6 +33,14 @@ namespace ArtPad {
             this.flowLayoutPanelFontSize = new System.Windows.Forms.FlowLayoutPanel();
             this.labelFontSize = new System.Windows.Forms.Label();
             this.numericUpDownFontSize = new System.Windows.Forms.NumericUpDown();
+            this.flowLayoutPanelFg = new System.Windows.Forms.FlowLayoutPanel();
+            this.labelFg = new System.Windows.Forms.Label();
+            this.textBoxFg = new System.Windows.Forms.TextBox();
+            this.buttonFg = new System.Windows.Forms.Button();
+            this.flowLayoutPanelBg = new System.Windows.Forms.FlowLayoutPanel();
+            this.labelBg = new System.Windows.Forms.Label();
+            this.textBoxBg = new System.Windows.Forms.TextBox();
+            this.buttonBg = new System.Windows.Forms.Button();
             this.flowLayoutPanelWidth = new System.Windows.Forms.FlowLayoutPanel();
             this.labelWidth = new System.Windows.Forms.Label();
             this.numericUpDownWidth = new System.Windows.Forms.NumericUpDown();
@@ -46,6 +54,8 @@ namespace ArtPad {
             this.flowLayoutPanelFontName.SuspendLayout();
             this.flowLayoutPanelFontSize.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFontSize)).BeginInit();
+            this.flowLayoutPanelFg.SuspendLayout();
+            this.flowLayoutPanelBg.SuspendLayout();
             this.flowLayoutPanelWidth.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWidth)).BeginInit();
             this.flowLayoutPanelHeight.SuspendLayout();
@@ -55,26 +65,77 @@ namespace ArtPad {
             // 
             // tableLayoutPanelTop
             // 
+            this.tableLayoutPanelTop.AutoSize = true;
             this.tableLayoutPanelTop.ColumnCount = 1;
             this.tableLayoutPanelTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelFontName, 0, 0);
             this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelFontSize, 0, 1);
-            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelWidth, 0, 2);
-            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelHeight, 0, 4);
-            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelButtons, 0, 5);
+            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelFg, 0, 2);
+            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelBg, 0, 3);
+            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelWidth, 0, 4);
+            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelHeight, 0, 5);
+            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelButtons, 0, 6);
             this.tableLayoutPanelTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelTop.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelTop.Margin = new System.Windows.Forms.Padding(6);
             this.tableLayoutPanelTop.Name = "tableLayoutPanelTop";
-            this.tableLayoutPanelTop.RowCount = 5;
+            this.tableLayoutPanelTop.RowCount = 7;
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanelTop.Size = new System.Drawing.Size(662, 323);
-            this.tableLayoutPanelTop.TabIndex = 2;
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.Size = new System.Drawing.Size(640, 459);
+            this.tableLayoutPanelTop.TabIndex = 0;
             // 
             // flowLayoutPanelFontName
             // 
@@ -85,7 +146,7 @@ namespace ArtPad {
             this.flowLayoutPanelFontName.Location = new System.Drawing.Point(6, 6);
             this.flowLayoutPanelFontName.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelFontName.Name = "flowLayoutPanelFontName";
-            this.flowLayoutPanelFontName.Size = new System.Drawing.Size(620, 45);
+            this.flowLayoutPanelFontName.Size = new System.Drawing.Size(619, 45);
             this.flowLayoutPanelFontName.TabIndex = 0;
             this.flowLayoutPanelFontName.WrapContents = false;
             // 
@@ -102,12 +163,11 @@ namespace ArtPad {
             // 
             // comboBoxFontName
             // 
-            this.comboBoxFontName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.comboBoxFontName.FormattingEnabled = true;
             this.comboBoxFontName.Location = new System.Drawing.Point(169, 3);
             this.comboBoxFontName.Name = "comboBoxFontName";
-            this.comboBoxFontName.Size = new System.Drawing.Size(448, 39);
-            this.comboBoxFontName.TabIndex = 2;
+            this.comboBoxFontName.Size = new System.Drawing.Size(447, 39);
+            this.comboBoxFontName.TabIndex = 1;
             // 
             // flowLayoutPanelFontSize
             // 
@@ -115,11 +175,10 @@ namespace ArtPad {
             this.flowLayoutPanelFontSize.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelFontSize.Controls.Add(this.labelFontSize);
             this.flowLayoutPanelFontSize.Controls.Add(this.numericUpDownFontSize);
-            this.flowLayoutPanelFontSize.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelFontSize.Location = new System.Drawing.Point(6, 63);
             this.flowLayoutPanelFontSize.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelFontSize.Name = "flowLayoutPanelFontSize";
-            this.flowLayoutPanelFontSize.Size = new System.Drawing.Size(650, 50);
+            this.flowLayoutPanelFontSize.Size = new System.Drawing.Size(448, 50);
             this.flowLayoutPanelFontSize.TabIndex = 1;
             this.flowLayoutPanelFontSize.WrapContents = false;
             // 
@@ -148,17 +207,103 @@ namespace ArtPad {
             this.numericUpDownFontSize.Size = new System.Drawing.Size(240, 38);
             this.numericUpDownFontSize.TabIndex = 1;
             // 
+            // flowLayoutPanelFg
+            // 
+            this.flowLayoutPanelFg.AutoSize = true;
+            this.flowLayoutPanelFg.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanelFg.Controls.Add(this.labelFg);
+            this.flowLayoutPanelFg.Controls.Add(this.textBoxFg);
+            this.flowLayoutPanelFg.Controls.Add(this.buttonFg);
+            this.flowLayoutPanelFg.Location = new System.Drawing.Point(6, 125);
+            this.flowLayoutPanelFg.Margin = new System.Windows.Forms.Padding(6);
+            this.flowLayoutPanelFg.Name = "flowLayoutPanelFg";
+            this.flowLayoutPanelFg.Size = new System.Drawing.Size(616, 57);
+            this.flowLayoutPanelFg.TabIndex = 2;
+            this.flowLayoutPanelFg.WrapContents = false;
+            // 
+            // labelFg
+            // 
+            this.labelFg.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelFg.AutoSize = true;
+            this.labelFg.Location = new System.Drawing.Point(6, 12);
+            this.labelFg.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelFg.Name = "labelFg";
+            this.labelFg.Size = new System.Drawing.Size(237, 32);
+            this.labelFg.TabIndex = 0;
+            this.labelFg.Text = "Foreground Color";
+            // 
+            // textBoxFg
+            // 
+            this.textBoxFg.Location = new System.Drawing.Point(252, 3);
+            this.textBoxFg.Name = "textBoxFg";
+            this.textBoxFg.Size = new System.Drawing.Size(199, 38);
+            this.textBoxFg.TabIndex = 1;
+            // 
+            // buttonFg
+            // 
+            this.buttonFg.Location = new System.Drawing.Point(460, 6);
+            this.buttonFg.Margin = new System.Windows.Forms.Padding(6);
+            this.buttonFg.Name = "buttonFg";
+            this.buttonFg.Size = new System.Drawing.Size(150, 45);
+            this.buttonFg.TabIndex = 2;
+            this.buttonFg.Text = "Select";
+            this.buttonFg.UseVisualStyleBackColor = true;
+            this.buttonFg.Click += new System.EventHandler(this.buttonFg_click);
+            // 
+            // flowLayoutPanelBg
+            // 
+            this.flowLayoutPanelBg.AutoSize = true;
+            this.flowLayoutPanelBg.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanelBg.Controls.Add(this.labelBg);
+            this.flowLayoutPanelBg.Controls.Add(this.textBoxBg);
+            this.flowLayoutPanelBg.Controls.Add(this.buttonBg);
+            this.flowLayoutPanelBg.Location = new System.Drawing.Point(6, 194);
+            this.flowLayoutPanelBg.Margin = new System.Windows.Forms.Padding(6);
+            this.flowLayoutPanelBg.Name = "flowLayoutPanelBg";
+            this.flowLayoutPanelBg.Size = new System.Drawing.Size(621, 57);
+            this.flowLayoutPanelBg.TabIndex = 3;
+            this.flowLayoutPanelBg.WrapContents = false;
+            // 
+            // labelBg
+            // 
+            this.labelBg.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelBg.AutoSize = true;
+            this.labelBg.Location = new System.Drawing.Point(6, 12);
+            this.labelBg.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelBg.Name = "labelBg";
+            this.labelBg.Size = new System.Drawing.Size(242, 32);
+            this.labelBg.TabIndex = 0;
+            this.labelBg.Text = "Background Color";
+            // 
+            // textBoxBg
+            // 
+            this.textBoxBg.Location = new System.Drawing.Point(257, 3);
+            this.textBoxBg.Name = "textBoxBg";
+            this.textBoxBg.Size = new System.Drawing.Size(199, 38);
+            this.textBoxBg.TabIndex = 1;
+            // 
+            // buttonBg
+            // 
+            this.buttonBg.Location = new System.Drawing.Point(465, 6);
+            this.buttonBg.Margin = new System.Windows.Forms.Padding(6);
+            this.buttonBg.Name = "buttonBg";
+            this.buttonBg.Size = new System.Drawing.Size(150, 45);
+            this.buttonBg.TabIndex = 2;
+            this.buttonBg.Text = "Select";
+            this.buttonBg.UseVisualStyleBackColor = true;
+            this.buttonBg.Click += new System.EventHandler(this.buttonBg_click);
+            // 
             // flowLayoutPanelWidth
             // 
             this.flowLayoutPanelWidth.AutoSize = true;
             this.flowLayoutPanelWidth.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelWidth.Controls.Add(this.labelWidth);
             this.flowLayoutPanelWidth.Controls.Add(this.numericUpDownWidth);
-            this.flowLayoutPanelWidth.Location = new System.Drawing.Point(6, 125);
+            this.flowLayoutPanelWidth.Location = new System.Drawing.Point(6, 263);
             this.flowLayoutPanelWidth.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelWidth.Name = "flowLayoutPanelWidth";
             this.flowLayoutPanelWidth.Size = new System.Drawing.Size(352, 50);
-            this.flowLayoutPanelWidth.TabIndex = 3;
+            this.flowLayoutPanelWidth.TabIndex = 4;
             this.flowLayoutPanelWidth.WrapContents = false;
             // 
             // labelWidth
@@ -192,12 +337,11 @@ namespace ArtPad {
             this.flowLayoutPanelHeight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelHeight.Controls.Add(this.labelHeight);
             this.flowLayoutPanelHeight.Controls.Add(this.numericUpDownHeight);
-            this.flowLayoutPanelHeight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelHeight.Location = new System.Drawing.Point(6, 187);
+            this.flowLayoutPanelHeight.Location = new System.Drawing.Point(6, 325);
             this.flowLayoutPanelHeight.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelHeight.Name = "flowLayoutPanelHeight";
-            this.flowLayoutPanelHeight.Size = new System.Drawing.Size(650, 50);
-            this.flowLayoutPanelHeight.TabIndex = 4;
+            this.flowLayoutPanelHeight.Size = new System.Drawing.Size(362, 50);
+            this.flowLayoutPanelHeight.TabIndex = 5;
             this.flowLayoutPanelHeight.WrapContents = false;
             // 
             // labelHeight
@@ -232,11 +376,11 @@ namespace ArtPad {
             this.flowLayoutPanelButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelButtons.Controls.Add(this.buttonOk);
             this.flowLayoutPanelButtons.Controls.Add(this.buttonCancel);
-            this.flowLayoutPanelButtons.Location = new System.Drawing.Point(169, 249);
+            this.flowLayoutPanelButtons.Location = new System.Drawing.Point(158, 387);
             this.flowLayoutPanelButtons.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelButtons.Name = "flowLayoutPanelButtons";
-            this.flowLayoutPanelButtons.Size = new System.Drawing.Size(324, 68);
-            this.flowLayoutPanelButtons.TabIndex = 2;
+            this.flowLayoutPanelButtons.Size = new System.Drawing.Size(324, 66);
+            this.flowLayoutPanelButtons.TabIndex = 6;
             this.flowLayoutPanelButtons.WrapContents = false;
             // 
             // buttonOk
@@ -266,7 +410,7 @@ namespace ArtPad {
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(662, 323);
+            this.ClientSize = new System.Drawing.Size(640, 459);
             this.Controls.Add(this.tableLayoutPanelTop);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AppearanceDialog";
@@ -279,6 +423,10 @@ namespace ArtPad {
             this.flowLayoutPanelFontSize.ResumeLayout(false);
             this.flowLayoutPanelFontSize.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFontSize)).EndInit();
+            this.flowLayoutPanelFg.ResumeLayout(false);
+            this.flowLayoutPanelFg.PerformLayout();
+            this.flowLayoutPanelBg.ResumeLayout(false);
+            this.flowLayoutPanelBg.PerformLayout();
             this.flowLayoutPanelWidth.ResumeLayout(false);
             this.flowLayoutPanelWidth.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWidth)).EndInit();
@@ -287,6 +435,7 @@ namespace ArtPad {
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeight)).EndInit();
             this.flowLayoutPanelButtons.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -308,6 +457,14 @@ namespace ArtPad {
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelHeight;
         private System.Windows.Forms.Label labelHeight;
         private System.Windows.Forms.NumericUpDown numericUpDownHeight;
+        private FlowLayoutPanel flowLayoutPanelBg;
+        private Label labelBg;
+        private FlowLayoutPanel flowLayoutPanelFg;
+        private Label labelFg;
+        private TextBox textBoxFg;
+        private Button buttonFg;
+        private TextBox textBoxBg;
+        private Button buttonBg;
 
         public Label LabelFontName
         {
@@ -436,6 +593,71 @@ namespace ArtPad {
             set
             {
                 numericUpDownHeight = value;
+            }
+        }
+
+        public Label LabelFg
+        {
+            get
+            {
+                return labelFg;
+            }
+
+            set
+            {
+                labelFg = value;
+            }
+        }
+
+        public TextBox TextBoxFg
+        {
+            get
+            {
+                return textBoxFg;
+            }
+
+            set
+            {
+                textBoxFg = value;
+            }
+        }
+
+        public Button ButtonFg
+        {
+            get
+            {
+                return buttonFg;
+            }
+
+            set
+            {
+                buttonFg = value;
+            }
+        }
+
+        public TextBox TextBoxBg
+        {
+            get
+            {
+                return textBoxBg;
+            }
+
+            set
+            {
+                textBoxBg = value;
+            }
+        }
+
+        public Button ButtonBg
+        {
+            get
+            {
+                return buttonBg;
+            }
+
+            set
+            {
+                buttonBg = value;
             }
         }
     }

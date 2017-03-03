@@ -2,7 +2,6 @@
 
 namespace ArtPad {
     partial class KeyButton {
-        private AutoScaleMode AutoScaleMode;
 
         /// <summary> 
         /// Required designer variable.
