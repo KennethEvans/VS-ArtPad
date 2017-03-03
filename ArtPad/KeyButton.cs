@@ -408,7 +408,13 @@ namespace ArtPad {
                 sim.Keyboard.KeyUp(keyCode);
                 // Use this instead of 
                 // BackColor = Color.FromKnownColor(KnownColor.Control);
-                UseVisualStyleBackColor = true;
+                ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+                Configuration config = artPad.Config;
+                if (config.isValidBGColorString()) {
+                    BackColor = config.getBgColor();
+                } else {
+                    UseVisualStyleBackColor = true;
+                }
             } else {
                 sim.Keyboard.KeyDown(keyCode);
                 keyDef.Pressed = true;
@@ -417,7 +423,7 @@ namespace ArtPad {
         }
 
         private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e) {
-
+            // Could dynamically add things here
         }
     }
 }

@@ -15,8 +15,30 @@ namespace ArtPad {
         }
 
         private void buttonOk_Click(object sender, EventArgs e) {
-            DialogResult = DialogResult.OK;
-            Close();
+            string errMsg = null;
+            string fgColorString = TextBoxFg.Text;
+            string bgColorString = TextBoxBg.Text;
+            if (fgColorString.Length > 0 &&
+                 !Configuration.isValidColorString(fgColorString)) {
+                errMsg = "Invalid FG Color (" + fgColorString + ")";
+            }
+            if (bgColorString.Length > 0 &&
+                 !Configuration.isValidColorString(bgColorString)) {
+                if (errMsg == null) {
+                    errMsg = "Invalid BG Color (" + fgColorString + ")";
+                } else {
+                    errMsg += Utils.LF
+                        + "Invalid BG Color (" + bgColorString + ")";
+                }
+            }
+            if (errMsg != null) {
+                errMsg += Utils.LF  + "Must be blank or of the form #RRGGBB"
+                    + Utils.LF+ "where R, G, and B are valid Hex digits";
+                Utils.errMsg(errMsg);
+            } else { 
+                DialogResult = DialogResult.OK;
+                Close();
+            }
         }
 
         private void buttonCancel_Click(object sender, EventArgs e) {

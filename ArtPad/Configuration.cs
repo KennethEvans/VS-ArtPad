@@ -203,13 +203,53 @@ namespace ArtPad {
         }
 
         /// <summary>
+        /// Checks if the Configuration has a valid FG color string.
+        /// </summary>
+        /// <returns></returns>
+        public bool isValidFGColorString() {
+            return isValidColorString(fgColorString);
+        }
+
+        /// <summary>
+        /// Checks if the Configuration has a valid BG color string.
+        /// </summary>
+        /// <returns></returns>
+        public bool isValidBGColorString() {
+            return isValidColorString(bgColorString);
+        }
+
+        /// <summary>
+        /// Gets a Color for the foreground. It is better to check if the 
+        /// current colorString is valid first to avoid an Exception.  Color 
+        /// is not nullable so there is always a return Color, not null.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentException">
+        /// Thrown for invalid colorString</exception>
+        public Color getFgColor() {
+            return hexStringToColor(fgColorString);
+        }
+
+        /// <summary>
+        /// Gets a Color for the background. It is better to check if the 
+        /// current colorString is valid first to avoid an Exception.  Color 
+        /// is not nullable so there is always a return Color, not null.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentException">
+        /// Thrown for invalid colorString</exception>
+        public Color getBgColor() {
+            return hexStringToColor(bgColorString);
+        }
+
+        /// <summary>
         /// Checks if a color string is valid, i.e., of the form #RRGGBB where
         /// R, G, and B are valid hex characters.
         /// </summary>
         /// <param name="colorString"></param>
         /// <returns></returns>
         public static bool isValidColorString(string colorString) {
-            if (colorString == null || colorString.Length == 7
+            if (colorString == null || colorString.Length != 7
                 || !colorString.StartsWith("#")) {
                 return false;
             }
@@ -226,7 +266,7 @@ namespace ArtPad {
         }
 
         /// <summary>
-        /// Cnverts a Color to a string of the form #RRGGBB.
+        /// Converts a Color to a string of the form #RRGGBB.
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>

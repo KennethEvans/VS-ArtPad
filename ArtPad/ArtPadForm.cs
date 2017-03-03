@@ -260,10 +260,16 @@ namespace ArtPad {
                 keyButton = new KeyButton(keyDef);
                 if (keyDef.Type == KeyDef.KeyType.UNUSED) {
                     keyButton.Text = "";
-                    keyButton.BackColor =
-                        Color.FromKnownColor(KnownColor.ControlLight);
+                    //keyButton.BackColor =
+                    //    Color.FromKnownColor(KnownColor.ControlLight);
                 } else {
                     keyButton.Text = keyDef.Name;
+                }// Colors
+                if (config.isValidFGColorString()) {
+                    keyButton.ForeColor = config.getFgColor();
+                }
+                if (config.isValidBGColorString()) {
+                    keyButton.BackColor = config.getBgColor();
                 }
                 keyButton.Dock = DockStyle.Fill;
                 keyButton.Margin = new Padding(0);
