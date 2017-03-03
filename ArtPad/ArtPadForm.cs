@@ -48,29 +48,32 @@ namespace ArtPad {
             // Read persistent settings
             lastConfigFile = Properties.Settings.Default.LastConfigFile;
 
-            //if (args != null && args.Length > 0) {
-            //    Configuration newConfig = Configuration.readConfig(args[0]);
-            //    if (newConfig != null) {
-            //        Config = newConfig;
-            //        keyDefs = Config.KeyDefs;
-            //        lastConfigFile = args[0];
-            //    } else {
-            //        Utils.errMsg("Error reading configuration");
-            //    }
-            //} else if (File.Exists(lastConfigFile)) {
-            //    Configuration newConfig =
-            //        Configuration.readConfig(lastConfigFile);
-            //    if (newConfig != null) {
-            //        Config = newConfig;
-            //        keyDefs = Config.KeyDefs;
-            //    } else {
-            //        Utils.errMsg("Error reading configuration");
-            //    }
-            //} else {
-            Config = new Configuration();
-            Config.KeyDefs = Tools.TestKeyDefs;
-            Config.setSizeForKeySize(defaultKeySize, defaultKeySize);
-            //}
+            if (args != null && args.Length > 0) {
+                // First use the arguments if there are any
+                Configuration newConfig = Configuration.readConfig(args[0]);
+                if (newConfig != null) {
+                    config = newConfig;
+                    keyDefs = config.KeyDefs;
+                    lastConfigFile = args[0];
+                } else {
+                    Utils.errMsg("Error reading configuration");
+                }
+            } else if (File.Exists(lastConfigFile)) {
+                // Next use the last coinfiguration.
+                Configuration newConfig =
+                    Configuration.readConfig(lastConfigFile);
+                if (newConfig != null) {
+                    config = newConfig;
+                    keyDefs = config.KeyDefs;
+                } else {
+                    Utils.errMsg("Error reading configuration");
+                }
+            } else {
+                // Finally use the default configuration
+                config = new Configuration();
+                config.KeyDefs = Tools.TestKeyDefs;
+                config.setSizeForKeySize(defaultKeySize, defaultKeySize);
+            }
 
             // Set the location to the saved location
             // (will be modified in reconfigure)
@@ -88,7 +91,7 @@ namespace ArtPad {
 
 #if DEBUG
             Tools.printModuleInfo();
-            Configuration.writeConfig(Config,
+            Configuration.writeConfig(config,
                 @"c:\scratch\ArtPad-startup.config");
 #endif
         }
@@ -113,8 +116,8 @@ namespace ArtPad {
             }
             Properties.Settings.Default.LastLocation = Location;
 
-            Config = newConfig;
-            keyDefs = Config.KeyDefs;
+            config = newConfig;
+            keyDefs = config.KeyDefs;
             createTable();
             Invalidate();
 
@@ -177,8 +180,8 @@ namespace ArtPad {
             }
 
             // Get the table size
-            int rows = Config.Rows;
-            int cols = Config.Cols;
+            int rows = config.Rows;
+            int cols = config.Cols;
             Debug.Print("createTable: rows=" + rows + " cols=" + cols);
 
             // Remove any existing tableLayoutPanel
@@ -190,8 +193,8 @@ namespace ArtPad {
                 tableLayoutPanel.Dispose();
             }
 
-            ClientSize = new Size(Config.Size.Width,
-                Config.Size.Height);
+            ClientSize = new Size(config.Size.Width,
+                config.Size.Height);
 
             tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             tableLayoutPanel.AutoSize = true;
@@ -252,9 +255,9 @@ namespace ArtPad {
 
             // Set the key definitions into the table
             KeyButton keyButton;
-            int buttonWidth = Config.Size.Width / Config.Cols;
+            int buttonWidth = config.Size.Width / config.Cols;
             if (buttonWidth <= 0) buttonWidth = 50;
-            int buttonHeight = Config.Size.Height / Config.Rows;
+            int buttonHeight = config.Size.Height / config.Rows;
             if (buttonHeight <= 0) buttonHeight = 50;
 
             foreach (KeyDef keyDef in keyDefs) {
@@ -292,7 +295,7 @@ namespace ArtPad {
 #if DEBUG
             Tools.debugForegroundWindows("ArtPadForm.OnLoad");
 #endif
-            reconfigure(Config);
+            reconfigure(config);
         }
 
         /// <summary>

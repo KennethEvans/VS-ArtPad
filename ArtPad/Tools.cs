@@ -190,14 +190,14 @@ namespace ArtPad {
                 {
                     return new List<KeyDef>{
             new KeyDef("Zoom-","^-", KeyDef.KeyType.NORMAL, 0, 0),
-            new KeyDef("Zoom+","{+}", KeyDef.KeyType.NORMAL, 0, 1),
-            new KeyDef("Brush+","]", KeyDef.KeyType.NORMAL, 0, 2),
-            new KeyDef("Save+","^%s", KeyDef.KeyType.UNUSED, 1, 0),
-            new KeyDef("Save","^s", KeyDef.KeyType.NORMAL, 1,1),
-            new KeyDef("Brush-","[", KeyDef.KeyType.NORMAL, 1, 2),
-            new KeyDef("ArtPad","ArtPad.exe", KeyDef.KeyType.COMMAND, 2,0),
-            new KeyDef("Redo","+^z", KeyDef.KeyType.NORMAL, 2,1),
-            new KeyDef("Undo","^z", KeyDef.KeyType.NORMAL, 2,2),
+            new KeyDef("Brush-","[", KeyDef.KeyType.NORMAL, 0,1),
+            new KeyDef("Undo","^z", KeyDef.KeyType.NORMAL, 0,2),
+            new KeyDef("Zoom+","{+}", KeyDef.KeyType.NORMAL, 1,0),
+            new KeyDef("Brush+","]", KeyDef.KeyType.NORMAL, 1,1),
+            new KeyDef("Redo","+^z", KeyDef.KeyType.NORMAL, 1,2),
+            new KeyDef("Save","^s", KeyDef.KeyType.NORMAL, 2,0),
+            new KeyDef("Actual","^1", KeyDef.KeyType.NORMAL, 2, 1),
+            new KeyDef("Fit","^0", KeyDef.KeyType.NORMAL, 2,2),
             new KeyDef("ArtPad","ArtPad.exe", KeyDef.KeyType.COMMAND, 3,0),
             new KeyDef("OSK","\\windows\\system32\\osk.exe", KeyDef.KeyType.COMMAND, 3,1),
             new KeyDef("TabTip",
@@ -206,8 +206,8 @@ namespace ArtPad {
             new KeyDef("Cut","^x", KeyDef.KeyType.NORMAL, 4, 0),
             new KeyDef("Copy","^c", KeyDef.KeyType.NORMAL, 4,1),
             new KeyDef("Paste","^v", KeyDef.KeyType.NORMAL, 4, 2),
-            new KeyDef("Shift","+", KeyDef.KeyType.HOLD, 5,0),
-            new KeyDef("Ctrl","^", KeyDef.KeyType.HOLD, 5, 1),
+            new KeyDef("Ctrl","^", KeyDef.KeyType.HOLD, 5, 0),
+            new KeyDef("Shift","+", KeyDef.KeyType.HOLD, 5,1),
             new KeyDef("Alt","%", KeyDef.KeyType.HOLD, 5, 2),
         };
                 }
