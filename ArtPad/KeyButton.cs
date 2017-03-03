@@ -40,10 +40,8 @@ namespace ArtPad {
                 new System.EventHandler(toolStripMenuItemSort_click);
             toolStripMenuItemCreateNew.Click +=
                 new System.EventHandler(toolStripMenuItemCreateNew_click);
-            toolStripMenuItemSetKeySize.Click +=
-                new System.EventHandler(toolStripMenuItemSetKeySize_click);
-            toolStripMenuItemSetFont.Click +=
-                new System.EventHandler(toolStripMenuItemSetFont_click);
+            toolStripMenuItemAppearance.Click +=
+                new System.EventHandler(toolStripMenuItemAppearance_click);
             toolStripMenuItemHoldKeysUp.Click +=
                 new System.EventHandler(toolStripMenuItemHoldKeysUp_click);
             toolStripMenuItemCopyKey.Click +=
@@ -166,29 +164,13 @@ namespace ArtPad {
             }
         }
 
-        void toolStripMenuItemSetKeySize_click(object sender, System.EventArgs e) {
-            NumericEntry2Dialog dlg = new NumericEntry2Dialog();
-            dlg.Text = "Key Size";
-            dlg.Label1.Text = "Width";
-            dlg.Label2.Text = "Height";
-            dlg.NumericUpDown1.Value = Width;
-            dlg.NumericUpDown2.Value = Height;
-            if (dlg.ShowDialog() == DialogResult.OK) {
-                ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-                Configuration config = artPad.Config;
-                config.setSizeForKeySize((int)dlg.NumericUpDown1.Value,
-                    (int)dlg.NumericUpDown2.Value);
-                artPad.reconfigure(config);
-            }
-        }
-
-        void toolStripMenuItemSetFont_click(object sender, System.EventArgs e) {
+        void toolStripMenuItemAppearance_click(object sender, System.EventArgs e) {
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
             Configuration config = artPad.Config;
-            FontSelectionDialog dlg = new FontSelectionDialog();
-            dlg.Text = "Key Size";
-            dlg.Label1.Text = "Name";
-            dlg.Label2.Text = "Size (pt)";
+            AppearanceDialog dlg = new AppearanceDialog();
+            dlg.Text = "Appearance";
+            dlg.LabelFontName.Text = "Font Name";
+            dlg.LabelFontSize.Text = "Font Size (pt)";
             System.Drawing.Text.InstalledFontCollection installedFontCollection =
                 new System.Drawing.Text.InstalledFontCollection();
             FontFamily[] fontFamilies = installedFontCollection.Families;
@@ -197,17 +179,26 @@ namespace ArtPad {
             string name;
             for (int i = 0; i < count; i++) {
                 name = fontFamilies[i].Name;
-                dlg.ComboBox1.Items.Add(name);
+                dlg.ComboBoxFontName.Items.Add(name);
                 if (name.Equals(config.FontName)) {
                     selectedIndex = i;
                 }
             }
-            dlg.ComboBox1.SelectedIndex = selectedIndex;
-            dlg.NumericUpDown2.DecimalPlaces = 1;
-            dlg.NumericUpDown2.Value = (Decimal)config.FontSize;
+            dlg.ComboBoxFontName.SelectedIndex = selectedIndex;
+
+            dlg.NumericUpDownFontSize.DecimalPlaces = 1;
+            dlg.NumericUpDownFontSize.Value = (Decimal)config.FontSize;
+
+            dlg.LabelWidth.Text = "Key Width";
+            dlg.LabelHeight.Text = "Key Height";
+            dlg.NumericUpDownWidth.Value = Width;
+            dlg.NumericUpDownHeight.Value = Height;
+
             if (dlg.ShowDialog() == DialogResult.OK) {
-                config.FontName = dlg.ComboBox1.Text;
-                config.FontSize = (float)dlg.NumericUpDown2.Value;
+                config.FontName = dlg.ComboBoxFontName.Text;
+                config.FontSize = (float)dlg.NumericUpDownFontSize.Value;
+                config.setSizeForKeySize((int)dlg.NumericUpDownWidth.Value,
+                    (int)dlg.NumericUpDownHeight.Value);
                 artPad.reconfigure(config);
             }
         }

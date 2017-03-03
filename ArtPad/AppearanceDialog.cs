@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ArtPad {
-    public partial class FontSelectionDialog : Form {
-        public FontSelectionDialog() {
+    public partial class AppearanceDialog : Form {
+        public AppearanceDialog() {
             InitializeComponent();
         }
 
