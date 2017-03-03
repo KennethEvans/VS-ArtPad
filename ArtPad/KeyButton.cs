@@ -186,8 +186,16 @@ namespace ArtPad {
             }
             dlg.ComboBoxFontName.SelectedIndex = selectedIndex;
 
+            dlg.CheckBoxBold.Checked = config.FontFlags.Bold;
+            dlg.CheckBoxItalic.Checked = config.FontFlags.Italic;
+            dlg.CheckBoxUnderline.Checked = config.FontFlags.Underline;
+            dlg.CheckBoxStrikeout.Checked = config.FontFlags.Strikeout;
+
             dlg.NumericUpDownFontSize.DecimalPlaces = 1;
             dlg.NumericUpDownFontSize.Value = (Decimal)config.FontSize;
+
+            dlg.TextBoxFg.Text = config.FgColorString;
+            dlg.TextBoxBg.Text = config.BgColorString;
 
             dlg.LabelWidth.Text = "Key Width";
             dlg.LabelHeight.Text = "Key Height";
@@ -197,6 +205,12 @@ namespace ArtPad {
             if (dlg.ShowDialog() == DialogResult.OK) {
                 config.FontName = dlg.ComboBoxFontName.Text;
                 config.FontSize = (float)dlg.NumericUpDownFontSize.Value;
+                config.setFontStyle(dlg.CheckBoxBold.Checked,
+                    dlg.CheckBoxItalic.Checked,
+                    dlg.CheckBoxUnderline.Checked,
+                    dlg.CheckBoxStrikeout.Checked);
+                config.FgColorString = dlg.TextBoxFg.Text;
+                config.BgColorString = dlg.TextBoxBg.Text;
                 config.setSizeForKeySize((int)dlg.NumericUpDownWidth.Value,
                     (int)dlg.NumericUpDownHeight.Value);
                 artPad.reconfigure(config);

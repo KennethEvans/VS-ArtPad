@@ -30,6 +30,11 @@ namespace ArtPad {
             this.flowLayoutPanelFontName = new System.Windows.Forms.FlowLayoutPanel();
             this.labelFontName = new System.Windows.Forms.Label();
             this.comboBoxFontName = new System.Windows.Forms.ComboBox();
+            this.flowLayoutPanelFontStyles = new System.Windows.Forms.FlowLayoutPanel();
+            this.checkBoxBold = new System.Windows.Forms.CheckBox();
+            this.checkBoxItalic = new System.Windows.Forms.CheckBox();
+            this.checkBoxUnderline = new System.Windows.Forms.CheckBox();
+            this.checkBoxStrikeout = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanelFontSize = new System.Windows.Forms.FlowLayoutPanel();
             this.labelFontSize = new System.Windows.Forms.Label();
             this.numericUpDownFontSize = new System.Windows.Forms.NumericUpDown();
@@ -52,6 +57,7 @@ namespace ArtPad {
             this.buttonCancel = new System.Windows.Forms.Button();
             this.tableLayoutPanelTop.SuspendLayout();
             this.flowLayoutPanelFontName.SuspendLayout();
+            this.flowLayoutPanelFontStyles.SuspendLayout();
             this.flowLayoutPanelFontSize.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFontSize)).BeginInit();
             this.flowLayoutPanelFg.SuspendLayout();
@@ -69,17 +75,18 @@ namespace ArtPad {
             this.tableLayoutPanelTop.ColumnCount = 1;
             this.tableLayoutPanelTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelFontName, 0, 0);
-            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelFontSize, 0, 1);
-            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelFg, 0, 2);
-            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelBg, 0, 3);
-            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelWidth, 0, 4);
-            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelHeight, 0, 5);
-            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelButtons, 0, 6);
+            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelFontStyles, 0, 1);
+            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelFontSize, 0, 2);
+            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelFg, 0, 3);
+            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelBg, 0, 4);
+            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelWidth, 0, 5);
+            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelHeight, 0, 6);
+            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelButtons, 0, 7);
             this.tableLayoutPanelTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelTop.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelTop.Margin = new System.Windows.Forms.Padding(6);
             this.tableLayoutPanelTop.Name = "tableLayoutPanelTop";
-            this.tableLayoutPanelTop.RowCount = 7;
+            this.tableLayoutPanelTop.RowCount = 9;
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -134,7 +141,7 @@ namespace ArtPad {
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.Size = new System.Drawing.Size(640, 459);
+            this.tableLayoutPanelTop.Size = new System.Drawing.Size(641, 459);
             this.tableLayoutPanelTop.TabIndex = 0;
             // 
             // flowLayoutPanelFontName
@@ -169,13 +176,68 @@ namespace ArtPad {
             this.comboBoxFontName.Size = new System.Drawing.Size(447, 39);
             this.comboBoxFontName.TabIndex = 1;
             // 
+            // flowLayoutPanelFontStyles
+            // 
+            this.flowLayoutPanelFontStyles.AutoSize = true;
+            this.flowLayoutPanelFontStyles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanelFontStyles.Controls.Add(this.checkBoxBold);
+            this.flowLayoutPanelFontStyles.Controls.Add(this.checkBoxItalic);
+            this.flowLayoutPanelFontStyles.Controls.Add(this.checkBoxUnderline);
+            this.flowLayoutPanelFontStyles.Controls.Add(this.checkBoxStrikeout);
+            this.flowLayoutPanelFontStyles.Location = new System.Drawing.Point(6, 63);
+            this.flowLayoutPanelFontStyles.Margin = new System.Windows.Forms.Padding(6);
+            this.flowLayoutPanelFontStyles.Name = "flowLayoutPanelFontStyles";
+            this.flowLayoutPanelFontStyles.Size = new System.Drawing.Size(589, 42);
+            this.flowLayoutPanelFontStyles.TabIndex = 7;
+            this.flowLayoutPanelFontStyles.WrapContents = false;
+            // 
+            // checkBoxBold
+            // 
+            this.checkBoxBold.AutoSize = true;
+            this.checkBoxBold.Location = new System.Drawing.Point(3, 3);
+            this.checkBoxBold.Name = "checkBoxBold";
+            this.checkBoxBold.Size = new System.Drawing.Size(111, 36);
+            this.checkBoxBold.TabIndex = 2;
+            this.checkBoxBold.Text = "Bold";
+            this.checkBoxBold.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxItalic
+            // 
+            this.checkBoxItalic.AutoSize = true;
+            this.checkBoxItalic.Location = new System.Drawing.Point(120, 3);
+            this.checkBoxItalic.Name = "checkBoxItalic";
+            this.checkBoxItalic.Size = new System.Drawing.Size(112, 36);
+            this.checkBoxItalic.TabIndex = 3;
+            this.checkBoxItalic.Text = "Italic";
+            this.checkBoxItalic.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxUnderline
+            // 
+            this.checkBoxUnderline.AutoSize = true;
+            this.checkBoxUnderline.Location = new System.Drawing.Point(238, 3);
+            this.checkBoxUnderline.Name = "checkBoxUnderline";
+            this.checkBoxUnderline.Size = new System.Drawing.Size(176, 36);
+            this.checkBoxUnderline.TabIndex = 4;
+            this.checkBoxUnderline.Text = "Underline";
+            this.checkBoxUnderline.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxStrikeout
+            // 
+            this.checkBoxStrikeout.AutoSize = true;
+            this.checkBoxStrikeout.Location = new System.Drawing.Point(420, 3);
+            this.checkBoxStrikeout.Name = "checkBoxStrikeout";
+            this.checkBoxStrikeout.Size = new System.Drawing.Size(166, 36);
+            this.checkBoxStrikeout.TabIndex = 5;
+            this.checkBoxStrikeout.Text = "Strikeout";
+            this.checkBoxStrikeout.UseVisualStyleBackColor = true;
+            // 
             // flowLayoutPanelFontSize
             // 
             this.flowLayoutPanelFontSize.AutoSize = true;
             this.flowLayoutPanelFontSize.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelFontSize.Controls.Add(this.labelFontSize);
             this.flowLayoutPanelFontSize.Controls.Add(this.numericUpDownFontSize);
-            this.flowLayoutPanelFontSize.Location = new System.Drawing.Point(6, 63);
+            this.flowLayoutPanelFontSize.Location = new System.Drawing.Point(6, 117);
             this.flowLayoutPanelFontSize.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelFontSize.Name = "flowLayoutPanelFontSize";
             this.flowLayoutPanelFontSize.Size = new System.Drawing.Size(448, 50);
@@ -214,7 +276,7 @@ namespace ArtPad {
             this.flowLayoutPanelFg.Controls.Add(this.labelFg);
             this.flowLayoutPanelFg.Controls.Add(this.textBoxFg);
             this.flowLayoutPanelFg.Controls.Add(this.buttonFg);
-            this.flowLayoutPanelFg.Location = new System.Drawing.Point(6, 125);
+            this.flowLayoutPanelFg.Location = new System.Drawing.Point(6, 179);
             this.flowLayoutPanelFg.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelFg.Name = "flowLayoutPanelFg";
             this.flowLayoutPanelFg.Size = new System.Drawing.Size(616, 57);
@@ -257,7 +319,7 @@ namespace ArtPad {
             this.flowLayoutPanelBg.Controls.Add(this.labelBg);
             this.flowLayoutPanelBg.Controls.Add(this.textBoxBg);
             this.flowLayoutPanelBg.Controls.Add(this.buttonBg);
-            this.flowLayoutPanelBg.Location = new System.Drawing.Point(6, 194);
+            this.flowLayoutPanelBg.Location = new System.Drawing.Point(6, 248);
             this.flowLayoutPanelBg.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelBg.Name = "flowLayoutPanelBg";
             this.flowLayoutPanelBg.Size = new System.Drawing.Size(621, 57);
@@ -299,7 +361,7 @@ namespace ArtPad {
             this.flowLayoutPanelWidth.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelWidth.Controls.Add(this.labelWidth);
             this.flowLayoutPanelWidth.Controls.Add(this.numericUpDownWidth);
-            this.flowLayoutPanelWidth.Location = new System.Drawing.Point(6, 263);
+            this.flowLayoutPanelWidth.Location = new System.Drawing.Point(6, 317);
             this.flowLayoutPanelWidth.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelWidth.Name = "flowLayoutPanelWidth";
             this.flowLayoutPanelWidth.Size = new System.Drawing.Size(352, 50);
@@ -337,7 +399,7 @@ namespace ArtPad {
             this.flowLayoutPanelHeight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelHeight.Controls.Add(this.labelHeight);
             this.flowLayoutPanelHeight.Controls.Add(this.numericUpDownHeight);
-            this.flowLayoutPanelHeight.Location = new System.Drawing.Point(6, 325);
+            this.flowLayoutPanelHeight.Location = new System.Drawing.Point(6, 379);
             this.flowLayoutPanelHeight.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelHeight.Name = "flowLayoutPanelHeight";
             this.flowLayoutPanelHeight.Size = new System.Drawing.Size(362, 50);
@@ -376,10 +438,10 @@ namespace ArtPad {
             this.flowLayoutPanelButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelButtons.Controls.Add(this.buttonOk);
             this.flowLayoutPanelButtons.Controls.Add(this.buttonCancel);
-            this.flowLayoutPanelButtons.Location = new System.Drawing.Point(158, 387);
+            this.flowLayoutPanelButtons.Location = new System.Drawing.Point(158, 441);
             this.flowLayoutPanelButtons.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelButtons.Name = "flowLayoutPanelButtons";
-            this.flowLayoutPanelButtons.Size = new System.Drawing.Size(324, 66);
+            this.flowLayoutPanelButtons.Size = new System.Drawing.Size(324, 57);
             this.flowLayoutPanelButtons.TabIndex = 6;
             this.flowLayoutPanelButtons.WrapContents = false;
             // 
@@ -410,7 +472,7 @@ namespace ArtPad {
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(640, 459);
+            this.ClientSize = new System.Drawing.Size(641, 459);
             this.Controls.Add(this.tableLayoutPanelTop);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AppearanceDialog";
@@ -420,6 +482,8 @@ namespace ArtPad {
             this.tableLayoutPanelTop.PerformLayout();
             this.flowLayoutPanelFontName.ResumeLayout(false);
             this.flowLayoutPanelFontName.PerformLayout();
+            this.flowLayoutPanelFontStyles.ResumeLayout(false);
+            this.flowLayoutPanelFontStyles.PerformLayout();
             this.flowLayoutPanelFontSize.ResumeLayout(false);
             this.flowLayoutPanelFontSize.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFontSize)).EndInit();
@@ -465,6 +529,11 @@ namespace ArtPad {
         private Button buttonFg;
         private TextBox textBoxBg;
         private Button buttonBg;
+        private FlowLayoutPanel flowLayoutPanelFontStyles;
+        private CheckBox checkBoxBold;
+        private CheckBox checkBoxItalic;
+        private CheckBox checkBoxUnderline;
+        private CheckBox checkBoxStrikeout;
 
         public Label LabelFontName
         {
@@ -658,6 +727,58 @@ namespace ArtPad {
             set
             {
                 buttonBg = value;
+            }
+        }
+
+        public CheckBox CheckBoxBold
+        {
+            get
+            {
+                return checkBoxBold;
+            }
+
+            set
+            {
+                checkBoxBold = value;
+            }
+        }
+
+        public CheckBox CheckBoxItalic
+        {
+            get
+            {
+                return checkBoxItalic;
+            }
+
+            set
+            {
+                checkBoxItalic = value;
+            }
+        }
+
+        public CheckBox CheckBoxUnderline
+        {
+            get
+            {
+                return checkBoxUnderline;
+            }
+
+            set
+            {
+                checkBoxUnderline = value;
+            }
+        }
+
+        public CheckBox CheckBoxStrikeout
+        {
+            get
+            {
+                return checkBoxStrikeout;
+            }
+
+            set
+            {
+                checkBoxStrikeout = value;
             }
         }
     }

@@ -18,6 +18,7 @@ namespace ArtPad {
         private static Point defaultLocation = new Point(50, 50);
         private string defaultFontName;
         private float defaultFontSize = 0;
+        private FontStyle defaultFontStyle = FontStyle.Regular;
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
 
@@ -82,6 +83,7 @@ namespace ArtPad {
             // Get the default font
             defaultFontName = this.Font.Name;
             defaultFontSize = this.Font.SizeInPoints;
+            defaultFontStyle = this.Font.Style;
 
 #if DEBUG
             Tools.printModuleInfo();
@@ -203,13 +205,16 @@ namespace ArtPad {
             // Font
             string fontName = config.FontName;
             float fontSize = config.FontSize;
+            FontStyle fontStyle = config.getFontStyle();
             Font font = null;
             if (fontSize <= 0) fontSize = defaultFontSize;
             if (config.FontName == null || config.FontName.Length <= 0) {
                 fontName = defaultFontName;
+                // If the name is invalid, then the FontStyle is invalid
+                fontStyle = defaultFontStyle;
             }
             try {
-                font = new Font(fontName, fontSize);
+                font = new Font(fontName, fontSize, fontStyle);
                 tableLayoutPanel.Font = font;
                 config.FontName = font.Name;
                 config.FontSize = font.SizeInPoints;

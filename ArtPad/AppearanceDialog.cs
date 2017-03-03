@@ -28,7 +28,7 @@ namespace ArtPad {
             ColorDialog dlg = new ColorDialog();
             if (dlg.ShowDialog() == DialogResult.OK) {
                 Color color = dlg.Color;
-                TextBoxFg.Text = Utils.colorToHexString(color);
+                TextBoxFg.Text = Configuration.colorToHexString(color);
             }
         }
 
@@ -36,7 +36,7 @@ namespace ArtPad {
             ColorDialog dlg = new ColorDialog();
             if (dlg.ShowDialog() == DialogResult.OK) {
                 Color color = dlg.Color;
-                TextBoxBg.Text = Utils.colorToHexString(color);
+                TextBoxBg.Text = Configuration.colorToHexString(color);
             }
         }
     }
