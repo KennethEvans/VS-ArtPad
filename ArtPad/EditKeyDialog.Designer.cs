@@ -75,7 +75,7 @@
             this.editKeyTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.editKeyTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.editKeyTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.editKeyTableLayoutPanel.Size = new System.Drawing.Size(626, 426);
+            this.editKeyTableLayoutPanel.Size = new System.Drawing.Size(626, 401);
             this.editKeyTableLayoutPanel.TabIndex = 0;
             this.editKeyTableLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.editKeyTableLayoutPanel_Paint);
             // 
@@ -139,10 +139,10 @@
             this.flowLayoutPanelButtons1.Controls.Add(this.buttonCopy);
             this.flowLayoutPanelButtons1.Controls.Add(this.buttonPaste);
             this.flowLayoutPanelButtons1.Controls.Add(this.buttonReset);
-            this.flowLayoutPanelButtons1.Location = new System.Drawing.Point(7, 264);
+            this.flowLayoutPanelButtons1.Location = new System.Drawing.Point(70, 264);
             this.flowLayoutPanelButtons1.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelButtons1.Name = "flowLayoutPanelButtons1";
-            this.flowLayoutPanelButtons1.Size = new System.Drawing.Size(612, 93);
+            this.flowLayoutPanelButtons1.Size = new System.Drawing.Size(486, 57);
             this.flowLayoutPanelButtons1.TabIndex = 4;
             this.flowLayoutPanelButtons1.WrapContents = false;
             // 
@@ -153,7 +153,7 @@
             this.buttonCopy.Location = new System.Drawing.Point(6, 6);
             this.buttonCopy.Margin = new System.Windows.Forms.Padding(6);
             this.buttonCopy.Name = "buttonCopy";
-            this.buttonCopy.Size = new System.Drawing.Size(182, 81);
+            this.buttonCopy.Size = new System.Drawing.Size(150, 45);
             this.buttonCopy.TabIndex = 0;
             this.buttonCopy.Text = "Copy";
             this.toolTip.SetToolTip(this.buttonCopy, "Copy a Json string representing the current key settings to the clipboard.");
@@ -164,10 +164,10 @@
             // 
             this.buttonPaste.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.buttonPaste.AutoSize = true;
-            this.buttonPaste.Location = new System.Drawing.Point(200, 6);
+            this.buttonPaste.Location = new System.Drawing.Point(168, 6);
             this.buttonPaste.Margin = new System.Windows.Forms.Padding(6);
             this.buttonPaste.Name = "buttonPaste";
-            this.buttonPaste.Size = new System.Drawing.Size(196, 81);
+            this.buttonPaste.Size = new System.Drawing.Size(150, 45);
             this.buttonPaste.TabIndex = 1;
             this.buttonPaste.Text = "Paste";
             this.toolTip.SetToolTip(this.buttonPaste, "Paste a Json string representing a key to the current settings in the dialog..");
@@ -178,10 +178,10 @@
             // 
             this.buttonReset.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.buttonReset.AutoSize = true;
-            this.buttonReset.Location = new System.Drawing.Point(408, 6);
+            this.buttonReset.Location = new System.Drawing.Point(330, 6);
             this.buttonReset.Margin = new System.Windows.Forms.Padding(6);
             this.buttonReset.Name = "buttonReset";
-            this.buttonReset.Size = new System.Drawing.Size(198, 81);
+            this.buttonReset.Size = new System.Drawing.Size(150, 45);
             this.buttonReset.TabIndex = 2;
             this.buttonReset.Text = "Reset";
             this.toolTip.SetToolTip(this.buttonReset, "Reset the key settings to the original values when starting to edit.");
@@ -195,10 +195,10 @@
             this.flowLayoutPanelButtons2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelButtons2.Controls.Add(this.buttonSetKey);
             this.flowLayoutPanelButtons2.Controls.Add(this.buttonDismiss);
-            this.flowLayoutPanelButtons2.Location = new System.Drawing.Point(53, 369);
+            this.flowLayoutPanelButtons2.Location = new System.Drawing.Point(151, 333);
             this.flowLayoutPanelButtons2.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelButtons2.Name = "flowLayoutPanelButtons2";
-            this.flowLayoutPanelButtons2.Size = new System.Drawing.Size(520, 93);
+            this.flowLayoutPanelButtons2.Size = new System.Drawing.Size(324, 62);
             this.flowLayoutPanelButtons2.TabIndex = 5;
             // 
             // buttonSetKey
@@ -208,7 +208,7 @@
             this.buttonSetKey.Location = new System.Drawing.Point(6, 6);
             this.buttonSetKey.Margin = new System.Windows.Forms.Padding(6);
             this.buttonSetKey.Name = "buttonSetKey";
-            this.buttonSetKey.Size = new System.Drawing.Size(248, 81);
+            this.buttonSetKey.Size = new System.Drawing.Size(150, 45);
             this.buttonSetKey.TabIndex = 0;
             this.buttonSetKey.Text = "Set Key";
             this.toolTip.SetToolTip(this.buttonSetKey, "Set the current values to the key button in ArtPad.");
@@ -219,10 +219,10 @@
             // 
             this.buttonDismiss.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.buttonDismiss.AutoSize = true;
-            this.buttonDismiss.Location = new System.Drawing.Point(266, 6);
+            this.buttonDismiss.Location = new System.Drawing.Point(168, 6);
             this.buttonDismiss.Margin = new System.Windows.Forms.Padding(6);
             this.buttonDismiss.Name = "buttonDismiss";
-            this.buttonDismiss.Size = new System.Drawing.Size(248, 81);
+            this.buttonDismiss.Size = new System.Drawing.Size(150, 45);
             this.buttonDismiss.TabIndex = 1;
             this.buttonDismiss.Text = "Dismiss";
             this.toolTip.SetToolTip(this.buttonDismiss, "Dismiss this dialog (make it not visible).");
@@ -315,7 +315,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(626, 426);
+            this.ClientSize = new System.Drawing.Size(626, 401);
             this.Controls.Add(this.editKeyTableLayoutPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(6);
