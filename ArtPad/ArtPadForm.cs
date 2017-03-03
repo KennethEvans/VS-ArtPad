@@ -48,28 +48,29 @@ namespace ArtPad {
             // Read persistent settings
             lastConfigFile = Properties.Settings.Default.LastConfigFile;
 
-            if (args == null || args.Length > 0) {
-                Configuration newConfig = Configuration.readConfig(args[0]);
-                if (newConfig != null) {
-                    Config = newConfig;
-                    keyDefs = Config.KeyDefs;
-                    lastConfigFile = args[0];
-                } else {
-                    Utils.errMsg("Error reading configuration");
-                }
-            } else if (File.Exists(lastConfigFile)) {
-                Configuration newConfig =
-                    Configuration.readConfig(lastConfigFile);
-                if (newConfig != null) {
-                    Config = newConfig;
-                    keyDefs = Config.KeyDefs;
-                } else {
-                    Utils.errMsg("Error reading configuration");
-                }
-            } else {
-                Config.KeyDefs = Tools.TestKeyDefs;
-                Config.setSizeForKeySize(defaultKeySize, defaultKeySize);
-            }
+            //if (args != null && args.Length > 0) {
+            //    Configuration newConfig = Configuration.readConfig(args[0]);
+            //    if (newConfig != null) {
+            //        Config = newConfig;
+            //        keyDefs = Config.KeyDefs;
+            //        lastConfigFile = args[0];
+            //    } else {
+            //        Utils.errMsg("Error reading configuration");
+            //    }
+            //} else if (File.Exists(lastConfigFile)) {
+            //    Configuration newConfig =
+            //        Configuration.readConfig(lastConfigFile);
+            //    if (newConfig != null) {
+            //        Config = newConfig;
+            //        keyDefs = Config.KeyDefs;
+            //    } else {
+            //        Utils.errMsg("Error reading configuration");
+            //    }
+            //} else {
+            Config = new Configuration();
+            Config.KeyDefs = Tools.TestKeyDefs;
+            Config.setSizeForKeySize(defaultKeySize, defaultKeySize);
+            //}
 
             // Set the location to the saved location
             // (will be modified in reconfigure)
