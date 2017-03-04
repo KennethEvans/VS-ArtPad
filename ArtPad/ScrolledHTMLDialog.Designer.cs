@@ -41,7 +41,7 @@
             this.webBrowser.Location = new System.Drawing.Point(3, 3);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(762, 801);
+            this.webBrowser.Size = new System.Drawing.Size(762, 837);
             this.webBrowser.TabIndex = 1;
             // 
             // flowLayoutPanelButtons1
@@ -52,10 +52,10 @@
             this.flowLayoutPanelButtons1.Controls.Add(this.buttonBack);
             this.flowLayoutPanelButtons1.Controls.Add(this.buttonForward);
             this.flowLayoutPanelButtons1.Controls.Add(this.buttonCancel);
-            this.flowLayoutPanelButtons1.Location = new System.Drawing.Point(78, 813);
+            this.flowLayoutPanelButtons1.Location = new System.Drawing.Point(141, 849);
             this.flowLayoutPanelButtons1.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelButtons1.Name = "flowLayoutPanelButtons1";
-            this.flowLayoutPanelButtons1.Size = new System.Drawing.Size(612, 93);
+            this.flowLayoutPanelButtons1.Size = new System.Drawing.Size(486, 57);
             this.flowLayoutPanelButtons1.TabIndex = 5;
             this.flowLayoutPanelButtons1.WrapContents = false;
             // 
@@ -65,7 +65,7 @@
             this.buttonBack.Location = new System.Drawing.Point(6, 6);
             this.buttonBack.Margin = new System.Windows.Forms.Padding(6);
             this.buttonBack.Name = "buttonBack";
-            this.buttonBack.Size = new System.Drawing.Size(182, 81);
+            this.buttonBack.Size = new System.Drawing.Size(150, 45);
             this.buttonBack.TabIndex = 0;
             this.buttonBack.Text = "Back";
             this.buttonBack.UseVisualStyleBackColor = true;
@@ -74,10 +74,10 @@
             // buttonForward
             // 
             this.buttonForward.AutoSize = true;
-            this.buttonForward.Location = new System.Drawing.Point(200, 6);
+            this.buttonForward.Location = new System.Drawing.Point(168, 6);
             this.buttonForward.Margin = new System.Windows.Forms.Padding(6);
             this.buttonForward.Name = "buttonForward";
-            this.buttonForward.Size = new System.Drawing.Size(196, 81);
+            this.buttonForward.Size = new System.Drawing.Size(150, 45);
             this.buttonForward.TabIndex = 1;
             this.buttonForward.Text = "Forward";
             this.buttonForward.UseVisualStyleBackColor = true;
@@ -86,10 +86,10 @@
             // buttonCancel
             // 
             this.buttonCancel.AutoSize = true;
-            this.buttonCancel.Location = new System.Drawing.Point(408, 6);
+            this.buttonCancel.Location = new System.Drawing.Point(330, 6);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(6);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(198, 81);
+            this.buttonCancel.Size = new System.Drawing.Size(150, 45);
             this.buttonCancel.TabIndex = 2;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
