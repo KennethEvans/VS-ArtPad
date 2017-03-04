@@ -9,7 +9,7 @@
 <h1 align="center"><strong><img src="ArtPad.256x256.png" alt="Logo" width="96" height="96" align="middle" />ArtPad Overview</strong></h1>
 <p align="left">ArtPad is primarily designed for graphics applications that can use a pen input. These include Photoshop, Painter, Manga Studio, Rebelle, and others. Computers such as the Surface Pro,  Surface Book, and Cintiq provide pressure-sensitive pens. The problem is that most of these applications rely on a large number of sometimes complicated keystroke sequences to do things in the application. These sequences are hard to enter with the pen.</p>
 <p align="left">ArtPad is a small keypad  that stays on top of your application and allows you to enter these sequences by tapping on one of its keys. The keys, the number of rows and columns, their size, their label, and what keystrokes they send are all configurable. It is like an on-screen keyboard except that it sends key sequences rather than a single key. It also has some additional options, such as running a command.</p>
-<p align="left">There is a <a href="#Troubleshooting">Troubleshooting</a> section at the bottom of the page. </p>
+<p align="left">There is a <a href="#Troubleshooting">Troubleshooting</a> section at the bottom of the page. There are also <a href="#Acknowledgements">Acknowledgements</a>. </p>
 <h3 align="left">How it Works</h3>
 <p>ArtPad is registered as a TOPMOST window, so that it stays on top of most other windows. If there are other TOPMOST windows, there is no guarantee it will be on top of those.</p>
 <p>Making it TOPMOST works most of the time. However, at times it may not stay on top for reasons that may not be readily apparent. The only reliable solution is to restart it. Also see <a href="#Troubleshooting">Troubleshooting</a>. </p>
@@ -17,6 +17,16 @@
 <p>ArtPad is built for Any CPU&nbsp;<em>without</em>&nbsp;32-bit preferred. It thus runs as 64-bit on 64-bit systems and 32-bit on 32-bit systems.</p>
 <p>ArtPad will remember its last location on the screen and its last loaded configuration file. It will use these values the next time it starts. If you have changed the configuration, perhaps by resizing, it will not remember those changes. Save the configuration if you want to keep it.</p>
 <p>The configuration file has the key definitions, the size of the keypad, the number of rows and columns, the font parameters, and the foreground and background colors. </p>
+<h3>Installation</h3>
+<p>If you are installing from a download, just unzip the files into a directory somewhere convenient. Then run it from there. If you are installing from a build, copy these files and directories from the bin/Release directory to a convenient directory..</p>
+<ul>
+  <li>ArtPad.exe</li>
+  <li>Newtonsoft.Json.dll</li>
+  <li>Newtonsoft.Json.dll</li>
+  <li>Help</li>
+</ul>
+<p>To uninstall, just delete these files. </p>
+<p>It is suggested you make an ArtPad directory in My Documents to keep configuration files. </p>
 <h3>Keys</h3>
 <p align="left">ArtPad comes comes with a default keys configuration. You can change the keys directly in the interface, or you can also save the configuration as a file, and edit the file. You can load a saved configuration file. The file is in JSON syntax, but can be intuitively edited in a text editor without really needing to understand JSON. Configuration files have the extension .config. This is an example key configuration that sends Ctrl-C:</p>
 <pre> {
@@ -248,6 +258,8 @@
 <p>Shows this  overview . </p>
 <p><strong><a name="HelpAbout" id="HelpAbout"></a>Help About... </strong></p>
 <p>Shows information about this application. </p>
+<h3><a name="Acknowledgements" id="Acknowledgements"></a>Acknowledgements</h3>
+<p>ArtPad uses the packages <a href="http://www.newtonsoft.com/json">Json.net</a> and <a href="https://inputsimulator.codeplex.com/">Windows Input Simulator</a>. </p>
 <h3><a name="Troubleshooting" id="Troubleshooting"></a>Troubleshooting</h3>
 <p><strong>I can't move ArtPad because the title bar is too small to find a place to drag.</strong></p>
 <p>Click the icon on the title bar, and use Move from the resulting menu.  You can use the keyboard or the mouse (provided you start where the double-arrow move cursor first appears). Alternative ways to get the Move menu item are to Shift-right-click the Task Bar icon, or use Alt-space when ArtPad is the active window. If you want to be able to move it easily, leave it large enough that there is space on the title bar to drag it. </p>
