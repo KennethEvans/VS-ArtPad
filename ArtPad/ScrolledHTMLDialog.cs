@@ -1,17 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ArtPad {
     public partial class ScrolledHTMLDialog : Form {
-        public ScrolledHTMLDialog() {
+        public ScrolledHTMLDialog(Size size) {
             InitializeComponent();
+
+            // Resize the Form
+            if (size != null) {
+                this.Size = size;
+            }
 
             // Add the HTML
             string appDir = System.IO.Path.GetDirectoryName(

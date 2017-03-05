@@ -273,7 +273,9 @@ namespace ArtPad {
         void toolStripMenuItemOverview_click(object sender, System.EventArgs e) {
             // Create, show, or set visible the overviewDialog as appropriate
             if (overviewDlg == null) {
-                overviewDlg = new ScrolledHTMLDialog();
+                ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+                overviewDlg = new ScrolledHTMLDialog(
+                    Utils.getDpiAdjustedSize(artPad, new Size(800,600)));
                 overviewDlg.Show();
             } else {
                 overviewDlg.Visible = true;
