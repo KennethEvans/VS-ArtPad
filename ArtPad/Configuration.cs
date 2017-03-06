@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace ArtPad {
     public class Configuration {
         private List<KeyDef> keyDefs = new List<KeyDef>();
-        private Size size = new Size(300, 300);
+        private Size size = new Size(300, 150);
         private int rows = 0;
         private int cols = 0;
         private string fontName = "";
