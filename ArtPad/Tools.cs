@@ -8,20 +8,6 @@ using WindowsInput.Native;
 namespace ArtPad {
     public static class Tools {
         public const string VERSION = "ArtPad 1.0.0";
-        private const int WS_EX_NOACTIVATE = 0x08000000;
-        private const int GWL_EXSTYLE = -20;
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern int SetWindowLong(IntPtr hwnd, int index, int newStyle);
-
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetForegroundWindow();
-
-        [DllImport("user32.dll")]
-        public static extern bool SetForegroundWindow(IntPtr WindowHandle);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
 
         /// <summary>
         /// The saved value of the foreground window to be restored later.
@@ -32,7 +18,7 @@ namespace ArtPad {
         /// Saves the current foreground window to be restored later.
         /// </summary>
         public static void saveForegroundWindow() {
-            HForegroundWindow = GetForegroundWindow();
+            HForegroundWindow = NativeMethods.GetForegroundWindow();
         }
 
         /// <summary>
@@ -41,7 +27,7 @@ namespace ArtPad {
         /// <returns></returns>
         public static bool setForegroundWindowFromSaved() {
             if (Tools.HForegroundWindow != IntPtr.Zero) {
-                return SetForegroundWindow(HForegroundWindow);
+                return NativeMethods.SetForegroundWindow(HForegroundWindow);
             }
             return false;
         }
@@ -51,7 +37,7 @@ namespace ArtPad {
         /// </summary>
         /// <returns></returns>
         public static string getForegroundWindowTitle() {
-            IntPtr hWnd = GetForegroundWindow();
+            IntPtr hWnd = NativeMethods.GetForegroundWindow();
             if (hWnd.Equals(IntPtr.Zero)) {
                 return "<NotFound>";
             }
@@ -78,7 +64,7 @@ namespace ArtPad {
         public static string getWindowTitle(IntPtr hWnd) {
             const int nChars = 256;
             StringBuilder Buff = new StringBuilder(nChars);
-            if (GetWindowText(hWnd, Buff, nChars) > 0) {
+            if (NativeMethods.GetWindowText(hWnd, Buff, nChars) > 0) {
                 return Buff.ToString();
             }
             return "<empty>";
@@ -223,5 +209,27 @@ namespace ArtPad {
                 hForegroundWindow = value;
             }
         }
+    }
+
+    /// <summary>
+    /// Class for native methods.
+    /// </summary>
+    internal static class NativeMethods {
+        internal const int WS_EX_NOACTIVATE = 0x08000000;
+        internal const int GWL_EXSTYLE = -20;
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        internal static extern int SetWindowLong(IntPtr hwnd, int index,
+            int newStyle);
+
+        [DllImport("user32.dll")]
+        internal static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll")]
+        internal static extern bool SetForegroundWindow(IntPtr WindowHandle);
+
+        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        internal static extern int GetWindowText(IntPtr hWnd,
+            StringBuilder lpString, int nMaxCount);
     }
 }
