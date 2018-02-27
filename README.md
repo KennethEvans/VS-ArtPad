@@ -1,23 +1,25 @@
-# VS-WindowsPerformance
+# VS-ArtPad
 
-Windows Performance Viewer is a C# application that accesses the Windows event logs and presents details of the performance in convenient ways. It was originally used to see if boot time was increasing over time.
+Windows Performance Viewer is a C# stay-on-top application that provides a customizable keypad for use with pen-based applications such as Photoshop, Painter, Manga Studio, and Rebelle. The problem is that most of these applications rely on a large number of sometimes complicated keystroke sequences to do things in the application. These sequences are hard to enter with the pen. ArtPad allows you to send them by clicking a key which you have set up.
 
-The logs used in this application are those provided by Microsoft-Windows-Diagnostics-Performance. You will probably have to run it as administrator to get access to the diagnostic logs. The program does not change anything, just reads the logs.
+See https://rawgit.com/KennethEvans/VS-Artpad/master/ArtPad/Help/Overview.html
 
-See https://rawgit.com/KennethEvans/VS-WindowsPerformance/master/WindowsPerformanceViewer/Help/Overview.html
-
-See https://kennethevans.github.io/index.html#WindowsPerformanceViewer
-
-There is also a C# console project, Windows Performance Review, in the Solution.
+See https://kennethevans.github.io/index.html#ArtPad
 
 **Installation**
 
 If you are installing from a download, just unzip the files into a directory somewhere convenient. Then run it from there. If you are installing from a build, copy these files and directories from the bin/Release directory to a convenient directory.
 
-* WindowsPerformanceViewer.exe
+* ArtPad.exe
+* Newtonsoft.Json.dll
+* Newtonsoft.Json.dll
 * Help
 
 To uninstall, just delete these files. 
+
+**Sample Configuration Files**
+
+See https://github.com/KennethEvans/VS-ArtPad/tree/master/ArtPad/Sample%20Configuration
 
 **More Information**
 
