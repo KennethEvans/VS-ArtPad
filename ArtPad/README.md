@@ -15,10 +15,11 @@ If you are installing from a download, just unzip the files into a directory som
 * Newtonsoft.Json.dll
 * Help
 
-
-
-
 To uninstall, just delete these files. 
+
+**Sample Configuration Files**
+
+See https://github.com/KennethEvans/VS-ArtPad/tree/master/ArtPad/Sample%20Configuration
 
 **More Information**
 

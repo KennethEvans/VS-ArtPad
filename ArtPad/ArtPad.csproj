@@ -177,7 +177,12 @@
       <DependentUpon>ScrolledHTMLDialog.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.manifest" />
+    <None Include="Sample Configuration\Default.config" />
+    <None Include="Sample Configuration\Krita.config" />
+    <None Include="Sample Configuration\MangaStudio.config" />
     <None Include="packages.config" />
+    <None Include="Sample Configuration\Painter.config" />
+    <None Include="Sample Configuration\Photoshop.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -188,6 +193,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="README.md" />
+    <None Include="Sample Configuration\Rebelle.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
