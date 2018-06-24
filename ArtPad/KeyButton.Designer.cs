@@ -56,6 +56,7 @@ namespace ArtPad {
             this.toolStripMenuItemResetTopmost = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemApplicationNotTopmost = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemApplicationTopmost = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -246,7 +247,8 @@ namespace ArtPad {
             this.toolStripMenuItemTroubleshooting.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemSendHoldKeys,
             this.toolStripMenuItemResetTopmost,
-            this.toolStripMenuItemApplicationNotTopmost});
+            this.toolStripMenuItemApplicationNotTopmost,
+            this.toolStripMenuItemApplicationTopmost});
             this.toolStripMenuItemTroubleshooting.Name = "toolStripMenuItemTroubleshooting";
             this.toolStripMenuItemTroubleshooting.Size = new System.Drawing.Size(413, 46);
             this.toolStripMenuItemTroubleshooting.Text = "Troubleshooting";
@@ -274,14 +276,23 @@ namespace ArtPad {
             this.toolStripMenuItemApplicationNotTopmost.Name = "toolStripMenuItemApplicationNotTopmost";
             this.toolStripMenuItemApplicationNotTopmost.Size = new System.Drawing.Size(509, 46);
             this.toolStripMenuItemApplicationNotTopmost.Text = "Set Application not Topmost";
-            this.toolStripMenuItemApplicationNotTopmost.ToolTipText = "Sets the associated foreground application to not be Topmost (thus possible on to" +
-    "p of ArtPad.)";
+            this.toolStripMenuItemApplicationNotTopmost.ToolTipText = "Sets the associated foreground application to not be Topmost (thus not on top of " +
+    "ArtPad.)";
             this.toolStripMenuItemApplicationNotTopmost.Click += new System.EventHandler(this.toolStripAsMenuItemApplicationNotTopmost_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(410, 6);
+            // 
+            // toolStripMenuItemApplicationTopmost
+            // 
+            this.toolStripMenuItemApplicationTopmost.Name = "toolStripMenuItemApplicationTopmost";
+            this.toolStripMenuItemApplicationTopmost.Size = new System.Drawing.Size(509, 46);
+            this.toolStripMenuItemApplicationTopmost.Text = "Set Application Topmost";
+            this.toolStripMenuItemApplicationTopmost.ToolTipText = "Sets the associated foreground application to be Topmost (to correct setting the " +
+    "wrong window not topmost.)";
+            this.toolStripMenuItemApplicationTopmost.Click += new System.EventHandler(this.toolStripAsMenuItemApplicationTopmost_Click);
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -318,5 +329,6 @@ namespace ArtPad {
         private ToolStripMenuItem toolStripMenuItemResetTopmost;
         private ToolStripMenuItem toolStripMenuItemApplicationNotTopmost;
         private ToolStripSeparator toolStripSeparator5;
+        private ToolStripMenuItem toolStripMenuItemApplicationTopmost;
     }
 }
