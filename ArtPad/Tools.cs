@@ -7,7 +7,7 @@ using WindowsInput.Native;
 
 namespace ArtPad {
     public static class Tools {
-        public const string VERSION = "ArtPad 1.0.0";
+        public const string VERSION = "ArtPad 1.1.0";
 
         /// <summary>
         /// The saved value of the foreground window to be restored later.
