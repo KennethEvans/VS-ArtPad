@@ -42,8 +42,6 @@ namespace ArtPad {
                 new System.EventHandler(toolStripMenuItemCreateNew_click);
             toolStripMenuItemAppearance.Click +=
                 new System.EventHandler(toolStripMenuItemAppearance_click);
-            toolStripMenuItemHoldKeysUp.Click +=
-                new System.EventHandler(toolStripMenuItemHoldKeysUp_click);
             toolStripMenuItemCopyKey.Click +=
                 new System.EventHandler(toolStripMenuItemCopyKey_click);
             toolStripMenuItemPasteKey.Click +=
@@ -355,8 +353,8 @@ namespace ArtPad {
         /// </summary>
         /// <param name="e"></param>
         protected void handleNormalKey(System.EventArgs e) {
-            // Send the KeyString
-            if (!FindForm().Equals(Tools.HForegroundWindow)) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            if (artPad.Handle.Equals(Tools.HForegroundWindow)) {
                 SendKeys.Send(keyDef.KeyString);
             }
         }
@@ -426,6 +424,34 @@ namespace ArtPad {
 
         private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e) {
             // Could dynamically add things here
+        }
+
+        private void toolStripMenuItemArtPadTopmost_click(object sender, EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            artPad.TopMost = true;
+        }
+
+        private void toolStripAsMenuItemApplicationNotTopmost_Click(object sender, EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            if (Tools.HForegroundWindow == IntPtr.Zero) {
+                Utils.errMsg("The current foreground window is undefined");
+                return;
+            }
+            if (artPad.Handle.Equals(Tools.HForegroundWindow)) {
+                Utils.errMsg("The current foreground window is ArtPad");
+                return;
+            }
+            try {
+                NativeMethods.SetWindowPos(Tools.HForegroundWindow,
+                    NativeMethods.HWND_NOTOPMOST, 0, 0, 0, 0,
+                    NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOSIZE | NativeMethods.SWP_SHOWWINDOW);
+                Utils.infoMsg("Set window to not be Topmost\n"
+                    + String.Format("HWND=0x{0}\n", Tools.HForegroundWindow.ToString("X8"))
+                    + Tools.getWindowTitle(Tools.HForegroundWindow));
+            } catch (Exception ex) {
+                Utils.excMsg("Failed to set foreground window to not be topmost", ex);
+                return;
+            }
         }
     }
 }

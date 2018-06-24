@@ -7,8 +7,6 @@ using WindowsInput.Native;
 
 namespace ArtPad {
     public static class Tools {
-        public const string VERSION = "ArtPad 1.1.0";
-
         /// <summary>
         /// The saved value of the foreground window to be restored later.
         /// </summary>
@@ -231,5 +229,18 @@ namespace ArtPad {
         [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern int GetWindowText(IntPtr hWnd,
             StringBuilder lpString, int nMaxCount);
+
+        internal static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
+        internal static readonly IntPtr HWND_NOTOPMOST = new IntPtr(-2);
+        internal static readonly IntPtr HWND_TOP = new IntPtr(0);
+        internal static readonly IntPtr HWND_BOTTOM = new IntPtr(1);
+
+        internal const UInt32 SWP_NOSIZE = 0x0001;
+        internal const UInt32 SWP_NOMOVE = 0x0002;
+        internal const UInt32 SWP_SHOWWINDOW = 0x0040;
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
     }
 }
