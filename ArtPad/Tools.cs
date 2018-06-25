@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using WindowsInput;
@@ -66,6 +68,18 @@ namespace ArtPad {
                 return Buff.ToString();
             }
             return "<empty>";
+        }
+
+        /// <summary>
+        /// Gets if window is topmost for the given window handle.
+        /// </summary>
+        /// <param name="hWnd"></param>
+        /// <returns></returns>
+        public static bool getWindowIsTopmost(IntPtr hWnd) {
+            IntPtr exStyle = NativeMethods.GetWindowLongPtr(hWnd,
+                NativeMethods.GWL_EXSTYLE);
+            return ((long)exStyle & NativeMethods.WS_EX_TOPMOST) == 
+                NativeMethods.WS_EX_TOPMOST;
         }
 
         /// <summary>
@@ -180,7 +194,8 @@ namespace ArtPad {
             new KeyDef("Actual","^1", KeyDef.KeyType.NORMAL, 2, 1),
             new KeyDef("Fit","^0", KeyDef.KeyType.NORMAL, 2,2),
             new KeyDef("ArtPad","ArtPad.exe", KeyDef.KeyType.COMMAND, 3,0),
-            new KeyDef("OSK","\\windows\\system32\\osk.exe", KeyDef.KeyType.COMMAND, 3,1),
+            new KeyDef("OSK","\\windows\\system32\\osk.exe",
+            KeyDef.KeyType.COMMAND, 3,1),
             new KeyDef("TabTip",
             "\\Program Files\\Common Files\\Microsoft Shared\\ink\\TabTip.exe",
             KeyDef.KeyType.COMMAND, 3, 2),
@@ -215,6 +230,7 @@ namespace ArtPad {
     internal static class NativeMethods {
         internal const int WS_EX_NOACTIVATE = 0x08000000;
         internal const int GWL_EXSTYLE = -20;
+        internal const long WS_EX_TOPMOST = 0x00000008;
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         internal static extern int SetWindowLong(IntPtr hwnd, int index,
@@ -241,6 +257,22 @@ namespace ArtPad {
 
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
+        internal static extern bool SetWindowPos(IntPtr hWnd, 
+            IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
+
+        [DllImport("user32.dll", EntryPoint = "GetWindowLong")]
+        internal static extern IntPtr GetWindowLongPtr32(IntPtr hWnd, int nIndex);
+
+        [DllImport("user32.dll", EntryPoint = "GetWindowLongPtr")]
+        internal static extern IntPtr GetWindowLongPtr64(IntPtr hWnd, int nIndex);
+
+        // This static method is required because Win32 does not support
+        // GetWindowLongPtr directly
+        internal static IntPtr GetWindowLongPtr(IntPtr hWnd, int nIndex) {
+            if (IntPtr.Size == 8)
+                return GetWindowLongPtr64(hWnd, nIndex);
+            else
+                return GetWindowLongPtr32(hWnd, nIndex);
+        }
     }
 }

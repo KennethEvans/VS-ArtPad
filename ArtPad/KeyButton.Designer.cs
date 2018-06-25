@@ -45,18 +45,19 @@ namespace ArtPad {
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemCreateNew = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemTroubleshooting = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemSendHoldKeys = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemResetTopmost = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemApplicationNotTopmost = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemApplicationTopmost = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemLoad = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemOverview = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemTroubleshooting = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemSendHoldKeys = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemResetTopmost = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemApplicationNotTopmost = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemApplicationTopmost = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemShowForegroundWindow = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,7 +77,7 @@ namespace ArtPad {
             this.toolStripSeparator4,
             this.toolStripMenuItemHelp});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(414, 390);
+            this.contextMenuStrip.Size = new System.Drawing.Size(414, 445);
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
             // toolStripMenuItemEditKey
@@ -202,6 +203,59 @@ namespace ArtPad {
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(410, 6);
             // 
+            // toolStripMenuItemTroubleshooting
+            // 
+            this.toolStripMenuItemTroubleshooting.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemShowForegroundWindow,
+            this.toolStripMenuItemSendHoldKeys,
+            this.toolStripMenuItemResetTopmost,
+            this.toolStripMenuItemApplicationNotTopmost,
+            this.toolStripMenuItemApplicationTopmost});
+            this.toolStripMenuItemTroubleshooting.Name = "toolStripMenuItemTroubleshooting";
+            this.toolStripMenuItemTroubleshooting.Size = new System.Drawing.Size(413, 46);
+            this.toolStripMenuItemTroubleshooting.Text = "Troubleshooting";
+            this.toolStripMenuItemTroubleshooting.ToolTipText = "Things to try when something goes wrong.";
+            // 
+            // toolStripMenuItemSendHoldKeys
+            // 
+            this.toolStripMenuItemSendHoldKeys.Name = "toolStripMenuItemSendHoldKeys";
+            this.toolStripMenuItemSendHoldKeys.Size = new System.Drawing.Size(509, 46);
+            this.toolStripMenuItemSendHoldKeys.Text = "Send Hold Keys Up";
+            this.toolStripMenuItemSendHoldKeys.ToolTipText = "Sends up events for all hold keys.  (Mix fix application that is in a bad state.)" +
+    "";
+            this.toolStripMenuItemSendHoldKeys.Click += new System.EventHandler(this.toolStripMenuItemHoldKeysUp_click);
+            // 
+            // toolStripMenuItemResetTopmost
+            // 
+            this.toolStripMenuItemResetTopmost.Name = "toolStripMenuItemResetTopmost";
+            this.toolStripMenuItemResetTopmost.Size = new System.Drawing.Size(509, 46);
+            this.toolStripMenuItemResetTopmost.Text = "Reset ArtPad as Topmost";
+            this.toolStripMenuItemResetTopmost.ToolTipText = "Resets ArtPad to be a Topmost application.";
+            this.toolStripMenuItemResetTopmost.Click += new System.EventHandler(this.toolStripMenuItemArtPadTopmost_click);
+            // 
+            // toolStripMenuItemApplicationNotTopmost
+            // 
+            this.toolStripMenuItemApplicationNotTopmost.Name = "toolStripMenuItemApplicationNotTopmost";
+            this.toolStripMenuItemApplicationNotTopmost.Size = new System.Drawing.Size(509, 46);
+            this.toolStripMenuItemApplicationNotTopmost.Text = "Set Application not Topmost";
+            this.toolStripMenuItemApplicationNotTopmost.ToolTipText = "Sets the associated foreground application to not be Topmost (thus not on top of " +
+    "ArtPad.)";
+            this.toolStripMenuItemApplicationNotTopmost.Click += new System.EventHandler(this.toolStripAsMenuItemApplicationNotTopmost_Click);
+            // 
+            // toolStripMenuItemApplicationTopmost
+            // 
+            this.toolStripMenuItemApplicationTopmost.Name = "toolStripMenuItemApplicationTopmost";
+            this.toolStripMenuItemApplicationTopmost.Size = new System.Drawing.Size(509, 46);
+            this.toolStripMenuItemApplicationTopmost.Text = "Set Application Topmost";
+            this.toolStripMenuItemApplicationTopmost.ToolTipText = "Sets the associated foreground application to be Topmost (to correct setting the " +
+    "wrong window not topmost.)";
+            this.toolStripMenuItemApplicationTopmost.Click += new System.EventHandler(this.toolStripAsMenuItemApplicationTopmost_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(410, 6);
+            // 
             // toolStripMenuItemLoad
             // 
             this.toolStripMenuItemLoad.Name = "toolStripMenuItemLoad";
@@ -242,57 +296,13 @@ namespace ArtPad {
             this.toolStripMenuItemAbout.Size = new System.Drawing.Size(275, 46);
             this.toolStripMenuItemAbout.Text = "About...";
             // 
-            // toolStripMenuItemTroubleshooting
+            // toolStripMenuItemShowForegroundWindow
             // 
-            this.toolStripMenuItemTroubleshooting.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemSendHoldKeys,
-            this.toolStripMenuItemResetTopmost,
-            this.toolStripMenuItemApplicationNotTopmost,
-            this.toolStripMenuItemApplicationTopmost});
-            this.toolStripMenuItemTroubleshooting.Name = "toolStripMenuItemTroubleshooting";
-            this.toolStripMenuItemTroubleshooting.Size = new System.Drawing.Size(413, 46);
-            this.toolStripMenuItemTroubleshooting.Text = "Troubleshooting";
-            this.toolStripMenuItemTroubleshooting.ToolTipText = "Things to try when something goes wrong.";
-            // 
-            // toolStripMenuItemSendHoldKeys
-            // 
-            this.toolStripMenuItemSendHoldKeys.Name = "toolStripMenuItemSendHoldKeys";
-            this.toolStripMenuItemSendHoldKeys.Size = new System.Drawing.Size(509, 46);
-            this.toolStripMenuItemSendHoldKeys.Text = "Send Hold Keys Up";
-            this.toolStripMenuItemSendHoldKeys.ToolTipText = "Sends up events for all hold keys.  (Mix fix application that is in a bad state.)" +
-    "";
-            this.toolStripMenuItemSendHoldKeys.Click += new System.EventHandler(this.toolStripMenuItemHoldKeysUp_click);
-            // 
-            // toolStripMenuItemResetTopmost
-            // 
-            this.toolStripMenuItemResetTopmost.Name = "toolStripMenuItemResetTopmost";
-            this.toolStripMenuItemResetTopmost.Size = new System.Drawing.Size(509, 46);
-            this.toolStripMenuItemResetTopmost.Text = "Reset ArtPad as Topmost";
-            this.toolStripMenuItemResetTopmost.ToolTipText = "Resets ArtPad to be a Topmost application.";
-            this.toolStripMenuItemResetTopmost.Click += new System.EventHandler(this.toolStripMenuItemArtPadTopmost_click);
-            // 
-            // toolStripMenuItemApplicationNotTopmost
-            // 
-            this.toolStripMenuItemApplicationNotTopmost.Name = "toolStripMenuItemApplicationNotTopmost";
-            this.toolStripMenuItemApplicationNotTopmost.Size = new System.Drawing.Size(509, 46);
-            this.toolStripMenuItemApplicationNotTopmost.Text = "Set Application not Topmost";
-            this.toolStripMenuItemApplicationNotTopmost.ToolTipText = "Sets the associated foreground application to not be Topmost (thus not on top of " +
-    "ArtPad.)";
-            this.toolStripMenuItemApplicationNotTopmost.Click += new System.EventHandler(this.toolStripAsMenuItemApplicationNotTopmost_Click);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(410, 6);
-            // 
-            // toolStripMenuItemApplicationTopmost
-            // 
-            this.toolStripMenuItemApplicationTopmost.Name = "toolStripMenuItemApplicationTopmost";
-            this.toolStripMenuItemApplicationTopmost.Size = new System.Drawing.Size(509, 46);
-            this.toolStripMenuItemApplicationTopmost.Text = "Set Application Topmost";
-            this.toolStripMenuItemApplicationTopmost.ToolTipText = "Sets the associated foreground application to be Topmost (to correct setting the " +
-    "wrong window not topmost.)";
-            this.toolStripMenuItemApplicationTopmost.Click += new System.EventHandler(this.toolStripAsMenuItemApplicationTopmost_Click);
+            this.toolStripMenuItemShowForegroundWindow.Name = "toolStripMenuItemShowForegroundWindow";
+            this.toolStripMenuItemShowForegroundWindow.Size = new System.Drawing.Size(509, 46);
+            this.toolStripMenuItemShowForegroundWindow.Text = "Show Foreground Window...";
+            this.toolStripMenuItemShowForegroundWindow.ToolTipText = "Shows information about ArtPad and the current foreground window.";
+            this.toolStripMenuItemShowForegroundWindow.Click += new System.EventHandler(this.toolStripAsMenuItemShowForegroundWin_Click);
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -330,5 +340,6 @@ namespace ArtPad {
         private ToolStripMenuItem toolStripMenuItemApplicationNotTopmost;
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripMenuItem toolStripMenuItemApplicationTopmost;
+        private ToolStripMenuItem toolStripMenuItemShowForegroundWindow;
     }
 }

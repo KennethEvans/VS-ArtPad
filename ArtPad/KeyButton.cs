@@ -444,17 +444,21 @@ namespace ArtPad {
             try {
                 NativeMethods.SetWindowPos(Tools.HForegroundWindow,
                     NativeMethods.HWND_NOTOPMOST, 0, 0, 0, 0,
-                    NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOSIZE | NativeMethods.SWP_SHOWWINDOW);
+                    NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOSIZE | 
+                    NativeMethods.SWP_SHOWWINDOW);
                 Utils.infoMsg("Set window to not be Topmost\n"
-                    + String.Format("HWND=0x{0}\n", Tools.HForegroundWindow.ToString("X8"))
-                    + Tools.getWindowTitle(Tools.HForegroundWindow));
+                    + String.Format("HWND=0x{0}\n",
+                    Tools.HForegroundWindow.ToString("X8"))
+                    + "Title: " + Tools.getWindowTitle(Tools.HForegroundWindow));
             } catch (Exception ex) {
-                Utils.excMsg("Failed to set foreground window to not be topmost", ex);
+                Utils.excMsg("Failed to set foreground window to not be topmost",
+                    ex);
                 return;
             }
         }
 
-        private void toolStripAsMenuItemApplicationTopmost_Click(object sender, EventArgs e) {
+        private void toolStripAsMenuItemApplicationTopmost_Click(object sender,
+            EventArgs e) {
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
             if (Tools.HForegroundWindow == IntPtr.Zero) {
                 Utils.errMsg("The current foreground window is undefined");
@@ -467,14 +471,37 @@ namespace ArtPad {
             try {
                 NativeMethods.SetWindowPos(Tools.HForegroundWindow,
                     NativeMethods.HWND_TOPMOST, 0, 0, 0, 0,
-                    NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOSIZE | NativeMethods.SWP_SHOWWINDOW);
+                    NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOSIZE | 
+                    NativeMethods.SWP_SHOWWINDOW);
                 Utils.infoMsg("Set window to be Topmost\n"
-                    + String.Format("HWND=0x{0}\n", Tools.HForegroundWindow.ToString("X8"))
-                    + Tools.getWindowTitle(Tools.HForegroundWindow));
+                    + String.Format("HWND=0x{0}\n", 
+                    Tools.HForegroundWindow.ToString("X8"))
+                    + "Title: " + Tools.getWindowTitle(Tools.HForegroundWindow));
             } catch (Exception ex) {
                 Utils.excMsg("Failed to set foreground window to be topmost", ex);
                 return;
             }
+        }
+
+        private void toolStripAsMenuItemShowForegroundWin_Click(object sender,
+            EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            try {
+                Utils.infoMsg("ArtPad Window\n"
+                    + String.Format("HWND=0x{0}\n", artPad.Handle.ToString("X8"))
+                    + "Topmost=" + Tools.getWindowIsTopmost(artPad.Handle) + "\n"
+                    + "Title: " + Tools.getWindowTitle(artPad.Handle)
+                    + "\n\nForeground Window\n"
+                    + String.Format("HWND=0x{0}\n",
+                    Tools.HForegroundWindow.ToString("X8"))
+                    + "Topmost="
+                    + Tools.getWindowIsTopmost(Tools.HForegroundWindow) + "\n"
+                    + "Title: " + Tools.getWindowTitle(Tools.HForegroundWindow));
+            } catch (Exception ex) {
+                Utils.excMsg("Failed to show foreground window", ex);
+                return;
+            }
+
         }
     }
 }
