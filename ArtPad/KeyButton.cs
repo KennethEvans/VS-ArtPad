@@ -16,273 +16,6 @@ namespace ArtPad {
         public KeyButton(KeyDef key) {
             keyDef = key;
             InitializeComponent();
-
-            // Should have been able to do this in the designer
-            toolStripMenuItemLoad.Click +=
-                new System.EventHandler(toolStripMenuItemLoad_Click);
-            toolStripMenuItemSaveAs.Click +=
-                new System.EventHandler(toolStripAsMenuItemSaveAs_Click);
-            toolStripMenuItemEditKey.Click +=
-                new System.EventHandler(toolStripMenuItemEdit_Click);
-            toolStripMenuItemDeleteRow.Click +=
-                new System.EventHandler(toolStripMenuItemDeleteRow_click);
-            toolStripMenuItemAddRowBefore.Click +=
-                new System.EventHandler(toolStripMenuItemAddRowBefore_click);
-            toolStripMenuItemAddRowAfter.Click +=
-                new System.EventHandler(toolStripMenuItemAddRowAfter_click);
-            toolStripMenuItemDeleteCol.Click +=
-                new System.EventHandler(toolStripMenuItemDeleteCol_click);
-            toolStripMenuItemAddColBefore.Click +=
-                new System.EventHandler(toolStripMenuItemAddColBefore_click);
-            toolStripMenuItemAddColAfter.Click +=
-                new System.EventHandler(toolStripMenuItemAddColAfter_click);
-            toolStripMenuItemSort.Click +=
-                new System.EventHandler(toolStripMenuItemSort_click);
-            toolStripMenuItemCreateNew.Click +=
-                new System.EventHandler(toolStripMenuItemCreateNew_click);
-            toolStripMenuItemAppearance.Click +=
-                new System.EventHandler(toolStripMenuItemAppearance_click);
-            toolStripMenuItemCopyKey.Click +=
-                new System.EventHandler(toolStripMenuItemCopyKey_click);
-            toolStripMenuItemPasteKey.Click +=
-                new System.EventHandler(toolStripMenuItemPasteKey_click);
-            toolStripMenuItemOverview.Click +=
-                new System.EventHandler(toolStripMenuItemOverview_click);
-            toolStripMenuItemAbout.Click +=
-                new System.EventHandler(toolStripMenuItemAbout_click);
-        }
-
-        void toolStripMenuItemLoad_Click(object sender, System.EventArgs e) {
-
-            // Displays an OpenFileDialog so the user can select a 
-            // KeyConfiguration
-            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Configuration Files|*.config";
-            dlg.Title = "Select a Configuration File";
-            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
-                artPad.reconfigure(dlg.FileName);
-            }
-        }
-
-        void toolStripAsMenuItemSaveAs_Click(object sender, System.EventArgs e) {
-            // Displays an OpenFileDialog so the user can select a 
-            // KeyConfiguration
-            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-            artPad.Config.setSizeForKeySize(Width, Height);
-            SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Filter = "Configuration Files|*.config";
-            dlg.Title = "Select a Configuration File";
-            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
-                Configuration.writeConfig(artPad.Config, dlg.FileName);
-            }
-        }
-
-        void toolStripMenuItemEdit_Click(object sender, System.EventArgs e) {
-            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-            // Create, show, or set visible the EditKeyDialog as appropriate
-            if (editKeyDlg == null) {
-                editKeyDlg = new EditKeyDialog(keyDef, artPad);
-                editKeyDlg.Show();
-            } else {
-                editKeyDlg.Visible = true;
-                editKeyDlg.resetContents(keyDef, artPad);
-            }
-        }
-
-        void toolStripMenuItemDeleteRow_click(object sender, System.EventArgs e) {
-            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-            Configuration config = artPad.Config;
-            config.deleteRow(keyDef.Row);
-            config.setSizeForKeySize(Width, Height);
-            artPad.reconfigure(config);
-        }
-
-        void toolStripMenuItemAddRowBefore_click(object sender, System.EventArgs e) {
-            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-            Configuration config = artPad.Config;
-            config.insertRowBefore(keyDef.Row);
-            config.setSizeForKeySize(Width, Height);
-            artPad.reconfigure(config);
-        }
-
-        void toolStripMenuItemAddRowAfter_click(object sender, System.EventArgs e) {
-            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-            Configuration config = artPad.Config;
-            config.insertRowAfter(keyDef.Row);
-            config.setSizeForKeySize(Width, Height);
-            artPad.reconfigure(config);
-        }
-
-        void toolStripMenuItemDeleteCol_click(object sender, System.EventArgs e) {
-            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-            Configuration config = artPad.Config;
-            config.deleteCol(keyDef.Col);
-            config.setSizeForKeySize(Width, Height);
-            artPad.reconfigure(config);
-        }
-
-        void toolStripMenuItemAddColBefore_click(object sender, System.EventArgs e) {
-            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-            Configuration config = artPad.Config;
-            config.insertColBefore(keyDef.Col);
-            config.setSizeForKeySize(Width, Height);
-            artPad.reconfigure(config);
-        }
-
-        void toolStripMenuItemAddColAfter_click(object sender, System.EventArgs e) {
-            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-            Configuration config = artPad.Config;
-            config.insertColAfter(keyDef.Col);
-            config.setSizeForKeySize(Width, Height);
-            artPad.reconfigure(config);
-        }
-
-        void toolStripMenuItemSort_click(object sender, System.EventArgs e) {
-            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-            Configuration config = artPad.Config;
-            config.sort();
-            artPad.reconfigure(config);
-        }
-
-        void toolStripMenuItemCreateNew_click(object sender, System.EventArgs e) {
-            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-            NumericEntry2Dialog dlg = new NumericEntry2Dialog();
-            dlg.Text = "Contents";
-            dlg.Label1.Text = "Rows";
-            dlg.Label2.Text = "Columns";
-            dlg.NumericUpDown1.Value = artPad.Config.Rows;
-            dlg.NumericUpDown2.Value = artPad.Config.Cols;
-            if (dlg.ShowDialog() == DialogResult.OK) {
-                Configuration config =
-                    Configuration.generateNewConfiguration((int)dlg.NumericUpDown1.Value,
-                    (int)dlg.NumericUpDown2.Value);
-                config.setSizeForKeySize(Width, Height);
-                artPad.reconfigure(config);
-            }
-        }
-
-        void toolStripMenuItemAppearance_click(object sender, System.EventArgs e) {
-            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-            Configuration config = artPad.Config;
-            AppearanceDialog dlg = new AppearanceDialog();
-            dlg.Text = "Appearance";
-            dlg.LabelFontName.Text = "Font Name";
-            dlg.LabelFontSize.Text = "Font Size (pt)";
-            System.Drawing.Text.InstalledFontCollection installedFontCollection =
-                new System.Drawing.Text.InstalledFontCollection();
-            FontFamily[] fontFamilies = installedFontCollection.Families;
-            int count = fontFamilies.Length;
-            int selectedIndex = -1;
-            string name;
-            for (int i = 0; i < count; i++) {
-                name = fontFamilies[i].Name;
-                dlg.ComboBoxFontName.Items.Add(name);
-                if (name.Equals(config.FontName)) {
-                    selectedIndex = i;
-                }
-            }
-            dlg.ComboBoxFontName.SelectedIndex = selectedIndex;
-
-            dlg.CheckBoxBold.Checked = config.FontFlags.Bold;
-            dlg.CheckBoxItalic.Checked = config.FontFlags.Italic;
-            dlg.CheckBoxUnderline.Checked = config.FontFlags.Underline;
-            dlg.CheckBoxStrikeout.Checked = config.FontFlags.Strikeout;
-
-            dlg.NumericUpDownFontSize.DecimalPlaces = 1;
-            dlg.NumericUpDownFontSize.Value = (Decimal)config.FontSize;
-
-            dlg.TextBoxFg.Text = config.FgColorString;
-            dlg.TextBoxBg.Text = config.BgColorString;
-
-            dlg.LabelWidth.Text = "Key Width";
-            dlg.LabelHeight.Text = "Key Height";
-            dlg.NumericUpDownWidth.Value = Width;
-            dlg.NumericUpDownHeight.Value = Height;
-
-            if (dlg.ShowDialog() == DialogResult.OK) {
-                config.FontName = dlg.ComboBoxFontName.Text;
-                config.FontSize = (float)dlg.NumericUpDownFontSize.Value;
-                config.setFontStyle(dlg.CheckBoxBold.Checked,
-                    dlg.CheckBoxItalic.Checked,
-                    dlg.CheckBoxUnderline.Checked,
-                    dlg.CheckBoxStrikeout.Checked);
-                config.FgColorString = dlg.TextBoxFg.Text;
-                config.BgColorString = dlg.TextBoxBg.Text;
-                config.setSizeForKeySize((int)dlg.NumericUpDownWidth.Value,
-                    (int)dlg.NumericUpDownHeight.Value);
-                artPad.reconfigure(config);
-            }
-        }
-
-        void toolStripMenuItemHoldKeysUp_click(object sender, System.EventArgs e) {
-            try {
-                ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-                Configuration config = artPad.Config;
-                Tools.sendUpEventsForPressedKeys(config.KeyDefs);
-                artPad.reconfigure(config);
-            } catch (System.Exception ex) {
-                Utils.excMsg("Error sending key up events", ex);
-            }
-        }
-
-        void toolStripMenuItemCopyKey_click(object sender, System.EventArgs e) {
-            try {
-                string json =
-                    JsonConvert.SerializeObject(keyDef, Formatting.Indented);
-                Clipboard.SetText(json);
-            } catch (System.Exception ex) {
-                Utils.excMsg("Error sending key up events", ex);
-            }
-        }
-
-        void toolStripMenuItemPasteKey_click(object sender, System.EventArgs e) {
-            IDataObject ClipData = Clipboard.GetDataObject();
-            if (!ClipData.GetDataPresent(DataFormats.Text)) {
-                Utils.errMsg("Clipboard does not contain a key definition");
-                return;
-            }
-            string json = Clipboard.GetData(DataFormats.Text).ToString();
-            KeyDef newKeyDef;
-            try {
-                newKeyDef = JsonConvert.DeserializeObject<KeyDef>(json);
-            } catch (Exception ex) {
-                Utils.excMsg(
-                    "Error converting clipboard contents to a "
-                    + "key definition", ex);
-                return;
-            }
-            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-            Configuration config = artPad.Config;
-            newKeyDef.Row = keyDef.Row;
-            newKeyDef.Col = keyDef.Col;
-            int index = config.KeyDefs.FindIndex(
-                keyDef =>
-                keyDef.Row == newKeyDef.Row && keyDef.Col == newKeyDef.Col);
-            if (index == -1) {
-                Utils.errMsg("Error finding key definition to set");
-                return;
-            }
-            config.setSizeForKeySize(Width, Height);
-            config.KeyDefs[index] = newKeyDef;
-            artPad.reconfigure(config);
-        }
-
-        void toolStripMenuItemOverview_click(object sender, System.EventArgs e) {
-            // Create, show, or set visible the overviewDialog as appropriate
-            if (overviewDlg == null) {
-                ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-                overviewDlg = new ScrolledHTMLDialog(
-                    Utils.getDpiAdjustedSize(artPad, new Size(800,600)));
-                overviewDlg.Show();
-            } else {
-                overviewDlg.Visible = true;
-            }
-        }
-
-        void toolStripMenuItemAbout_click(object sender, System.EventArgs e) {
-            AboutBox dlg = new AboutBox();
-            dlg.ShowDialog();
         }
 
         protected override void OnMouseUp(MouseEventArgs e) {
@@ -354,7 +87,7 @@ namespace ArtPad {
         /// <param name="e"></param>
         protected void handleNormalKey(System.EventArgs e) {
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-            if (artPad.Handle.Equals(Tools.HForegroundWindow)) {
+            if (!artPad.Handle.Equals(Tools.HForegroundWindow)) {
                 SendKeys.Send(keyDef.KeyString);
             }
         }
@@ -424,6 +157,238 @@ namespace ArtPad {
 
         private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e) {
             // Could dynamically add things here
+        }
+
+        void toolStripMenuItemLoad_Click(object sender, System.EventArgs e) {
+            // Displays an OpenFileDialog so the user can select a 
+            // KeyConfiguration
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "Configuration Files|*.config";
+            dlg.Title = "Select a Configuration File";
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                artPad.reconfigure(dlg.FileName);
+            }
+        }
+
+        private void toolStripAsMenuItemSaveAs_Click(object sender, System.EventArgs e) {
+            // Displays an OpenFileDialog so the user can select a 
+            // KeyConfiguration
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            artPad.Config.setSizeForKeySize(Width, Height);
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Filter = "Configuration Files|*.config";
+            dlg.Title = "Select a Configuration File";
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                Configuration.writeConfig(artPad.Config, dlg.FileName);
+            }
+        }
+
+        private void toolStripMenuItemEdit_Click(object sender, System.EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            // Create, show, or set visible the EditKeyDialog as appropriate
+            if (editKeyDlg == null) {
+                editKeyDlg = new EditKeyDialog(keyDef, artPad);
+                editKeyDlg.Show();
+            } else {
+                editKeyDlg.Visible = true;
+                editKeyDlg.resetContents(keyDef, artPad);
+            }
+        }
+
+        private void toolStripMenuItemDeleteRow_click(object sender, System.EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            Configuration config = artPad.Config;
+            config.deleteRow(keyDef.Row);
+            config.setSizeForKeySize(Width, Height);
+            artPad.reconfigure(config);
+        }
+
+        private void toolStripMenuItemAddRowBefore_click(object sender, System.EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            Configuration config = artPad.Config;
+            config.insertRowBefore(keyDef.Row);
+            config.setSizeForKeySize(Width, Height);
+            artPad.reconfigure(config);
+        }
+
+        private void toolStripMenuItemAddRowAfter_click(object sender, System.EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            Configuration config = artPad.Config;
+            config.insertRowAfter(keyDef.Row);
+            config.setSizeForKeySize(Width, Height);
+            artPad.reconfigure(config);
+        }
+
+        private void toolStripMenuItemDeleteCol_click(object sender, System.EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            Configuration config = artPad.Config;
+            config.deleteCol(keyDef.Col);
+            config.setSizeForKeySize(Width, Height);
+            artPad.reconfigure(config);
+        }
+
+        private void toolStripMenuItemAddColBefore_click(object sender, System.EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            Configuration config = artPad.Config;
+            config.insertColBefore(keyDef.Col);
+            config.setSizeForKeySize(Width, Height);
+            artPad.reconfigure(config);
+        }
+
+        private void toolStripMenuItemAddColAfter_click(object sender, System.EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            Configuration config = artPad.Config;
+            config.insertColAfter(keyDef.Col);
+            config.setSizeForKeySize(Width, Height);
+            artPad.reconfigure(config);
+        }
+
+        private void toolStripMenuItemSort_click(object sender, System.EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            Configuration config = artPad.Config;
+            config.sort();
+            artPad.reconfigure(config);
+        }
+
+        private void toolStripMenuItemCreateNew_click(object sender, System.EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            NumericEntry2Dialog dlg = new NumericEntry2Dialog();
+            dlg.Text = "Contents";
+            dlg.Label1.Text = "Rows";
+            dlg.Label2.Text = "Columns";
+            dlg.NumericUpDown1.Value = artPad.Config.Rows;
+            dlg.NumericUpDown2.Value = artPad.Config.Cols;
+            if (dlg.ShowDialog() == DialogResult.OK) {
+                Configuration config =
+                    Configuration.generateNewConfiguration((int)dlg.NumericUpDown1.Value,
+                    (int)dlg.NumericUpDown2.Value);
+                config.setSizeForKeySize(Width, Height);
+                artPad.reconfigure(config);
+            }
+        }
+
+        private void toolStripMenuItemAppearance_click(object sender, System.EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            Configuration config = artPad.Config;
+            AppearanceDialog dlg = new AppearanceDialog();
+            dlg.Text = "Appearance";
+            dlg.LabelFontName.Text = "Font Name";
+            dlg.LabelFontSize.Text = "Font Size (pt)";
+            System.Drawing.Text.InstalledFontCollection installedFontCollection =
+                new System.Drawing.Text.InstalledFontCollection();
+            FontFamily[] fontFamilies = installedFontCollection.Families;
+            int count = fontFamilies.Length;
+            int selectedIndex = -1;
+            string name;
+            for (int i = 0; i < count; i++) {
+                name = fontFamilies[i].Name;
+                dlg.ComboBoxFontName.Items.Add(name);
+                if (name.Equals(config.FontName)) {
+                    selectedIndex = i;
+                }
+            }
+            dlg.ComboBoxFontName.SelectedIndex = selectedIndex;
+
+            dlg.CheckBoxBold.Checked = config.FontFlags.Bold;
+            dlg.CheckBoxItalic.Checked = config.FontFlags.Italic;
+            dlg.CheckBoxUnderline.Checked = config.FontFlags.Underline;
+            dlg.CheckBoxStrikeout.Checked = config.FontFlags.Strikeout;
+
+            dlg.NumericUpDownFontSize.DecimalPlaces = 1;
+            dlg.NumericUpDownFontSize.Value = (Decimal)config.FontSize;
+
+            dlg.TextBoxFg.Text = config.FgColorString;
+            dlg.TextBoxBg.Text = config.BgColorString;
+
+            dlg.LabelWidth.Text = "Key Width";
+            dlg.LabelHeight.Text = "Key Height";
+            dlg.NumericUpDownWidth.Value = Width;
+            dlg.NumericUpDownHeight.Value = Height;
+
+            if (dlg.ShowDialog() == DialogResult.OK) {
+                config.FontName = dlg.ComboBoxFontName.Text;
+                config.FontSize = (float)dlg.NumericUpDownFontSize.Value;
+                config.setFontStyle(dlg.CheckBoxBold.Checked,
+                    dlg.CheckBoxItalic.Checked,
+                    dlg.CheckBoxUnderline.Checked,
+                    dlg.CheckBoxStrikeout.Checked);
+                config.FgColorString = dlg.TextBoxFg.Text;
+                config.BgColorString = dlg.TextBoxBg.Text;
+                config.setSizeForKeySize((int)dlg.NumericUpDownWidth.Value,
+                    (int)dlg.NumericUpDownHeight.Value);
+                artPad.reconfigure(config);
+            }
+        }
+
+        private void toolStripMenuItemHoldKeysUp_click(object sender, System.EventArgs e) {
+            try {
+                ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+                Configuration config = artPad.Config;
+                Tools.sendUpEventsForPressedKeys(config.KeyDefs);
+                artPad.reconfigure(config);
+            } catch (System.Exception ex) {
+                Utils.excMsg("Error sending key up events", ex);
+            }
+        }
+
+        private void toolStripMenuItemCopyKey_click(object sender, System.EventArgs e) {
+            try {
+                string json =
+                    JsonConvert.SerializeObject(keyDef, Formatting.Indented);
+                Clipboard.SetText(json);
+            } catch (System.Exception ex) {
+                Utils.excMsg("Error sending key up events", ex);
+            }
+        }
+
+        private void toolStripMenuItemPasteKey_click(object sender, System.EventArgs e) {
+            IDataObject ClipData = Clipboard.GetDataObject();
+            if (!ClipData.GetDataPresent(DataFormats.Text)) {
+                Utils.errMsg("Clipboard does not contain a key definition");
+                return;
+            }
+            string json = Clipboard.GetData(DataFormats.Text).ToString();
+            KeyDef newKeyDef;
+            try {
+                newKeyDef = JsonConvert.DeserializeObject<KeyDef>(json);
+            } catch (Exception ex) {
+                Utils.excMsg(
+                    "Error converting clipboard contents to a "
+                    + "key definition", ex);
+                return;
+            }
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            Configuration config = artPad.Config;
+            newKeyDef.Row = keyDef.Row;
+            newKeyDef.Col = keyDef.Col;
+            int index = config.KeyDefs.FindIndex(
+                keyDef =>
+                keyDef.Row == newKeyDef.Row && keyDef.Col == newKeyDef.Col);
+            if (index == -1) {
+                Utils.errMsg("Error finding key definition to set");
+                return;
+            }
+            config.setSizeForKeySize(Width, Height);
+            config.KeyDefs[index] = newKeyDef;
+            artPad.reconfigure(config);
+        }
+
+        private void toolStripMenuItemOverview_click(object sender, System.EventArgs e) {
+            // Create, show, or set visible the overviewDialog as appropriate
+            if (overviewDlg == null) {
+                ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+                overviewDlg = new ScrolledHTMLDialog(
+                    Utils.getDpiAdjustedSize(artPad, new Size(800, 600)));
+                overviewDlg.Show();
+            } else {
+                overviewDlg.Visible = true;
+            }
+        }
+
+        private void toolStripMenuItemAbout_click(object sender, System.EventArgs e) {
+            AboutBox dlg = new AboutBox();
+            dlg.ShowDialog();
         }
 
         private void toolStripMenuItemArtPadTopmost_click(object sender, EventArgs e) {
