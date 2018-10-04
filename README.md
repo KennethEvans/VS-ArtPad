@@ -4,8 +4,6 @@ Art Pad is a C# stay-on-top application that provides a customizable keypad for 
 
 See https://rawgit.com/KennethEvans/VS-Artpad/master/ArtPad/Help/Overview.html
 
-See https://kennethevans.github.io/index.html#ArtPad
-
 **Installation**
 
 If you are installing from a download, just unzip the files into a directory somewhere convenient. Then run it from there. If you are installing from a build, copy these files and directories from the bin/Release directory to a convenient directory.
