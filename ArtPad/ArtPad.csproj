@@ -177,7 +177,6 @@
       <DependentUpon>ScrolledHTMLDialog.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.manifest" />
-    <None Include="README.md" />
     <None Include="Sample Configuration\Default.config" />
     <None Include="Sample Configuration\Krita.config" />
     <None Include="Sample Configuration\MangaStudio.config" />
