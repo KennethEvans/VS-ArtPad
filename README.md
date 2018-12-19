@@ -2,7 +2,7 @@
 
 Art Pad is a C# stay-on-top application that provides a customizable keypad for use with pen-based applications such as Photoshop, Painter, Manga Studio, and Rebelle. The problem is that most of these applications rely on a large number of sometimes complicated keystroke sequences to do things in the application. These sequences are hard to enter with the pen. ArtPad allows you to send them by clicking a key which you have set up.
 
-See https://rawgit.com/KennethEvans/VS-Artpad/master/ArtPad/Help/Overview.html
+See https://kenevans.net/opensource/ArtPad/Help/Overview.html
 
 **Installation**
 
@@ -10,7 +10,7 @@ If you are installing from a download, just unzip the files into a directory som
 
 * ArtPad.exe
 * Newtonsoft.Json.dll
-* Newtonsoft.Json.dll
+* WindowsInput.dll
 * Help
 
 To uninstall, just delete these files. 
