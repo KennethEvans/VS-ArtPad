@@ -88,7 +88,12 @@ namespace ArtPad {
         protected void handleNormalKey(System.EventArgs e) {
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
             if (!artPad.Handle.Equals(Tools.HForegroundWindow)) {
-                SendKeys.Send(keyDef.KeyString);
+                try {
+                    SendKeys.Send(keyDef.KeyString);
+                } catch (Exception ex) {
+                    Utils.excMsg("Error invoking COMMAND for key "
+                        + keyDef.Name, ex);
+                }
             }
         }
 
@@ -136,22 +141,27 @@ namespace ArtPad {
             }
 
             var sim = new InputSimulator();
-            if (keyDef.Pressed) {
-                keyDef.Pressed = false;
-                sim.Keyboard.KeyUp(keyCode);
-                // Use this instead of 
-                // BackColor = Color.FromKnownColor(KnownColor.Control);
-                ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-                Configuration config = artPad.Config;
-                if (config.isValidBGColorString()) {
-                    BackColor = config.getBgColor();
+            try {
+                if (keyDef.Pressed) {
+                    keyDef.Pressed = false;
+                    sim.Keyboard.KeyUp(keyCode);
+                    // Use this instead of 
+                    // BackColor = Color.FromKnownColor(KnownColor.Control);
+                    ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+                    Configuration config = artPad.Config;
+                    if (config.isValidBGColorString()) {
+                        BackColor = config.getBgColor();
+                    } else {
+                        UseVisualStyleBackColor = true;
+                    }
                 } else {
-                    UseVisualStyleBackColor = true;
+                    sim.Keyboard.KeyDown(keyCode);
+                    keyDef.Pressed = true;
+                    BackColor = Color.FromKnownColor(KnownColor.Highlight);
                 }
-            } else {
-                sim.Keyboard.KeyDown(keyCode);
-                keyDef.Pressed = true;
-                BackColor = Color.FromKnownColor(KnownColor.Highlight);
+            } catch (Exception ex) {
+                Utils.excMsg("Error invoking COMMAND for key "
+                        + keyDef.Name, ex);
             }
         }
 
@@ -409,7 +419,7 @@ namespace ArtPad {
             try {
                 NativeMethods.SetWindowPos(Tools.HForegroundWindow,
                     NativeMethods.HWND_NOTOPMOST, 0, 0, 0, 0,
-                    NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOSIZE | 
+                    NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOSIZE |
                     NativeMethods.SWP_SHOWWINDOW);
                 Utils.infoMsg("Set window to not be Topmost\n"
                     + String.Format("HWND=0x{0}\n",
@@ -436,10 +446,10 @@ namespace ArtPad {
             try {
                 NativeMethods.SetWindowPos(Tools.HForegroundWindow,
                     NativeMethods.HWND_TOPMOST, 0, 0, 0, 0,
-                    NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOSIZE | 
+                    NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOSIZE |
                     NativeMethods.SWP_SHOWWINDOW);
                 Utils.infoMsg("Set window to be Topmost\n"
-                    + String.Format("HWND=0x{0}\n", 
+                    + String.Format("HWND=0x{0}\n",
                     Tools.HForegroundWindow.ToString("X8"))
                     + "Title: " + Tools.getWindowTitle(Tools.HForegroundWindow));
             } catch (Exception ex) {
