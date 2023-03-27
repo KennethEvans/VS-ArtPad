@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("kenevans.net")]
 [assembly: AssemblyProduct("ArtPad")]
-[assembly: AssemblyCopyright("Copyright © Kenneth Evans 2016-2022")]
+[assembly: AssemblyCopyright("Copyright © Kenneth Evans 2016-2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
