@@ -396,6 +396,14 @@ namespace ArtPad {
             }
         }
 
+        private void toolStripMenuItemOverviewOnlineClick(object sender, EventArgs e) {
+            try {
+                Process.Start("https://kenevans.net/opensource/ArtPad/Help/Overview.html");
+            } catch (Exception ex) {
+                Utils.excMsg("Failed to start browser", ex);
+            }
+        }
+
         private void toolStripMenuItemAbout_click(object sender, System.EventArgs e) {
             AboutBox dlg = new AboutBox();
             dlg.ShowDialog();
