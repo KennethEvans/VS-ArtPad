@@ -1,6 +1,7 @@
 ﻿#define CHECK_EVENTS
 //#undef DEBUG
 
+using KEUtils.Utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 
 namespace ArtPad {
     public partial class ArtPadForm : Form {
-        private string LF = Utils.LF;
+        private string LF = Environment.NewLine;
         private int defaultKeySize = 50;
         private string lastConfigFile;
         private static Point defaultLocation = new Point(50, 50);

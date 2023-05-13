@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KEUtils.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,13 +28,13 @@ namespace ArtPad {
                 if (errMsg == null) {
                     errMsg = "Invalid BG Color (" + fgColorString + ")";
                 } else {
-                    errMsg += Utils.LF
+                    errMsg += Environment.NewLine
                         + "Invalid BG Color (" + bgColorString + ")";
                 }
             }
             if (errMsg != null) {
-                errMsg += Utils.LF  + "Must be blank or of the form #RRGGBB"
-                    + Utils.LF+ "where R, G, and B are valid Hex digits";
+                errMsg += Environment.NewLine + "Must be blank or of the form #RRGGBB"
+                    + Environment.NewLine + "where R, G, and B are valid Hex digits";
                 Utils.errMsg(errMsg);
             } else { 
                 DialogResult = DialogResult.OK;

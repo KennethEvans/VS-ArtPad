@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
+using KEUtils.About;
+using KEUtils.ScrolledHTML2;
+using KEUtils.Utils;
 using Newtonsoft.Json;
 using WindowsInput;
 using WindowsInput.Native;
@@ -10,7 +14,7 @@ namespace ArtPad {
     public partial class KeyButton : Button {
         private string LF = System.Environment.NewLine;
         private static EditKeyDialog editKeyDlg;
-        private static ScrolledHTMLDialog overviewDlg;
+        private static ScrolledHTMLDialog2 overviewDlg;
         private KeyDef keyDef;
 
         public KeyButton(KeyDef key) {
@@ -385,11 +389,12 @@ namespace ArtPad {
         }
 
         private void toolStripMenuItemOverview_click(object sender, System.EventArgs e) {
-            // Create, show, or set visible the overviewDialog as appropriate
+            // Create, show, or set visible the overview dialog as appropriate
             if (overviewDlg == null) {
-                ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-                overviewDlg = new ScrolledHTMLDialog(
-                    Utils.getDpiAdjustedSize(artPad, new Size(800, 600)));
+                ArtPadForm app = (ArtPadForm)FindForm().FindForm();
+                overviewDlg = new ScrolledHTMLDialog2(
+                    Utils.getDpiAdjustedSize(app, new Size(800, 600)),
+                    "Overview", @"Help\Overview.html");
                 overviewDlg.Show();
             } else {
                 overviewDlg.Visible = true;
@@ -405,7 +410,14 @@ namespace ArtPad {
         }
 
         private void toolStripMenuItemAbout_click(object sender, System.EventArgs e) {
-            AboutBox dlg = new AboutBox();
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            Image image = null;
+            try {
+                image = Image.FromFile(@".\Help\ArtPad.256x256.png");
+            } catch (Exception ex) {
+                Utils.excMsg("Failed to get AboutBox image", ex);
+            }
+            AboutBox dlg = new AboutBox(image, assembly);
             dlg.ShowDialog();
         }
 
