@@ -34,7 +34,7 @@
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(584, 494);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "ArtPadForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "ArtPad";

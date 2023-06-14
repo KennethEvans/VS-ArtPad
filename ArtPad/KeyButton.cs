@@ -1,12 +1,12 @@
-﻿using System;
+﻿using KEUtils.About;
+using KEUtils.ScrolledHTML2;
+using KEUtils.Utils;
+using Newtonsoft.Json;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
-using KEUtils.About;
-using KEUtils.ScrolledHTML2;
-using KEUtils.Utils;
-using Newtonsoft.Json;
 using WindowsInput;
 using WindowsInput.Native;
 
@@ -32,6 +32,34 @@ namespace ArtPad {
             // See if it is a right click
             MouseEventArgs me = (MouseEventArgs)e;
             if (me.Button == MouseButtons.Right) {
+                // Adjust the visibility of the control items
+                ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+                if (artPad.Config.TitleBarType == 0) {
+                    toolStripMenuItemMove.Visible = false;
+                    toolStripMenuItemMove.Enabled = false;
+                    toolStripMenuItemRestore.Visible = false;
+                    toolStripMenuItemRestore.Enabled = false;
+                    toolStripMenuItemMinimize.Visible = false;
+                    toolStripMenuItemMinimize.Enabled = false;
+                    toolStripMenuItemMaximize.Visible = false;
+                    toolStripMenuItemMaximize.Enabled = false;
+                    toolStripMenuItemExit.Visible = false;
+                    toolStripMenuItemExit.Enabled = false;
+                    toolStripSeparatorControls.Visible = false;
+                } else {
+                    toolStripMenuItemMove.Visible = true;
+                    toolStripMenuItemMove.Enabled = true;
+                    toolStripMenuItemRestore.Visible = true;
+                    toolStripMenuItemRestore.Enabled = true;
+                    toolStripMenuItemMinimize.Visible = true;
+                    toolStripMenuItemMinimize.Enabled = true;
+                    toolStripMenuItemMaximize.Visible = true;
+                    toolStripMenuItemMaximize.Enabled = true;
+                    toolStripMenuItemExit.Visible = true;
+                    toolStripMenuItemExit.Enabled = true;
+                    toolStripSeparatorControls.Visible = true;
+                }
+
                 // Show the context menu
                 contextMenuStrip.Show(this, me.X, me.Y);
                 return;
@@ -53,6 +81,16 @@ namespace ArtPad {
             base.OnMouseLeave(e);
 #if DEBUG && true
             Tools.debugForegroundWindows("KeyButton.OnMouseLeave ("
+                + keyDef.Row + "," + keyDef.Col + ")");
+#endif
+        }
+
+        protected override void OnMouseDown(MouseEventArgs e) {
+            base.OnMouseDown(e);
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            artPad.DoMouseDown(e);
+#if DEBUG && true
+            Tools.debugForegroundWindows("KeyButton.OnMouseDown ("
                 + keyDef.Row + "," + keyDef.Col + ")");
 #endif
         }
@@ -185,7 +223,7 @@ namespace ArtPad {
             }
         }
 
-        private void toolStripAsMenuItemSaveAs_Click(object sender, System.EventArgs e) {
+        private void toolStripMenuItemSaveAs_Click(object sender, System.EventArgs e) {
             // Displays an OpenFileDialog so the user can select a 
             // KeyConfiguration
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
@@ -315,6 +353,8 @@ namespace ArtPad {
             dlg.TextBoxFg.Text = config.FgColorString;
             dlg.TextBoxBg.Text = config.BgColorString;
 
+            dlg.ComboBoxTitleBar.SelectedIndex = config.TitleBarType;
+
             dlg.LabelWidth.Text = "Key Width";
             dlg.LabelHeight.Text = "Key Height";
             dlg.NumericUpDownWidth.Value = Width;
@@ -329,6 +369,7 @@ namespace ArtPad {
                     dlg.CheckBoxStrikeout.Checked);
                 config.FgColorString = dlg.TextBoxFg.Text;
                 config.BgColorString = dlg.TextBoxBg.Text;
+                config.TitleBarType = dlg.ComboBoxTitleBar.SelectedIndex;
                 config.setSizeForKeySize((int)dlg.NumericUpDownWidth.Value,
                     (int)dlg.NumericUpDownHeight.Value);
                 artPad.reconfigure(config);
@@ -426,7 +467,7 @@ namespace ArtPad {
             artPad.TopMost = true;
         }
 
-        private void toolStripAsMenuItemApplicationNotTopmost_Click(object sender, EventArgs e) {
+        private void toolStripMenuItemApplicationNotTopmost_Click(object sender, EventArgs e) {
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
             if (Tools.HForegroundWindow == IntPtr.Zero) {
                 Utils.errMsg("The current foreground window is undefined");
@@ -452,7 +493,7 @@ namespace ArtPad {
             }
         }
 
-        private void toolStripAsMenuItemApplicationTopmost_Click(object sender,
+        private void toolStripMenuItemApplicationTopmost_Click(object sender,
             EventArgs e) {
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
             if (Tools.HForegroundWindow == IntPtr.Zero) {
@@ -478,7 +519,7 @@ namespace ArtPad {
             }
         }
 
-        private void toolStripAsMenuItemShowForegroundWin_Click(object sender,
+        private void toolStripMenuItemShowForegroundWin_Click(object sender,
             EventArgs e) {
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
             try {
@@ -496,7 +537,36 @@ namespace ArtPad {
                 Utils.excMsg("Failed to show foreground window", ex);
                 return;
             }
+        }
 
+        private void toolStripMenuItemDoMove(object sender,
+            EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            artPad.Moving = true;
+        }
+
+        private void toolStripMenuItemDoMimimize(object sender,
+            EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            artPad.WindowState = FormWindowState.Minimized;
+        }
+
+        private void toolStripMenuItemDoMaximize(object sender,
+            EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            artPad.WindowState = FormWindowState.Maximized;
+        }
+
+        private void toolStripMenuItemDoRestore(object sender,
+            EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            artPad.WindowState = FormWindowState.Normal;
+        }
+
+        private void toolStripMenuItemDoExit(object sender,
+            EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            artPad.Close();
         }
     }
 }

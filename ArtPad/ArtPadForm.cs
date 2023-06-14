@@ -9,7 +9,9 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace ArtPad {
     public partial class ArtPadForm : Form {
@@ -20,6 +22,7 @@ namespace ArtPad {
         private string defaultFontName;
         private float defaultFontSize = 0;
         private FontStyle defaultFontStyle = FontStyle.Regular;
+        public bool Moving = false;
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
 
@@ -90,6 +93,12 @@ namespace ArtPad {
             defaultFontSize = this.Font.SizeInPoints;
             defaultFontStyle = this.Font.Style;
 
+            // Set the Control Box
+            ControlBox = false;
+            FormBorderStyle = FormBorderStyle.Sizable;
+            Text = "";
+
+
 #if DEBUG
             Tools.printModuleInfo();
             Configuration.writeConfig(config,
@@ -115,6 +124,22 @@ namespace ArtPad {
                     return;
                 }
             }
+
+            // Set the title bar type
+            if (newConfig.TitleBarType == 1) {
+                ControlBox = false;
+                FormBorderStyle = FormBorderStyle.Sizable;
+                Text = "";
+            } else if (newConfig.TitleBarType == 2) {
+                ControlBox = false;
+                FormBorderStyle = FormBorderStyle.None;
+                Text = "";
+            } else { 
+                ControlBox = true;
+                FormBorderStyle = FormBorderStyle.Sizable;
+                Text = "Art Pad";
+            }
+
             Properties.Settings.Default.LastLocation = Location;
 
             config = newConfig;
@@ -303,36 +328,28 @@ namespace ArtPad {
         /// ShowWithoutActivation is readonly and  needs to be overwritten to
         /// keep the Form from being activated when it is shown.
         /// </summary>
-        protected override bool ShowWithoutActivation
-        {
-            get
-            {
+        protected override bool ShowWithoutActivation {
+            get {
                 return true;
             }
         }
 
-        public Configuration Config
-        {
-            get
-            {
+        public Configuration Config {
+            get {
                 return config;
             }
 
-            set
-            {
+            set {
                 config = value;
             }
         }
 
-        public string LastConfigFile
-        {
-            get
-            {
+        public string LastConfigFile {
+            get {
                 return lastConfigFile;
             }
 
-            set
-            {
+            set {
                 lastConfigFile = value;
             }
         }
@@ -455,8 +472,29 @@ namespace ArtPad {
 #endif
         }
 
-#endif //CHECK_EVENTS
-        #endregion Check events
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HTCAPTION = 0x2;
+        [DllImport("User32.dll")]
+        public static extern bool ReleaseCapture();
+        [DllImport("User32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
 
+        protected override void OnMouseDown(MouseEventArgs e) {
+            base.OnMouseDown(e);
+            if (Moving && e.Button == MouseButtons.Left) {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+                Moving = false;
+            }
+        }
+
+        public void DoMouseDown(MouseEventArgs e) {
+            OnMouseDown(e);
+        }
     }
+
+#endif //CHECK_EVENTS
+    #endregion Check events
+
 }
+

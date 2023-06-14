@@ -55,6 +55,9 @@ namespace ArtPad {
             this.flowLayoutPanelButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.flowLayoutPanelTitleBar = new System.Windows.Forms.FlowLayoutPanel();
+            this.labelTitleBar = new System.Windows.Forms.Label();
+            this.comboBoxTitleBar = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanelTop.SuspendLayout();
             this.flowLayoutPanelFontName.SuspendLayout();
             this.flowLayoutPanelFontStyles.SuspendLayout();
@@ -67,11 +70,13 @@ namespace ArtPad {
             this.flowLayoutPanelHeight.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeight)).BeginInit();
             this.flowLayoutPanelButtons.SuspendLayout();
+            this.flowLayoutPanelTitleBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanelTop
             // 
             this.tableLayoutPanelTop.AutoSize = true;
+            this.tableLayoutPanelTop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanelTop.ColumnCount = 1;
             this.tableLayoutPanelTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelFontName, 0, 0);
@@ -81,7 +86,8 @@ namespace ArtPad {
             this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelBg, 0, 4);
             this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelWidth, 0, 5);
             this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelHeight, 0, 6);
-            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelButtons, 0, 7);
+            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelTitleBar, 0, 7);
+            this.tableLayoutPanelTop.Controls.Add(this.flowLayoutPanelButtons, 0, 8);
             this.tableLayoutPanelTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelTop.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelTop.Margin = new System.Windows.Forms.Padding(6);
@@ -95,53 +101,8 @@ namespace ArtPad {
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.Size = new System.Drawing.Size(641, 459);
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanelTop.Size = new System.Drawing.Size(641, 569);
             this.tableLayoutPanelTop.TabIndex = 0;
             // 
             // flowLayoutPanelFontName
@@ -153,7 +114,7 @@ namespace ArtPad {
             this.flowLayoutPanelFontName.Location = new System.Drawing.Point(6, 6);
             this.flowLayoutPanelFontName.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelFontName.Name = "flowLayoutPanelFontName";
-            this.flowLayoutPanelFontName.Size = new System.Drawing.Size(619, 45);
+            this.flowLayoutPanelFontName.Size = new System.Drawing.Size(618, 46);
             this.flowLayoutPanelFontName.TabIndex = 0;
             this.flowLayoutPanelFontName.WrapContents = false;
             // 
@@ -161,17 +122,17 @@ namespace ArtPad {
             // 
             this.labelFontName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelFontName.AutoSize = true;
-            this.labelFontName.Location = new System.Drawing.Point(6, 6);
+            this.labelFontName.Location = new System.Drawing.Point(6, 7);
             this.labelFontName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelFontName.Name = "labelFontName";
-            this.labelFontName.Size = new System.Drawing.Size(154, 32);
+            this.labelFontName.Size = new System.Drawing.Size(153, 32);
             this.labelFontName.TabIndex = 0;
             this.labelFontName.Text = "Font Name";
             // 
             // comboBoxFontName
             // 
             this.comboBoxFontName.FormattingEnabled = true;
-            this.comboBoxFontName.Location = new System.Drawing.Point(169, 3);
+            this.comboBoxFontName.Location = new System.Drawing.Point(168, 3);
             this.comboBoxFontName.Name = "comboBoxFontName";
             this.comboBoxFontName.Size = new System.Drawing.Size(447, 39);
             this.comboBoxFontName.TabIndex = 1;
@@ -184,10 +145,10 @@ namespace ArtPad {
             this.flowLayoutPanelFontStyles.Controls.Add(this.checkBoxItalic);
             this.flowLayoutPanelFontStyles.Controls.Add(this.checkBoxUnderline);
             this.flowLayoutPanelFontStyles.Controls.Add(this.checkBoxStrikeout);
-            this.flowLayoutPanelFontStyles.Location = new System.Drawing.Point(6, 63);
+            this.flowLayoutPanelFontStyles.Location = new System.Drawing.Point(6, 64);
             this.flowLayoutPanelFontStyles.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelFontStyles.Name = "flowLayoutPanelFontStyles";
-            this.flowLayoutPanelFontStyles.Size = new System.Drawing.Size(589, 42);
+            this.flowLayoutPanelFontStyles.Size = new System.Drawing.Size(585, 42);
             this.flowLayoutPanelFontStyles.TabIndex = 7;
             this.flowLayoutPanelFontStyles.WrapContents = false;
             // 
@@ -196,7 +157,7 @@ namespace ArtPad {
             this.checkBoxBold.AutoSize = true;
             this.checkBoxBold.Location = new System.Drawing.Point(3, 3);
             this.checkBoxBold.Name = "checkBoxBold";
-            this.checkBoxBold.Size = new System.Drawing.Size(111, 36);
+            this.checkBoxBold.Size = new System.Drawing.Size(110, 36);
             this.checkBoxBold.TabIndex = 2;
             this.checkBoxBold.Text = "Bold";
             this.checkBoxBold.UseVisualStyleBackColor = true;
@@ -204,9 +165,9 @@ namespace ArtPad {
             // checkBoxItalic
             // 
             this.checkBoxItalic.AutoSize = true;
-            this.checkBoxItalic.Location = new System.Drawing.Point(120, 3);
+            this.checkBoxItalic.Location = new System.Drawing.Point(119, 3);
             this.checkBoxItalic.Name = "checkBoxItalic";
-            this.checkBoxItalic.Size = new System.Drawing.Size(112, 36);
+            this.checkBoxItalic.Size = new System.Drawing.Size(111, 36);
             this.checkBoxItalic.TabIndex = 3;
             this.checkBoxItalic.Text = "Italic";
             this.checkBoxItalic.UseVisualStyleBackColor = true;
@@ -214,9 +175,9 @@ namespace ArtPad {
             // checkBoxUnderline
             // 
             this.checkBoxUnderline.AutoSize = true;
-            this.checkBoxUnderline.Location = new System.Drawing.Point(238, 3);
+            this.checkBoxUnderline.Location = new System.Drawing.Point(236, 3);
             this.checkBoxUnderline.Name = "checkBoxUnderline";
-            this.checkBoxUnderline.Size = new System.Drawing.Size(176, 36);
+            this.checkBoxUnderline.Size = new System.Drawing.Size(175, 36);
             this.checkBoxUnderline.TabIndex = 4;
             this.checkBoxUnderline.Text = "Underline";
             this.checkBoxUnderline.UseVisualStyleBackColor = true;
@@ -224,9 +185,9 @@ namespace ArtPad {
             // checkBoxStrikeout
             // 
             this.checkBoxStrikeout.AutoSize = true;
-            this.checkBoxStrikeout.Location = new System.Drawing.Point(420, 3);
+            this.checkBoxStrikeout.Location = new System.Drawing.Point(417, 3);
             this.checkBoxStrikeout.Name = "checkBoxStrikeout";
-            this.checkBoxStrikeout.Size = new System.Drawing.Size(166, 36);
+            this.checkBoxStrikeout.Size = new System.Drawing.Size(165, 36);
             this.checkBoxStrikeout.TabIndex = 5;
             this.checkBoxStrikeout.Text = "Strikeout";
             this.checkBoxStrikeout.UseVisualStyleBackColor = true;
@@ -237,10 +198,10 @@ namespace ArtPad {
             this.flowLayoutPanelFontSize.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelFontSize.Controls.Add(this.labelFontSize);
             this.flowLayoutPanelFontSize.Controls.Add(this.numericUpDownFontSize);
-            this.flowLayoutPanelFontSize.Location = new System.Drawing.Point(6, 117);
+            this.flowLayoutPanelFontSize.Location = new System.Drawing.Point(6, 118);
             this.flowLayoutPanelFontSize.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelFontSize.Name = "flowLayoutPanelFontSize";
-            this.flowLayoutPanelFontSize.Size = new System.Drawing.Size(448, 50);
+            this.flowLayoutPanelFontSize.Size = new System.Drawing.Size(447, 50);
             this.flowLayoutPanelFontSize.TabIndex = 1;
             this.flowLayoutPanelFontSize.WrapContents = false;
             // 
@@ -251,14 +212,14 @@ namespace ArtPad {
             this.labelFontSize.Location = new System.Drawing.Point(6, 9);
             this.labelFontSize.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelFontSize.Name = "labelFontSize";
-            this.labelFontSize.Size = new System.Drawing.Size(184, 32);
+            this.labelFontSize.Size = new System.Drawing.Size(183, 32);
             this.labelFontSize.TabIndex = 0;
             this.labelFontSize.Text = "Font Size (pt)";
             // 
             // numericUpDownFontSize
             // 
             this.numericUpDownFontSize.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.numericUpDownFontSize.Location = new System.Drawing.Point(202, 6);
+            this.numericUpDownFontSize.Location = new System.Drawing.Point(201, 6);
             this.numericUpDownFontSize.Margin = new System.Windows.Forms.Padding(6);
             this.numericUpDownFontSize.Maximum = new decimal(new int[] {
             100000,
@@ -276,10 +237,10 @@ namespace ArtPad {
             this.flowLayoutPanelFg.Controls.Add(this.labelFg);
             this.flowLayoutPanelFg.Controls.Add(this.textBoxFg);
             this.flowLayoutPanelFg.Controls.Add(this.buttonFg);
-            this.flowLayoutPanelFg.Location = new System.Drawing.Point(6, 179);
+            this.flowLayoutPanelFg.Location = new System.Drawing.Point(6, 180);
             this.flowLayoutPanelFg.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelFg.Name = "flowLayoutPanelFg";
-            this.flowLayoutPanelFg.Size = new System.Drawing.Size(616, 57);
+            this.flowLayoutPanelFg.Size = new System.Drawing.Size(615, 57);
             this.flowLayoutPanelFg.TabIndex = 2;
             this.flowLayoutPanelFg.WrapContents = false;
             // 
@@ -290,20 +251,20 @@ namespace ArtPad {
             this.labelFg.Location = new System.Drawing.Point(6, 12);
             this.labelFg.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelFg.Name = "labelFg";
-            this.labelFg.Size = new System.Drawing.Size(237, 32);
+            this.labelFg.Size = new System.Drawing.Size(236, 32);
             this.labelFg.TabIndex = 0;
             this.labelFg.Text = "Foreground Color";
             // 
             // textBoxFg
             // 
-            this.textBoxFg.Location = new System.Drawing.Point(252, 3);
+            this.textBoxFg.Location = new System.Drawing.Point(251, 3);
             this.textBoxFg.Name = "textBoxFg";
             this.textBoxFg.Size = new System.Drawing.Size(199, 38);
             this.textBoxFg.TabIndex = 1;
             // 
             // buttonFg
             // 
-            this.buttonFg.Location = new System.Drawing.Point(460, 6);
+            this.buttonFg.Location = new System.Drawing.Point(459, 6);
             this.buttonFg.Margin = new System.Windows.Forms.Padding(6);
             this.buttonFg.Name = "buttonFg";
             this.buttonFg.Size = new System.Drawing.Size(150, 45);
@@ -319,10 +280,10 @@ namespace ArtPad {
             this.flowLayoutPanelBg.Controls.Add(this.labelBg);
             this.flowLayoutPanelBg.Controls.Add(this.textBoxBg);
             this.flowLayoutPanelBg.Controls.Add(this.buttonBg);
-            this.flowLayoutPanelBg.Location = new System.Drawing.Point(6, 248);
+            this.flowLayoutPanelBg.Location = new System.Drawing.Point(6, 249);
             this.flowLayoutPanelBg.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelBg.Name = "flowLayoutPanelBg";
-            this.flowLayoutPanelBg.Size = new System.Drawing.Size(621, 57);
+            this.flowLayoutPanelBg.Size = new System.Drawing.Size(620, 57);
             this.flowLayoutPanelBg.TabIndex = 3;
             this.flowLayoutPanelBg.WrapContents = false;
             // 
@@ -333,20 +294,20 @@ namespace ArtPad {
             this.labelBg.Location = new System.Drawing.Point(6, 12);
             this.labelBg.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelBg.Name = "labelBg";
-            this.labelBg.Size = new System.Drawing.Size(242, 32);
+            this.labelBg.Size = new System.Drawing.Size(241, 32);
             this.labelBg.TabIndex = 0;
             this.labelBg.Text = "Background Color";
             // 
             // textBoxBg
             // 
-            this.textBoxBg.Location = new System.Drawing.Point(257, 3);
+            this.textBoxBg.Location = new System.Drawing.Point(256, 3);
             this.textBoxBg.Name = "textBoxBg";
             this.textBoxBg.Size = new System.Drawing.Size(199, 38);
             this.textBoxBg.TabIndex = 1;
             // 
             // buttonBg
             // 
-            this.buttonBg.Location = new System.Drawing.Point(465, 6);
+            this.buttonBg.Location = new System.Drawing.Point(464, 6);
             this.buttonBg.Margin = new System.Windows.Forms.Padding(6);
             this.buttonBg.Name = "buttonBg";
             this.buttonBg.Size = new System.Drawing.Size(150, 45);
@@ -361,10 +322,10 @@ namespace ArtPad {
             this.flowLayoutPanelWidth.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelWidth.Controls.Add(this.labelWidth);
             this.flowLayoutPanelWidth.Controls.Add(this.numericUpDownWidth);
-            this.flowLayoutPanelWidth.Location = new System.Drawing.Point(6, 317);
+            this.flowLayoutPanelWidth.Location = new System.Drawing.Point(6, 318);
             this.flowLayoutPanelWidth.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelWidth.Name = "flowLayoutPanelWidth";
-            this.flowLayoutPanelWidth.Size = new System.Drawing.Size(352, 50);
+            this.flowLayoutPanelWidth.Size = new System.Drawing.Size(351, 50);
             this.flowLayoutPanelWidth.TabIndex = 4;
             this.flowLayoutPanelWidth.WrapContents = false;
             // 
@@ -375,14 +336,14 @@ namespace ArtPad {
             this.labelWidth.Location = new System.Drawing.Point(6, 9);
             this.labelWidth.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelWidth.Name = "labelWidth";
-            this.labelWidth.Size = new System.Drawing.Size(88, 32);
+            this.labelWidth.Size = new System.Drawing.Size(87, 32);
             this.labelWidth.TabIndex = 0;
             this.labelWidth.Text = "Width";
             // 
             // numericUpDownWidth
             // 
             this.numericUpDownWidth.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.numericUpDownWidth.Location = new System.Drawing.Point(106, 6);
+            this.numericUpDownWidth.Location = new System.Drawing.Point(105, 6);
             this.numericUpDownWidth.Margin = new System.Windows.Forms.Padding(6);
             this.numericUpDownWidth.Maximum = new decimal(new int[] {
             100000,
@@ -399,10 +360,10 @@ namespace ArtPad {
             this.flowLayoutPanelHeight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelHeight.Controls.Add(this.labelHeight);
             this.flowLayoutPanelHeight.Controls.Add(this.numericUpDownHeight);
-            this.flowLayoutPanelHeight.Location = new System.Drawing.Point(6, 379);
+            this.flowLayoutPanelHeight.Location = new System.Drawing.Point(6, 380);
             this.flowLayoutPanelHeight.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelHeight.Name = "flowLayoutPanelHeight";
-            this.flowLayoutPanelHeight.Size = new System.Drawing.Size(362, 50);
+            this.flowLayoutPanelHeight.Size = new System.Drawing.Size(361, 50);
             this.flowLayoutPanelHeight.TabIndex = 5;
             this.flowLayoutPanelHeight.WrapContents = false;
             // 
@@ -413,14 +374,14 @@ namespace ArtPad {
             this.labelHeight.Location = new System.Drawing.Point(6, 9);
             this.labelHeight.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelHeight.Name = "labelHeight";
-            this.labelHeight.Size = new System.Drawing.Size(98, 32);
+            this.labelHeight.Size = new System.Drawing.Size(97, 32);
             this.labelHeight.TabIndex = 0;
             this.labelHeight.Text = "Height";
             // 
             // numericUpDownHeight
             // 
             this.numericUpDownHeight.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.numericUpDownHeight.Location = new System.Drawing.Point(116, 6);
+            this.numericUpDownHeight.Location = new System.Drawing.Point(115, 6);
             this.numericUpDownHeight.Margin = new System.Windows.Forms.Padding(6);
             this.numericUpDownHeight.Maximum = new decimal(new int[] {
             100000,
@@ -438,10 +399,10 @@ namespace ArtPad {
             this.flowLayoutPanelButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelButtons.Controls.Add(this.buttonOk);
             this.flowLayoutPanelButtons.Controls.Add(this.buttonCancel);
-            this.flowLayoutPanelButtons.Location = new System.Drawing.Point(158, 441);
+            this.flowLayoutPanelButtons.Location = new System.Drawing.Point(158, 499);
             this.flowLayoutPanelButtons.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelButtons.Name = "flowLayoutPanelButtons";
-            this.flowLayoutPanelButtons.Size = new System.Drawing.Size(324, 57);
+            this.flowLayoutPanelButtons.Size = new System.Drawing.Size(324, 64);
             this.flowLayoutPanelButtons.TabIndex = 6;
             this.flowLayoutPanelButtons.WrapContents = false;
             // 
@@ -467,12 +428,48 @@ namespace ArtPad {
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // flowLayoutPanelTitleBar
+            // 
+            this.flowLayoutPanelTitleBar.AutoSize = true;
+            this.flowLayoutPanelTitleBar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanelTitleBar.Controls.Add(this.labelTitleBar);
+            this.flowLayoutPanelTitleBar.Controls.Add(this.comboBoxTitleBar);
+            this.flowLayoutPanelTitleBar.Location = new System.Drawing.Point(6, 442);
+            this.flowLayoutPanelTitleBar.Margin = new System.Windows.Forms.Padding(6);
+            this.flowLayoutPanelTitleBar.Name = "flowLayoutPanelTitleBar";
+            this.flowLayoutPanelTitleBar.Size = new System.Drawing.Size(438, 45);
+            this.flowLayoutPanelTitleBar.TabIndex = 8;
+            this.flowLayoutPanelTitleBar.WrapContents = false;
+            // 
+            // labelTitleBar
+            // 
+            this.labelTitleBar.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelTitleBar.AutoSize = true;
+            this.labelTitleBar.Location = new System.Drawing.Point(6, 6);
+            this.labelTitleBar.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelTitleBar.Name = "labelTitleBar";
+            this.labelTitleBar.Size = new System.Drawing.Size(120, 32);
+            this.labelTitleBar.TabIndex = 0;
+            this.labelTitleBar.Text = "Title Bar";
+            // 
+            // comboBoxTitleBar
+            // 
+            this.comboBoxTitleBar.FormattingEnabled = true;
+            this.comboBoxTitleBar.Items.AddRange(new object[] {
+            "Default",
+            "Minimal & Sizeable",
+            "Minimal"});
+            this.comboBoxTitleBar.Location = new System.Drawing.Point(135, 3);
+            this.comboBoxTitleBar.Name = "comboBoxTitleBar";
+            this.comboBoxTitleBar.Size = new System.Drawing.Size(300, 39);
+            this.comboBoxTitleBar.TabIndex = 2;
+            // 
             // AppearanceDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(641, 459);
+            this.ClientSize = new System.Drawing.Size(641, 569);
             this.Controls.Add(this.tableLayoutPanelTop);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AppearanceDialog";
@@ -498,6 +495,8 @@ namespace ArtPad {
             this.flowLayoutPanelHeight.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeight)).EndInit();
             this.flowLayoutPanelButtons.ResumeLayout(false);
+            this.flowLayoutPanelTitleBar.ResumeLayout(false);
+            this.flowLayoutPanelTitleBar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -534,6 +533,9 @@ namespace ArtPad {
         private CheckBox checkBoxItalic;
         private CheckBox checkBoxUnderline;
         private CheckBox checkBoxStrikeout;
+        private FlowLayoutPanel flowLayoutPanelTitleBar;
+        private Label labelTitleBar;
+        private ComboBox comboBoxTitleBar;
 
         public Label LabelFontName
         {
@@ -704,16 +706,23 @@ namespace ArtPad {
             }
         }
 
-        public TextBox TextBoxBg
-        {
-            get
-            {
+        public TextBox TextBoxBg {
+            get {
                 return textBoxBg;
             }
 
-            set
-            {
+            set {
                 textBoxBg = value;
+            }
+        }
+
+        public ComboBox ComboBoxTitleBar {
+            get {
+                return comboBoxTitleBar;
+            }
+
+            set {
+                comboBoxTitleBar = value;
             }
         }
 

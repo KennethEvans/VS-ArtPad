@@ -15,6 +15,7 @@ namespace ArtPad {
         private FontStyleFlags fontFlags = new FontStyleFlags();
         private string fgColorString = "";
         private string bgColorString = "";
+        private int titleBarType = 0;
 
         /// <summary>
         /// Reads a configuration from the specified file name.
@@ -436,16 +437,23 @@ namespace ArtPad {
             }
         }
 
-        public string BgColorString
-        {
-            get
-            {
+        public string BgColorString {
+            get {
                 return bgColorString;
             }
 
-            set
-            {
+            set {
                 bgColorString = value;
+            }
+        }
+
+        public int TitleBarType {
+            get {
+                return titleBarType;
+            }
+
+            set {
+                titleBarType = value;
             }
         }
 
