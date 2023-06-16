@@ -1,4 +1,6 @@
-﻿using KEUtils.About;
+﻿//#define DODEBUG
+
+using KEUtils.About;
 using KEUtils.ScrolledHTML2;
 using KEUtils.Utils;
 using Newtonsoft.Json;
@@ -25,7 +27,7 @@ namespace ArtPad {
         protected override void OnMouseUp(MouseEventArgs e) {
             // Use this for showing the context menu because OnClick
             // apparently does not get right mouse events
-#if DEBUG && true
+#if DODEBUG && true
             Tools.debugForegroundWindows("KeyButton.OnMouseUp ("
                 + keyDef.Row + "," + keyDef.Col + ")");
 #endif
@@ -37,6 +39,8 @@ namespace ArtPad {
                 if (artPad.Config.TitleBarType == 0) {
                     toolStripMenuItemMove.Visible = false;
                     toolStripMenuItemMove.Enabled = false;
+                    toolStripMenuItemSize.Visible = false;
+                    toolStripMenuItemSize.Enabled = false;
                     toolStripMenuItemRestore.Visible = false;
                     toolStripMenuItemRestore.Enabled = false;
                     toolStripMenuItemMinimize.Visible = false;
@@ -49,6 +53,8 @@ namespace ArtPad {
                 } else {
                     toolStripMenuItemMove.Visible = true;
                     toolStripMenuItemMove.Enabled = true;
+                    toolStripMenuItemSize.Visible = true;
+                    toolStripMenuItemSize.Enabled = true;
                     toolStripMenuItemRestore.Visible = true;
                     toolStripMenuItemRestore.Enabled = true;
                     toolStripMenuItemMinimize.Visible = true;
@@ -68,7 +74,7 @@ namespace ArtPad {
         }
 
         protected override void OnMouseEnter(System.EventArgs e) {
-#if DEBUG && true
+#if DODEBUG && true
             Tools.debugForegroundWindows("KeyButton.OnMouseEnter ("
                 + keyDef.Row + "," + keyDef.Col + ")");
 #endif
@@ -79,7 +85,7 @@ namespace ArtPad {
 
         protected override void OnMouseLeave(System.EventArgs e) {
             base.OnMouseLeave(e);
-#if DEBUG && true
+#if DODEBUG && true
             Tools.debugForegroundWindows("KeyButton.OnMouseLeave ("
                 + keyDef.Row + "," + keyDef.Col + ")");
 #endif
@@ -89,18 +95,18 @@ namespace ArtPad {
             base.OnMouseDown(e);
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
             artPad.DoMouseDown(e);
-#if DEBUG && true
+#if DODEBUG && true
             Tools.debugForegroundWindows("KeyButton.OnMouseDown ("
                 + keyDef.Row + "," + keyDef.Col + ")");
 #endif
         }
 
         protected override void OnClick(System.EventArgs e) {
-#if DEBUG && false
+#if DODEBUG && false
             Tools.debugForegroundWindows("KeyButton.OnClick");
 #endif
             Tools.setForegroundWindowFromSaved();
-#if DEBUG && false
+#if DODEBUG && false
             Tools.debugForegroundWindows("KeyButton.OnClick (After)");
             debug.print("KeyButton.OnClick (After): Sending: " + keyConfig.KeyString);
 #endif
@@ -163,7 +169,7 @@ namespace ArtPad {
                         + keyDef.Name, ex);
                 }
             }
-#if DEBUG && false
+#if DODEBUG && false
             Tools.debugForegroundWindows("handleCommandKey (After)");
 #endif
         }
@@ -208,7 +214,18 @@ namespace ArtPad {
         }
 
         private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e) {
-            // Could dynamically add things here
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            if (artPad.Config.TitleBarType != 1) return;
+            if (artPad.moving) {
+                toolStripMenuItemMove.Text = "Disable moving";
+            } else {
+                toolStripMenuItemMove.Text = "Enable moving";
+            }
+            if (artPad.sizing) {
+                toolStripMenuItemSize.Text = "Disable sizing";
+            } else {
+                toolStripMenuItemSize.Text = "Enable sizing";
+            }
         }
 
         void toolStripMenuItemLoad_Click(object sender, System.EventArgs e) {
@@ -219,6 +236,8 @@ namespace ArtPad {
             dlg.Filter = "Configuration Files|*.config";
             dlg.Title = "Select a Configuration File";
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                toolStripMenuItemMove.Checked = false;
+                toolStripMenuItemSize.Checked = false;
                 artPad.reconfigure(dlg.FileName);
             }
         }
@@ -353,6 +372,9 @@ namespace ArtPad {
             dlg.TextBoxFg.Text = config.FgColorString;
             dlg.TextBoxBg.Text = config.BgColorString;
 
+            if (config.TitleBarType > 1) {
+                config.TitleBarType = 0;
+            }
             dlg.ComboBoxTitleBar.SelectedIndex = config.TitleBarType;
 
             dlg.LabelWidth.Text = "Key Width";
@@ -542,7 +564,25 @@ namespace ArtPad {
         private void toolStripMenuItemDoMove(object sender,
             EventArgs e) {
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
-            artPad.Moving = true;
+            artPad.moving = !artPad.moving;
+            if (artPad.moving) {
+                artPad.moving = true;
+            } else {
+                artPad.moving = false;
+            }
+        }
+
+        private void toolStripMenuItemDoSize(object sender,
+            EventArgs e) {
+            ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
+            if (artPad.Config.TitleBarType == 1) {
+                artPad.sizing = !artPad.sizing;
+                if (artPad.sizing) {
+                    artPad.FormBorderStyle = FormBorderStyle.Sizable;
+                } else {
+                    artPad.FormBorderStyle = FormBorderStyle.None;
+                }
+            }
         }
 
         private void toolStripMenuItemDoMimimize(object sender,
@@ -568,5 +608,6 @@ namespace ArtPad {
             ArtPadForm artPad = (ArtPadForm)FindForm().FindForm();
             artPad.Close();
         }
+
     }
 }

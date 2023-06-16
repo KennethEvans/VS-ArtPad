@@ -29,10 +29,12 @@ namespace ArtPad {
             this.components = new System.ComponentModel.Container();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemMove = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemSize = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemRestore = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemMinimize = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemMaximize = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparatorControls = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemEditKey = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemCopyKey = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemPasteKey = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,7 +66,6 @@ namespace ArtPad {
             this.toolStripMenuItemOverview = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemOverviewOnline = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorControls = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,6 +74,7 @@ namespace ArtPad {
             this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemMove,
+            this.toolStripMenuItemSize,
             this.toolStripMenuItemRestore,
             this.toolStripMenuItemMinimize,
             this.toolStripMenuItemMaximize,
@@ -90,15 +92,22 @@ namespace ArtPad {
             this.toolStripSeparator4,
             this.toolStripMenuItemHelp});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(414, 707);
+            this.contextMenuStrip.Size = new System.Drawing.Size(414, 700);
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
             // toolStripMenuItemMove
             // 
             this.toolStripMenuItemMove.Name = "toolStripMenuItemMove";
             this.toolStripMenuItemMove.Size = new System.Drawing.Size(413, 48);
-            this.toolStripMenuItemMove.Text = "Move";
+            this.toolStripMenuItemMove.Text = "Toggle Move";
             this.toolStripMenuItemMove.Click += new System.EventHandler(this.toolStripMenuItemDoMove);
+            // 
+            // toolStripMenuItemSize
+            // 
+            this.toolStripMenuItemSize.Name = "toolStripMenuItemSize";
+            this.toolStripMenuItemSize.Size = new System.Drawing.Size(413, 48);
+            this.toolStripMenuItemSize.Text = "Toggle Size";
+            this.toolStripMenuItemSize.Click += new System.EventHandler(this.toolStripMenuItemDoSize);
             // 
             // toolStripMenuItemRestore
             // 
@@ -127,6 +136,11 @@ namespace ArtPad {
             this.toolStripMenuItemExit.Size = new System.Drawing.Size(413, 48);
             this.toolStripMenuItemExit.Text = "Exit";
             this.toolStripMenuItemExit.Click += new System.EventHandler(this.toolStripMenuItemDoExit);
+            // 
+            // toolStripSeparatorControls
+            // 
+            this.toolStripSeparatorControls.Name = "toolStripSeparatorControls";
+            this.toolStripSeparatorControls.Size = new System.Drawing.Size(410, 6);
             // 
             // toolStripMenuItemEditKey
             // 
@@ -375,11 +389,6 @@ namespace ArtPad {
             this.toolStripMenuItemAbout.Size = new System.Drawing.Size(422, 54);
             this.toolStripMenuItemAbout.Text = "About...";
             this.toolStripMenuItemAbout.Click += new System.EventHandler(this.toolStripMenuItemAbout_click);
-            // 
-            // toolStripSeparatorControls
-            // 
-            this.toolStripSeparatorControls.Name = "toolStripSeparatorControls";
-            this.toolStripSeparatorControls.Size = new System.Drawing.Size(410, 6);
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -425,5 +434,6 @@ namespace ArtPad {
         private ToolStripMenuItem toolStripMenuItemRestore;
         private ToolStripMenuItem toolStripMenuItemExit;
         private ToolStripSeparator toolStripSeparatorControls;
+        private ToolStripMenuItem toolStripMenuItemSize;
     }
 }

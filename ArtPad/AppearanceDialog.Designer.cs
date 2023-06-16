@@ -457,7 +457,6 @@ namespace ArtPad {
             this.comboBoxTitleBar.FormattingEnabled = true;
             this.comboBoxTitleBar.Items.AddRange(new object[] {
             "Default",
-            "Minimal & Sizeable",
             "Minimal"});
             this.comboBoxTitleBar.Location = new System.Drawing.Point(135, 3);
             this.comboBoxTitleBar.Name = "comboBoxTitleBar";

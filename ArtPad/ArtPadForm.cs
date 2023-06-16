@@ -1,5 +1,5 @@
-﻿#define CHECK_EVENTS
-//#undef DEBUG
+﻿//#define CHECK_EVENTS
+//#undef DODEBUG
 
 using KEUtils.Utils;
 using System;
@@ -22,7 +22,8 @@ namespace ArtPad {
         private string defaultFontName;
         private float defaultFontSize = 0;
         private FontStyle defaultFontStyle = FontStyle.Regular;
-        public bool Moving = false;
+        public bool moving = false;
+        public bool sizing  = false;
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
 
@@ -92,14 +93,7 @@ namespace ArtPad {
             defaultFontName = this.Font.Name;
             defaultFontSize = this.Font.SizeInPoints;
             defaultFontStyle = this.Font.Style;
-
-            // Set the Control Box
-            ControlBox = false;
-            FormBorderStyle = FormBorderStyle.Sizable;
-            Text = "";
-
-
-#if DEBUG
+#if DODEBUG
             Tools.printModuleInfo();
             Configuration.writeConfig(config,
                 @"c:\scratch\ArtPad-startup.config");
@@ -128,13 +122,9 @@ namespace ArtPad {
             // Set the title bar type
             if (newConfig.TitleBarType == 1) {
                 ControlBox = false;
-                FormBorderStyle = FormBorderStyle.Sizable;
-                Text = "";
-            } else if (newConfig.TitleBarType == 2) {
-                ControlBox = false;
                 FormBorderStyle = FormBorderStyle.None;
                 Text = "";
-            } else { 
+            } else {
                 ControlBox = true;
                 FormBorderStyle = FormBorderStyle.Sizable;
                 Text = "Art Pad";
@@ -144,6 +134,7 @@ namespace ArtPad {
 
             config = newConfig;
             keyDefs = config.KeyDefs;
+            moving = sizing = false;
             createTable();
             Invalidate();
 
@@ -180,6 +171,10 @@ namespace ArtPad {
         /// <param name="fileName"></param>
         public void reconfigure(string fileName) {
             Configuration newConfig = Configuration.readConfig(fileName);
+            // Handle possible bad values
+            if (newConfig.TitleBarType != 1) {
+                newConfig.TitleBarType = 0;
+            }
             if (newConfig.KeyDefs.Count == 0) {
                 DialogResult res = MessageBox.Show("There are no keys in:"
                     + LF + fileName
@@ -318,7 +313,7 @@ namespace ArtPad {
         }
 
         protected override void OnLoad(System.EventArgs e) {
-#if DEBUG
+#if DODEBUG
             Tools.debugForegroundWindows("ArtPadForm.OnLoad");
 #endif
             reconfigure(config);
@@ -356,17 +351,17 @@ namespace ArtPad {
 
         protected override void OnResizeEnd(System.EventArgs e) {
             base.OnResizeEnd(e);
-#if DEBUG
+#if DODEBUG
             Tools.debugForegroundWindows("ArtPadForm.OnResizeEnd (Before)");
 #endif
             Tools.setForegroundWindowFromSaved();
-#if DEBUG
+#if DODEBUG
             Tools.debugForegroundWindows("ArtPadForm.OnResizeEnd (After)");
 #endif
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e) {
-#if DEBUG
+#if DODEBUG
             Tools.debugForegroundWindows("ArtPadForm.OnFormClosing");
 #endif
             // Send up events for any pressed keys
@@ -380,7 +375,7 @@ namespace ArtPad {
         }
 
         private void ArtPadForm_Load(object sender, EventArgs e) {
-#if DEBUG
+#if DODEBUG
             Tools.debugForegroundWindows("ArtPadForm_Load");
 #endif
         }
@@ -391,55 +386,55 @@ namespace ArtPad {
 #if CHECK_EVENTS
 
         protected override void OnMouseEnter(System.EventArgs e) {
-#if DEBUG
+#if DODEBUG
             Tools.debugForegroundWindows("ArtPadForm.OnMouseEnter");
 #endif
             base.OnMouseEnter(e);
         }
 
         protected override void OnHandleCreated(System.EventArgs e) {
-#if DEBUG
+#if DODEBUG
             Tools.debugForegroundWindows("ArtPadForm.OnHandleCreated (Before)");
 #endif
             base.OnHandleCreated(e);
-#if DEBUG
+#if DODEBUG
             Tools.debugForegroundWindows("ArtPadForm.OnHandleCreated (After)");
 #endif
         }
 
         protected override void OnBindingContextChanged(System.EventArgs e) {
-#if DEBUG
+#if DODEBUG
             Tools.debugForegroundWindows("ArtPadForm.OnBindingContextChanged");
 #endif
             base.OnBindingContextChanged(e);
         }
 
         protected override void OnActivated(System.EventArgs e) {
-#if DEBUG
+#if DODEBUG
             Tools.debugForegroundWindows("ArtPadForm.OnActivated (Before)");
 #endif
             base.OnActivated(e);
-#if DEBUG
+#if DODEBUG
             Tools.debugForegroundWindows("ArtPadForm.OnActivated (After)");
 #endif
         }
 
         protected override void OnVisibleChanged(System.EventArgs e) {
-#if DEBUG
+#if DODEBUG
             Tools.debugForegroundWindows("ArtPadForm.OnVisibleChanged");
 #endif
             base.OnVisibleChanged(e);
         }
 
         protected override void OnShown(System.EventArgs e) {
-#if DEBUG
+#if DODEBUG
             Tools.debugForegroundWindows("ArtPadForm.OnShown");
 #endif
             base.OnShown(e);
         }
 
         protected override void OnGotFocus(System.EventArgs e) {
-#if DEBUG
+#if DODEBUG
             Tools.debugForegroundWindows("ArtPadForm.OnGotFocus");
 #endif
             base.OnGotFocus(e);
@@ -447,13 +442,13 @@ namespace ArtPad {
 
         protected override void OnLostFocus(System.EventArgs e) {
             base.OnLostFocus(e);
-#if DEBUG
+#if DODEBUG
             Tools.debugForegroundWindows("ArtPadForm.OnLostFocus");
 #endif
         }
 
         protected override void OnLocationChanged(System.EventArgs e) {
-#if DEBUG && false
+#if DODEBUG && false
             Tools.debugForegroundWindows("ArtPadForm.OnLocationChanged");
 #endif
             base.OnLocationChanged(e);
@@ -461,16 +456,19 @@ namespace ArtPad {
 
         protected override void OnMouseLeave(System.EventArgs e) {
             base.OnMouseLeave(e);
-#if DEBUG
+#if DODEBUG
             Tools.debugForegroundWindows("ArtPadForm.OnMouseLeave");
 #endif
         }
 
         protected override void OnMouseMove(MouseEventArgs e) {
-#if DEBUG
+#if DODEBUG
             Tools.debugForegroundWindows("ArtPadForm.OnMouseMove");
 #endif
         }
+
+#endif //CHECK_EVENTS
+        #endregion Check events
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HTCAPTION = 0x2;
@@ -481,10 +479,9 @@ namespace ArtPad {
 
         protected override void OnMouseDown(MouseEventArgs e) {
             base.OnMouseDown(e);
-            if (Moving && e.Button == MouseButtons.Left) {
+            if (moving && e.Button == MouseButtons.Left) {
                 ReleaseCapture();
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
-                Moving = false;
             }
         }
 
@@ -492,9 +489,5 @@ namespace ArtPad {
             OnMouseDown(e);
         }
     }
-
-#endif //CHECK_EVENTS
-    #endregion Check events
-
 }
 
